@@ -1,0 +1,279 @@
+/* ===================================================
+   HERO SLIDE STYLES - ARCHITECTURAL TRANSPARENT GLASS PANEL
+   =================================================== */
+
+.hero-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  visibility: hidden;
+  overflow: hidden;
+  will-change: transform, opacity;
+}
+
+.hero-slide.is-active {
+  opacity: 1;
+  visibility: visible;
+  z-index: 2;
+}
+
+/* Background Image Layer - Authentic, clear industrial steel photography */
+.hero-slide-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.hero-slide-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transform-origin: center center;
+  will-change: transform, opacity;
+  filter: brightness(0.96) contrast(1.04); /* Clean, authentic, sharp industrial detail */
+}
+
+/* Subtle top atmospheric blend only - NO heavy black overlay across the image */
+.hero-slide-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    rgba(10, 14, 20, 0.4) 0%,
+    rgba(10, 14, 20, 0.08) 18%,
+    transparent 35%
+  );
+  pointer-events: none;
+}
+
+/* Content Wrap */
+.hero-slide-content-wrap {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.hero-slide-container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 110px 40px 120px;
+}
+
+/* ===================================================
+   REFINED TRANSPARENT GLASS CONTENT PANEL (ARCHITECTURAL FRAME)
+   Inspired by high-end industrial engineering references
+   =================================================== */
+
+.hero-glass-card {
+  max-width: 700px;
+  background: rgba(14, 19, 28, 0.45); /* Soft transparent industrial glass tint */
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-top: 1px solid rgba(255, 255, 255, 0.45);
+  border-left: 1px solid rgba(255, 255, 255, 0.38);
+  box-shadow: 
+    0 24px 60px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  border-radius: 6px;
+  padding: 44px 48px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle Jubilant Red top accent line on frame */
+.hero-glass-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 52px;
+  height: 3px;
+  background: var(--color-red);
+  box-shadow: 0 0 10px var(--color-red-bright);
+}
+
+/* Eyebrow - Industrial Brand Label */
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.eyebrow-accent-bar {
+  display: block;
+  width: 26px;
+  height: 2px;
+  background-color: var(--color-red);
+  box-shadow: 0 0 8px var(--color-red-bright);
+}
+
+.eyebrow-text {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #FFFFFF;
+}
+
+/* Headline with Overflow Mask & Strong Display Sans Typography */
+.hero-headline-mask {
+  overflow: hidden;
+  padding: 2px 0 6px;
+}
+
+.hero-headline {
+  font-family: var(--font-primary);
+  font-size: clamp(2.3rem, 4.2vw, 3.6rem);
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  text-shadow: 0 3px 18px rgba(0, 0, 0, 0.45);
+  margin: 0;
+}
+
+/* Description */
+.hero-description {
+  font-size: clamp(0.98rem, 1.15vw, 1.12rem);
+  line-height: 1.6;
+  color: rgba(241, 245, 249, 0.88);
+  max-width: 580px;
+  margin-top: 18px;
+  font-weight: 400;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+}
+
+/* CTA Group */
+.hero-cta-group {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 32px;
+  flex-wrap: wrap;
+}
+
+/* Technical Specification Badge */
+.hero-spec-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 30px;
+  padding: 6px 14px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 4px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.spec-indicator {
+  width: 6px;
+  height: 6px;
+  background-color: var(--color-red);
+  border-radius: 50%;
+  box-shadow: 0 0 6px var(--color-red-bright);
+}
+
+.spec-text {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  color: rgba(241, 245, 249, 0.78);
+  text-transform: uppercase;
+}
+
+/* ===================================================
+   RESPONSIVE HERO SLIDE
+   =================================================== */
+
+@media (max-width: 1024px) {
+  .hero-slide-container {
+    padding: 100px 28px 120px;
+  }
+
+  .hero-glass-card {
+    max-width: 620px;
+    padding: 38px 38px;
+  }
+
+  .hero-headline {
+    font-size: clamp(2rem, 4.2vw, 2.9rem);
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-slide-container {
+    padding: 85px 20px 100px;
+  }
+
+  .hero-glass-card {
+    max-width: 100%;
+    padding: 30px 24px;
+    background: rgba(14, 19, 28, 0.6);
+    border-radius: 6px;
+  }
+
+  .hero-headline {
+    font-size: 1.9rem;
+    line-height: 1.16;
+  }
+
+  .hero-description {
+    font-size: 0.94rem;
+    margin-top: 14px;
+  }
+
+  .hero-cta-group {
+    margin-top: 24px;
+    gap: 12px;
+  }
+
+  .hero-spec-tag {
+    margin-top: 20px;
+    padding: 5px 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-glass-card {
+    padding: 24px 18px;
+  }
+
+  .hero-headline {
+    font-size: 1.62rem;
+  }
+
+  .hero-cta-group {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+
+  .hero-cta-group .btn {
+    width: 100%;
+  }
+
+  .hero-spec-tag {
+    display: none;
+  }
+}

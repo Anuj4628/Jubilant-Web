@@ -1,0 +1,310 @@
+/* ===================================================
+   MATERIALS SECTION - DUAL CONTINUOUS HORIZONTAL MARQUEES
+   =================================================== */
+
+.materials-section {
+  position: relative;
+  padding: 100px 0 90px;
+  background-color: var(--color-bg-main);
+  overflow: hidden;
+}
+
+.materials-header {
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto 52px;
+  padding: 0 24px;
+}
+
+/* Shared Section Eyebrow */
+.section-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.eyebrow-accent-bar {
+  width: 24px;
+  height: 2px;
+  background-color: var(--color-red);
+  box-shadow: 0 0 8px var(--color-red-bright);
+}
+
+.eyebrow-text {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+/* Shared Section Heading with Two-Tone Treatment */
+.section-display-heading {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.8vw, 3.1rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--color-text-primary);
+  margin-bottom: 16px;
+}
+
+.text-highlight-red {
+  color: var(--color-red);
+  display: inline-block;
+}
+
+.section-description {
+  font-family: var(--font-primary);
+  font-size: clamp(1rem, 1.15vw, 1.1rem);
+  line-height: 1.65;
+  letter-spacing: 0.01em;
+  color: var(--color-text-secondary);
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+/* ===================================================
+   CONTINUOUS MARQUEE SYSTEM (ROW 1 & ROW 2)
+   =================================================== */
+
+.materials-marquees-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 6%,
+    black 94%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 6%,
+    black 94%,
+    transparent 100%
+  );
+}
+
+.marquee-row-wrapper {
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+}
+
+.marquee-track-wrapper {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+}
+
+.marquee-track {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  padding: 6px 12px;
+  will-change: transform;
+}
+
+/* Row 1: Right to Left (0% to -50%) */
+.marquee-reverse .marquee-track {
+  animation: marqueeScrollLeft 38s linear infinite;
+}
+
+/* Row 2: Left to Right (-50% to 0%) */
+.marquee-forward .marquee-track {
+  animation: marqueeScrollRight 42s linear infinite;
+}
+
+/* Smooth Pause on hover */
+.marquee-row-wrapper:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes marqueeScrollLeft {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marqueeScrollRight {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* ===================================================
+   HORIZONTAL MATERIAL PILL / PANEL DESIGN
+   =================================================== */
+
+.material-panel-pill {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+  background: #FFFFFF;
+  border: 1px solid rgba(226, 232, 240, 0.95);
+  border-left: 3px solid rgba(203, 213, 225, 0.9);
+  padding: 14px 24px;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04);
+  cursor: pointer;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  min-width: 320px;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.pill-badge-code {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 6px;
+  background: var(--color-steel-100);
+  border: 1px solid var(--border-light);
+  color: var(--color-steel-700);
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+.pill-icon {
+  margin-bottom: 2px;
+}
+
+.code-text {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.pill-content {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  flex: 1;
+}
+
+.pill-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.pill-name {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  letter-spacing: -0.01em;
+  margin: 0;
+  transition: color 0.3s ease;
+}
+
+.pill-accent-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--color-steel-400);
+  transition: all 0.3s ease;
+}
+
+.pill-grades {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  letter-spacing: 0.02em;
+  margin: 0;
+}
+
+.pill-property {
+  font-family: var(--font-primary);
+  font-size: 0.73rem;
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+/* ===================================================
+   HOVER INTERACTION
+   =================================================== */
+
+.material-panel-pill:hover {
+  transform: translateY(-3px) scale(1.02);
+  border-color: rgba(211, 18, 42, 0.4);
+  border-left-color: var(--color-red);
+  box-shadow: 0 12px 30px rgba(211, 18, 42, 0.09), 0 2px 6px rgba(15, 23, 42, 0.04);
+}
+
+.material-panel-pill:hover .pill-name {
+  color: var(--color-red-dark);
+}
+
+.material-panel-pill:hover .pill-badge-code {
+  background: var(--color-red-subtle);
+  border-color: var(--color-red-border);
+  color: var(--color-red);
+}
+
+.material-panel-pill:hover .pill-accent-dot {
+  background-color: var(--color-red);
+  box-shadow: 0 0 8px var(--color-red-bright);
+}
+
+/* Bottom subtle divider */
+.section-bottom-divider {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 80px auto 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(226, 232, 240, 0.8) 20%,
+    rgba(226, 232, 240, 0.8) 80%,
+    transparent 100%
+  );
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .marquee-reverse .marquee-track,
+  .marquee-forward .marquee-track {
+    animation-duration: 120s;
+  }
+}
+
+@media (max-width: 768px) {
+  .materials-section {
+    padding: 70px 0 60px;
+  }
+
+  .material-panel-pill {
+    min-width: 280px;
+    padding: 12px 18px;
+    gap: 14px;
+  }
+
+  .pill-name {
+    font-size: 0.96rem;
+  }
+}
