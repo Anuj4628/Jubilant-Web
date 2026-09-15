@@ -1,294 +1,272 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { exportRegions, exportMetrics } from '../../data/homeSectionsData';
-import { MapPin, Anchor, ArrowUpRight } from 'lucide-react';
+import {
+  exportCountriesList,
+  exportCountryCategories
+} from '../../data/homeSectionsData';
+import { Search, X, Globe } from 'lucide-react';
 import './GlobalExportSection.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Destination coordinates mapped on SVG viewBox 0 0 1000 500
-const hubCoordinates = [
-  { id: 'in-hub', name: 'Mumbai / Gujarat Hub (Origin)', x: 670, y: 240, isOrigin: true },
-  { id: 'na-hub', name: 'Houston & New York', region: 'North America', x: 230, y: 180 },
-  { id: 'sa-hub', name: 'Santos & Valparaíso', region: 'South America', x: 330, y: 350 },
-  { id: 'eu-hub', name: 'Rotterdam & Antwerp', region: 'Europe', x: 505, y: 155 },
-  { id: 'me-hub', name: 'Jebel Ali & Dammam', region: 'Middle East', x: 605, y: 225 },
-  { id: 'af-hub', name: 'Durban & Alexandria', region: 'Africa', x: 530, y: 320 },
-  { id: 'sea-hub', name: 'Singapore & Yokohama', region: 'Asia & Southeast Asia', x: 770, y: 265 },
-  { id: 'au-hub', name: 'Sydney & Melbourne', region: 'Australia / Oceania', x: 865, y: 385 }
-];
-
 export default function GlobalExportSection() {
-  const [selectedHub, setSelectedHub] = useState(exportRegions[0]);
+  const [activeCategory, setActiveCategory] = useState('all');
+  const [searchQuery, setSearchQuery] = useState('');
+
   const sectionRef = useRef(null);
   const headerRef = useRef(null);
-  const mapRef = useRef(null);
-  const metricsRef = useRef(null);
+  const filterRef = useRef(null);
+  const gridRef = useRef(null);
 
+  // Filter countries based on region category and search query
+  const filteredCountries = useMemo(() => {
+    return exportCountriesList.filter(country => {
+      const matchesCategory =
+        activeCategory === 'all' || country.region === activeCategory;
+      const q = searchQuery.trim().toLowerCase();
+      const matchesSearch =
+        !q ||
+        country.name.toLowerCase().includes(q) ||
+        country.code.toLowerCase().includes(q);
+      return matchesCategory && matchesSearch;
+    });
+  }, [activeCategory, searchQuery]);
+
+  // Section entrance reveal with ScrollTrigger
   useEffect(() => {
     if (!sectionRef.current) return;
 
     const ctx = gsap.context(() => {
-      // Header entrance
+      // Header GSAP entrance
       gsap.fromTo(
         headerRef.current.children,
-        { opacity: 0, y: 30 },
+        { opacity: 0, y: 32 },
         {
           opacity: 1,
           y: 0,
-          duration: 0.8,
-          stagger: 0.15,
+          duration: 0.85,
+          stagger: 0.14,
           ease: 'power3.out',
           scrollTrigger: {
             trigger: headerRef.current,
-            start: 'top 82%',
+            start: 'top 85%',
             toggleActions: 'play none none none'
           }
         }
       );
 
-      // Map SVG entrance & path drawing
+      // Filter bar entrance
       gsap.fromTo(
-        mapRef.current,
-        { opacity: 0, scale: 0.98 },
-        {
-          opacity: 1,
-          scale: 1,
-          duration: 1,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: mapRef.current,
-            start: 'top 82%',
-            toggleActions: 'play none none none'
-          }
-        }
-      );
-
-      // Metrics counter reveal
-      gsap.fromTo(
-        metricsRef.current.children,
-        { opacity: 0, y: 25 },
+        filterRef.current,
+        { opacity: 0, y: 20 },
         {
           opacity: 1,
           y: 0,
           duration: 0.7,
-          stagger: 0.1,
           ease: 'power3.out',
           scrollTrigger: {
-            trigger: metricsRef.current,
+            trigger: filterRef.current,
             start: 'top 88%',
             toggleActions: 'play none none none'
           }
         }
       );
+
+      // Initial Country cards scroll entrance
+      if (gridRef.current) {
+        const initialCards = gridRef.current.querySelectorAll('.export-country-card');
+        if (initialCards.length > 0) {
+          gsap.fromTo(
+            initialCards,
+            { opacity: 0, y: 30, scale: 0.95 },
+            {
+              opacity: 1,
+              y: 0,
+              scale: 1,
+              duration: 0.65,
+              stagger: 0.02,
+              ease: 'power3.out',
+              scrollTrigger: {
+                trigger: gridRef.current,
+                start: 'top 86%',
+                toggleActions: 'play none none none'
+              }
+            }
+          );
+        }
+      }
     }, sectionRef);
 
     return () => ctx.revert();
   }, []);
 
-  const origin = hubCoordinates[0];
+  // GSAP animation triggered when region category or search query changes
+  useEffect(() => {
+    if (!gridRef.current) return;
+    const cards = gridRef.current.querySelectorAll('.export-country-card');
+    if (cards.length === 0) return;
+
+    // Smooth stagger fade, slide & subtle 3D lift transition
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        cards,
+        { opacity: 0, y: 18, scale: 0.95 },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.45,
+          stagger: {
+            each: 0.02,
+            from: 'start'
+          },
+          ease: 'power3.out',
+          overwrite: 'auto'
+        }
+      );
+    }, gridRef);
+
+    return () => ctx.revert();
+  }, [activeCategory, searchQuery]);
 
   return (
     <section id="export" ref={sectionRef} className="global-export-section" aria-label="Countries We Export To">
+      {/* Background Precision Grid */}
+      <div className="export-bg-grid" aria-hidden="true" />
+
       <div className="section-container">
-        {/* Section Header */}
+        {/* Standardized Section Header */}
         <div ref={headerRef} className="export-header">
           <div className="section-eyebrow">
             <span className="eyebrow-accent-bar" />
-            <span className="eyebrow-text">INTERNATIONAL SUPPLY & LOGISTICS</span>
+            <span className="eyebrow-text">GLOBAL EXPORT NETWORK // INTERNATIONAL TRADE</span>
           </div>
 
           <h2 className="section-display-heading">
-            COUNTRIES <span className="text-highlight-red">WE EXPORT TO</span>
+            COUNTRIES WE <span className="text-highlight-red">EXPORT TO</span>
           </h2>
 
           <p className="section-description">
-            Supporting global industries through dependable steel supply, seaworthy packaging, and synchronized international logistics.
+            Approved material supplier providing seaworthy packed stainless, alloy, and nickel piping products to mission-critical infrastructure across 45+ international destinations.
           </p>
+
+          {/* Compact Supporting Metric Badge */}
+          <div className="export-metric-pill-badge">
+            <span className="metric-pill-accent">45+</span>
+            <span className="metric-pill-label">GLOBAL EXPORT DESTINATIONS &bull; 100% TRACEABLE DISPATCH</span>
+          </div>
         </div>
 
-        {/* Global Network Map Showcase */}
-        <div ref={mapRef} className="global-map-card">
-          <div className="map-card-top-status">
-            <div className="status-indicator">
-              <span className="pulse-beacon" />
-              <span className="status-text">LIVE EXPORT CORRIDORS & STRATEGIC DISPATCH</span>
-            </div>
-            <div className="origin-badge">
-              <Anchor size={14} />
-              <span>HEADQUARTERS & MILL PORT: MUMBAI / GUJARAT</span>
-            </div>
-          </div>
-
-          {/* Interactive Network Map Visualization */}
-          <div className="map-svg-container">
-            <svg
-              viewBox="0 0 1000 500"
-              className="network-map-svg"
-              preserveAspectRatio="xMidYMid meet"
-              aria-label="Interactive world map showing steel supply routes"
-            >
-              <defs>
-                <linearGradient id="routeGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="#D3122A" stopOpacity="0.8" />
-                  <stop offset="100%" stopColor="#E81935" stopOpacity="0.3" />
-                </linearGradient>
-                <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-                  <feGaussianBlur stdDeviation="3" result="glow" />
-                  <feComposite in="SourceGraphic" in2="glow" operator="over" />
-                </filter>
-              </defs>
-
-              {/* World Map Graticule Grid */}
-              <g className="map-graticule-grid" opacity="0.35">
-                {[100, 200, 300, 400].map(y => (
-                  <line key={`lat-${y}`} x1="0" y1={y} x2="1000" y2={y} stroke="rgba(203, 213, 225, 0.4)" strokeDasharray="3 3" />
-                ))}
-                {[200, 400, 600, 800].map(x => (
-                  <line key={`lon-${x}`} x1={x} y1="0" x2={x} y2="500" stroke="rgba(203, 213, 225, 0.4)" strokeDasharray="3 3" />
-                ))}
-              </g>
-
-              {/* Simplified Continental Outlines */}
-              <g className="continents-silhouette" fill="rgba(241, 245, 249, 0.95)" stroke="rgba(203, 213, 225, 0.6)" strokeWidth="1">
-                {/* North America */}
-                <path d="M 120,80 L 290,70 L 320,130 L 250,210 L 200,240 L 150,180 Z" />
-                {/* South America */}
-                <path d="M 270,250 L 350,270 L 380,360 L 340,440 L 290,370 Z" />
-                {/* Europe */}
-                <path d="M 450,90 L 560,80 L 580,160 L 490,190 L 450,140 Z" />
-                {/* Africa */}
-                <path d="M 470,200 L 590,210 L 580,360 L 520,410 L 460,280 Z" />
-                {/* Asia */}
-                <path d="M 590,70 L 850,70 L 890,180 L 780,270 L 660,240 L 600,160 Z" />
-                {/* Australia */}
-                <path d="M 790,320 L 910,320 L 920,410 L 820,420 Z" />
-              </g>
-
-              {/* Radiating Curved Arcs from Origin to Worldwide Destinations */}
-              <g className="connection-arcs">
-                {hubCoordinates.slice(1).map(hub => {
-                  const mx = (origin.x + hub.x) / 2;
-                  const my = Math.min(origin.y, hub.y) - 50;
-                  const pathData = `M ${origin.x},${origin.y} Q ${mx},${my} ${hub.x},${hub.y}`;
-                  return (
-                    <g key={`arc-${hub.id}`}>
-                      {/* Ambient track */}
-                      <path
-                        d={pathData}
-                        fill="none"
-                        stroke="rgba(211, 18, 42, 0.22)"
-                        strokeWidth="1.5"
-                        strokeDasharray="4 4"
-                      />
-                      {/* Active animated pulsing path */}
-                      <path
-                        d={pathData}
-                        fill="none"
-                        stroke="url(#routeGradient)"
-                        strokeWidth="2"
-                        className="animated-arc-pulse"
-                      />
-                    </g>
-                  );
-                })}
-              </g>
-
-              {/* Destination Hub Markers */}
-              {hubCoordinates.map(hub => {
-                const isOrigin = hub.isOrigin;
-                return (
-                  <g
-                    key={`node-${hub.id}`}
-                    transform={`translate(${hub.x}, ${hub.y})`}
-                    className="map-node-group"
-                  >
-                    {/* Pulsing ring */}
-                    <circle
-                      r={isOrigin ? "14" : "10"}
-                      fill={isOrigin ? "rgba(211, 18, 42, 0.2)" : "rgba(15, 23, 42, 0.15)"}
-                      className={isOrigin ? "origin-pulse" : "hub-pulse"}
-                    />
-                    {/* Node Core */}
-                    <circle
-                      r={isOrigin ? "6" : "4.5"}
-                      fill={isOrigin ? "#D3122A" : "#0F172A"}
-                      stroke="#FFFFFF"
-                      strokeWidth="2"
-                      filter="url(#glow)"
-                    />
-                    {/* Label */}
-                    <text
-                      y={isOrigin ? "-16" : "18"}
-                      textAnchor="middle"
-                      className={`map-node-label ${isOrigin ? 'label-origin' : ''}`}
-                    >
-                      {hub.name}
-                    </text>
-                  </g>
-                );
-              })}
-            </svg>
-          </div>
-
-          {/* Region Tabs / Destination Selector */}
-          <div className="export-regions-strip">
-            {exportRegions.map((reg) => {
-              const isSelected = selectedHub.region === reg.region;
+        {/* Interactive Controls: Region Filters & Live Search */}
+        <div ref={filterRef} className="export-controls-container">
+          {/* Region Filter Tabs */}
+          <div className="export-region-tabs" role="tablist" aria-label="Filter countries by region">
+            {exportCountryCategories.map(cat => {
+              const isActive = activeCategory === cat.id;
               return (
                 <button
-                  key={reg.region}
+                  key={cat.id}
                   type="button"
-                  className={`region-pill-btn ${isSelected ? 'is-selected' : ''}`}
-                  onClick={() => setSelectedHub(reg)}
+                  role="tab"
+                  aria-selected={isActive}
+                  className={`region-tab-btn ${isActive ? 'is-active' : ''}`}
+                  onClick={() => setActiveCategory(cat.id)}
                 >
-                  <MapPin size={14} className="region-pin" />
-                  <span className="region-name">{reg.region}</span>
+                  <span>{cat.label}</span>
                 </button>
               );
             })}
           </div>
 
-          {/* Selected Region Detailed Card */}
-          <div className="selected-region-card">
-            <div className="card-region-info">
-              <span className="region-subtitle">EXPORT DESTINATION HUB</span>
-              <h4 className="region-title">{selectedHub.region}</h4>
-              <p className="region-hub-text">
-                Primary Shipping Terminals: <strong>{selectedHub.hub}</strong>
-              </p>
-            </div>
-
-            <div className="region-countries-list">
-              <span className="key-markets-label">KEY IMPORTING MARKETS:</span>
-              <div className="country-tags">
-                {selectedHub.destinations.map(country => (
-                  <span key={country} className="country-tag">
-                    {country}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            <a href="#quote" className="region-inquiry-cta">
-              <span>Freight Schedule & Port Delivery</span>
-              <ArrowUpRight size={16} />
-            </a>
+          {/* Live Search Country Input */}
+          <div className="export-search-wrapper">
+            <Search size={16} className="search-icon" aria-hidden="true" />
+            <input
+              type="text"
+              placeholder="Search country..."
+              value={searchQuery}
+              onChange={e => setSearchQuery(e.target.value)}
+              className="country-search-input"
+              aria-label="Search countries"
+            />
+            {searchQuery && (
+              <button
+                type="button"
+                onClick={() => setSearchQuery('')}
+                className="search-clear-btn"
+                aria-label="Clear search field"
+              >
+                <X size={14} />
+              </button>
+            )}
           </div>
         </div>
 
-        {/* Export Metrics Counter Grid */}
-        <div ref={metricsRef} className="export-metrics-grid">
-          {exportMetrics.map(m => (
-            <div key={m.label} className="metric-box">
-              <div className="metric-val-row">
-                <span className="metric-num">{m.value}</span>
-                <span className="metric-suffix">{m.suffix}</span>
+        {/* Count Status Indicator */}
+        <div className="export-status-bar">
+          <div className="status-counter-wrap">
+            <Globe size={14} className="status-globe-icon" />
+            <span className="status-counter-text">
+              Showing <strong>{filteredCountries.length}</strong> of <strong>{exportCountriesList.length}</strong> Export Destinations
+            </span>
+          </div>
+          {searchQuery && (
+            <span className="status-filter-tag">Filter: "{searchQuery}"</span>
+          )}
+        </div>
+
+        {/* Clean, Minimal Country Cards Grid — ONLY Flag + Country Name */}
+        <div ref={gridRef} className="export-countries-grid">
+          {filteredCountries.map(country => (
+            <div
+              key={country.code}
+              className="export-country-card"
+              tabIndex={0}
+              role="group"
+              aria-label={country.name}
+            >
+              {/* Flag Container */}
+              <div className="country-flag-box">
+                <img
+                  src={`https://flagcdn.com/w80/${country.code.toLowerCase()}.png`}
+                  alt={`${country.name} flag`}
+                  className="country-flag-img"
+                  loading="lazy"
+                  onError={(e) => {
+                    e.currentTarget.style.display = 'none';
+                    const fallback = e.currentTarget.parentElement.querySelector('.country-flag-fallback');
+                    if (fallback) fallback.style.display = 'inline-block';
+                  }}
+                />
+                <span className="country-flag-fallback" style={{ display: 'none' }}>
+                  {country.flag}
+                </span>
               </div>
-              <p className="metric-lbl">{m.label}</p>
+
+              {/* Country Name Only */}
+              <h3 className="country-name-text">{country.name}</h3>
+
+              {/* Bottom Subtle Accent Bar on Hover */}
+              <div className="country-card-accent" />
             </div>
           ))}
+
+          {filteredCountries.length === 0 && (
+            <div className="no-countries-state">
+              <p>No export countries found matching "{searchQuery}".</p>
+              <button
+                type="button"
+                className="reset-filters-btn"
+                onClick={() => {
+                  setSearchQuery('');
+                  setActiveCategory('all');
+                }}
+              >
+                Reset Search & Filters
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </section>

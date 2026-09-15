@@ -1,6 +1,6 @@
 import slide1Img from '../assets/images/slide-1.jpg';
 import slide2Img from '../assets/images/slide-2.jpg';
-import slide3Img from '../assets/images/slide-3.jpg';
+import slide3Img from '../assets/Product BG/precision pipes and fitting.png';
 import slide4Img from '../assets/images/slide-4.jpg';
 import slide5Img from '../assets/images/slide-5.jpg';
 

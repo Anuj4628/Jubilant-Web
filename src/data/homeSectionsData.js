@@ -1,76 +1,61 @@
-import slide1Img from '../assets/images/slide-1.jpg';
-import slide2Img from '../assets/images/slide-2.jpg';
-import slide3Img from '../assets/images/slide-3.jpg';
-import slide4Img from '../assets/images/slide-4.jpg';
-import slide5Img from '../assets/images/slide-5.jpg';
+// Authentic Product Images from Product Folders
+import buttWeldFittingImg from '../assets/Product Images/Butt weld fit/stainless steel.jpg';
+import flangesImg from '../assets/Product Images/Flanges/stainless steel.avif';
+import roundBarsImg from '../assets/Product Images/Rods and BArs/stainless steel.png';
+import pipeFittingsImg from '../assets/Product Images/Butt weld fit/alloy steel.jpg';
+import tubeFittingsImg from '../assets/Product Images/Forged Fittings/stainles steel.jpg';
+import forgedFittingsImg from '../assets/Product Images/Forged Fittings/alloy steel.jpg';
+import fastenersImg from '../assets/Product Images/Fasteners/stainless-steel.webp';
+import sheetsImg from '../assets/Product Images/Sheet and plates/stainless steel.png';
+import platesImg from '../assets/Product Images/Sheet and plates/Carbon.png';
+import pipesImg from '../assets/Product Images/Pipes and Tubes/stainless steel.png';
+import tubesImg from '../assets/Product Images/Pipes and Tubes/alloy steel.png';
+import seamlessPipesImg from '../assets/Product Images/Pipes and Tubes/high alloy.png';
+import nutsBoltsImg from '../assets/Product Images/Fasteners/high alloy.webp';
+import valvesImg from '../assets/Product Images/valves.jpg';
+
+// Authentic Sector Images from Serving Global Mission-Critical Sectors Folder
+import aerospaceImg from '../assets/Serving Global Mission-Critical Sectors/aerospace and defence.png';
+import heavyEngineeringImg from '../assets/Serving Global Mission-Critical Sectors/heavt engineering.png';
+import marineImg from '../assets/Serving Global Mission-Critical Sectors/marine.png';
+import nuclearPowerImg from '../assets/Serving Global Mission-Critical Sectors/nuclear and thermal power.png';
+import petrochemicalImg from '../assets/Serving Global Mission-Critical Sectors/petrochemical.png';
+import precisionPipingImg from '../assets/Serving Global Mission-Critical Sectors/precision industrial piping.png';
+
+// Authentic Client Network Partner Logos from Partners Folder
+import adaniLogo from '../assets/partners/adani.svg';
+import adityaBirlaLogo from '../assets/partners/aditya_birla.svg';
+import bhushanPowerLogo from '../assets/partners/bhushan_power.svg';
+import godrejLogo from '../assets/partners/godrej.svg';
+import haldiaLogo from '../assets/partners/haldia_petrochemicals.svg';
+import hpclLogo from '../assets/partners/hindustan_petroleum.svg';
+import ioclLogo from '../assets/partners/indian_oil.svg';
+import jindalLogo from '../assets/partners/jindal_steel.svg';
+import jswLogo from '../assets/partners/jsw_steel.svg';
+import relianceLogo from '../assets/partners/reliance.svg';
+import tataSteelLogo from '../assets/partners/tata_steel.svg';
 
 // ==========================================
 // 1. MATERIALS DATA (Row 1 & Row 2 for continuous marquees)
 // ==========================================
 export const materialsRow1 = [
-  {
-    name: "Stainless Steel",
-    code: "SS",
-    grades: "304 / 304L / 316 / 316L / 321 / 310S",
-    property: "Superior Corrosion & Heat Resistance"
-  },
-  {
-    name: "Duplex Steel",
-    code: "DX",
-    grades: "UNS S31803 / UNS S32205 (F51)",
-    property: "High Yield Strength & Pitting Resistance"
-  },
-  {
-    name: "Super Duplex",
-    code: "SD",
-    grades: "UNS S32750 / S32760 (F53 / F55)",
-    property: "Critical Offshore & Acid Environments"
-  },
-  {
-    name: "Nickel Alloys",
-    code: "NA",
-    grades: "Alloy 200 / 201 / Monel 400 / K500",
-    property: "Marine, Alkaline & Cryogenic Resistance"
-  },
-  {
-    name: "Inconel",
-    code: "INC",
-    grades: "Inconel 600 / 625 / 718 / 825",
-    property: "Extreme High-Temperature Oxidation Resistance"
-  }
+  { id: "inc-600", name: "INCONEL", grade: "600" },
+  { id: "ti-gr5", name: "TITANIUM", grade: "GRADE 5" },
+  { id: "zr-702", name: "ZIRCONIUM", grade: "702" },
+  { id: "inc-825", name: "INCOLOY", grade: "825" },
+  { id: "hast-c276", name: "HASTELLOY", grade: "C276" },
+  { id: "monel-400", name: "MONEL", grade: "400" },
+  { id: "cu-ni", name: "COPPER NICKEL", grade: "90/10" }
 ];
 
 export const materialsRow2 = [
-  {
-    name: "Hastelloy",
-    code: "HAST",
-    grades: "C276 / C22 / B2 / B3 / X",
-    property: "Severe Chemical & Wet Chlorine Service"
-  },
-  {
-    name: "Titanium",
-    code: "TI",
-    grades: "Grade 1 / Grade 2 / Grade 5 (Ti-6Al-4V)",
-    property: "Ultra High Strength-to-Weight Ratio"
-  },
-  {
-    name: "Alloy Steel",
-    code: "AS",
-    grades: "ASTM A335 P11 / P22 / P91 / 4140",
-    property: "High Pressure Boilers & Power Piping"
-  },
-  {
-    name: "Copper",
-    code: "CU",
-    grades: "Cu-Ni 90/10, 70/30 & Electrolytic Copper",
-    property: "High Thermal Conductivity & Anti-fouling"
-  },
-  {
-    name: "Carbon Steel",
-    code: "CS",
-    grades: "ASTM A106 Gr.B / A53 / A105 / API 5L",
-    property: "Heavy Industrial & Structural Infrastructure"
-  }
+  { id: "sd-uns", name: "SUPER DUPLEX", grade: "UNS S32760" },
+  { id: "ss-316", name: "STAINLESS STEEL", grade: "316 / 316L" },
+  { id: "sa-904l", name: "SUPER AUSTENITIC", grade: "SS 904L" },
+  { id: "duplex-uns", name: "DUPLEX STEEL", grade: "UNS S31803" },
+  { id: "na-200", name: "NICKEL ALLOYS", grade: "ALLOY 200" },
+  { id: "cs-a106", name: "CARBON STEEL", grade: "ASTM A106" },
+  { id: "as-p22", name: "ALLOY STEEL", grade: "P11 / P22 / P91" }
 ];
 
 // ==========================================
@@ -87,120 +72,75 @@ export const productCategories = [
 export const productsData = [
   {
     id: "butt-weld-fittings",
-    name: "Butt Weld Fittings",
+    name: "Buttweld Fittings",
     category: "fittings",
-    categoryLabel: "Fittings & Flanges",
     specTag: "ASME B16.9 // ELBOWS, TEES, REDUCERS",
-    image: slide3Img,
-    alt: "Precision industrial butt weld pipe fittings"
+    image: buttWeldFittingImg,
+    alt: "Precision industrial buttweld pipe fittings in stainless and alloy steel"
   },
   {
     id: "flanges",
     name: "Flanges",
     category: "fittings",
-    categoryLabel: "Fittings & Flanges",
     specTag: "ASME B16.5 // WELD NECK, SLIP-ON, BLIND",
-    image: slide3Img,
+    image: flangesImg,
     alt: "High-pressure industrial forged steel flanges"
   },
   {
     id: "round-bars",
-    name: "Round Bars",
+    name: "Rounds and Bars",
     category: "bars",
-    categoryLabel: "Bars & Fasteners",
     specTag: "ASTM A276 / A479 // BRIGHT & BLACK FINISH",
-    image: slide4Img,
-    alt: "Stainless steel and alloy solid round bars"
+    image: roundBarsImg,
+    alt: "Stainless steel and alloy solid rounds and bars"
   },
   {
     id: "pipe-fittings",
     name: "Pipe Fittings",
     category: "fittings",
-    categoryLabel: "Fittings & Flanges",
     specTag: "MSS-SP // HIGH INTEGRITY PROCESS CONNECTIONS",
-    image: slide3Img,
-    alt: "Heavy duty process pipe fittings"
+    image: pipeFittingsImg,
+    alt: "Heavy duty alloy steel process pipe fittings"
   },
   {
     id: "tube-fittings",
     name: "Tube Fittings",
     category: "fittings",
-    categoryLabel: "Fittings & Flanges",
     specTag: "DOUBLE FERRULE // INSTRUMENTATION GRADE",
-    image: slide3Img,
+    image: tubeFittingsImg,
     alt: "Precision instrumentation tube fittings"
   },
   {
     id: "forged-fittings",
     name: "Forged Fittings",
     category: "fittings",
-    categoryLabel: "Fittings & Flanges",
     specTag: "ASME B16.11 // 3000# / 6000# / 9000#",
-    image: slide3Img,
+    image: forgedFittingsImg,
     alt: "High-pressure forged socket weld and threaded fittings"
   },
   {
     id: "fasteners",
     name: "Fasteners",
     category: "bars",
-    categoryLabel: "Bars & Fasteners",
     specTag: "ASTM A193 / A194 // STUDS, BOLTS & SPECIALS",
-    image: slide4Img,
+    image: fastenersImg,
     alt: "High tensile industrial alloy fasteners"
   },
   {
-    id: "sheets",
-    name: "Sheets",
+    id: "sheets-plates",
+    name: "Sheets / Plates",
     category: "plates",
-    categoryLabel: "Sheets & Plates",
-    specTag: "ASTM A240 // 2B / BA / NO.4 FINISH",
-    image: slide2Img,
-    alt: "Cold rolled precision stainless steel sheets"
+    specTag: "ASTM A240 / ASME SA516 // COLD & HOT ROLLED",
+    image: sheetsImg,
+    alt: "Industrial stainless and carbon steel sheets and plates"
   },
   {
-    id: "plates",
-    name: "Plates",
-    category: "plates",
-    categoryLabel: "Sheets & Plates",
-    specTag: "ASME SA516 / SA240 // HEAVY ROLLING",
-    image: slide1Img,
-    alt: "Heavy boiler and pressure vessel steel plates"
-  },
-  {
-    id: "pipes",
-    name: "Pipes",
-    category: "pipes",
-    categoryLabel: "Pipes & Tubes",
-    specTag: "ASTM A312 / A358 // SCHEDULE 10 TO XXS",
-    image: slide3Img,
-    alt: "Welded and heavy wall industrial steel pipes"
-  },
-  {
-    id: "tubes",
-    name: "Tubes",
-    category: "pipes",
-    categoryLabel: "Pipes & Tubes",
-    specTag: "ASTM A269 / A213 // HEAT EXCHANGER TUBES",
-    image: slide5Img,
-    alt: "Precision seamless heat exchanger and boiler tubes"
-  },
-  {
-    id: "seamless-pipes",
-    name: "Seamless Pipes",
-    category: "pipes",
-    categoryLabel: "Pipes & Tubes",
-    specTag: "HOT ROLLED & COLD DRAWN // ZERO DEFECT",
-    image: slide3Img,
-    alt: "High-pressure seamless carbon and alloy pipes"
-  },
-  {
-    id: "nuts-bolts",
-    name: "Nuts & Bolts",
-    category: "bars",
-    categoryLabel: "Bars & Fasteners",
-    specTag: "GRADE 8.8 / 10.9 / 12.9 & B8M / B7",
-    image: slide4Img,
-    alt: "Industrial heavy hex nuts and studs"
+    id: "valves",
+    name: "Valves",
+    category: "fittings",
+    specTag: "API 600 / ASME B16.34 // GATE, GLOBE, BALL & CHECK",
+    image: valvesImg,
+    alt: "Industrial high-pressure stainless and forged steel valves"
   }
 ];
 
@@ -213,120 +153,107 @@ export const whyChooseData = [
     title: "ENGINEERED QUALITY",
     description: "Precision-focused products for demanding applications, manufactured under stringent metallurgical tolerances.",
     badge: "100% PMI & UT TESTED",
-    iconName: "ShieldCheck"
+    iconName: "ShieldCheck",
+    featured: true
   },
   {
     number: "02",
     title: "GLOBAL SUPPLY",
     description: "Reliable sourcing and delivery for international markets with synchronized export handling and packaging.",
     badge: "45+ EXPORT DESTINATIONS",
-    iconName: "Globe"
+    iconName: "Globe",
+    featured: false
   },
   {
     number: "03",
     title: "QUALITY ASSURANCE",
     description: "Consistent standards, inspection and documentation provided with every heat lot and batch shipment.",
     badge: "EN 10204 3.1 & 3.2 MTR",
-    iconName: "Award"
+    iconName: "Award",
+    featured: false
   },
   {
     number: "04",
     title: "INDUSTRIAL EXPERTISE",
     description: "Solutions built around demanding engineering requirements, code compliance, and specialized metallurgy.",
     badge: "ASME • ASTM • DIN • ISO",
-    iconName: "Cpu"
+    iconName: "Cpu",
+    featured: false
   },
   {
     number: "05",
     title: "RELIABLE SERVICE",
     description: "Responsive support from enquiry to delivery with dedicated project desk and technical consultation.",
     badge: "TECHNICAL ASSISTANCE",
-    iconName: "Headphones"
+    iconName: "Headphones",
+    featured: false
   },
   {
     number: "06",
     title: "ON-TIME DELIVERY",
     description: "Organized supply and logistics for critical requirements, backed by strategic inventory and ready stock.",
     badge: "OPTIMIZED LOGISTICS",
-    iconName: "Truck"
+    iconName: "Truck",
+    featured: false
   }
 ];
 
 // ==========================================
-// 4. APPLICATION INDUSTRIES (10 Industries)
+// 4. SERVING GLOBAL MISSIONS AND CRITICAL SECTORS (6 Authentic Sectors)
 // ==========================================
-export const industriesData = [
+export const sectorsData = [
   {
-    id: "engineering",
-    name: "Engineering Industries",
-    subtitle: "Heavy Machinery & Structural Systems",
-    code: "ENG-01",
-    image: slide1Img
-  },
-  {
-    id: "sugar",
-    name: "Sugar Industries",
-    subtitle: "Corrosion-Resistant Mill Rollers & Piping",
-    code: "SGR-02",
-    image: slide2Img
-  },
-  {
-    id: "power",
-    name: "Power",
-    subtitle: "Thermal Generation & Superheater Tubes",
-    code: "PWR-03",
-    image: slide5Img
-  },
-  {
-    id: "nuclear-power",
-    name: "Nuclear Power",
-    subtitle: "Ultra-High Purity Reactor Grade Piping",
-    code: "NUC-04",
-    image: slide3Img
-  },
-  {
-    id: "petrochemical",
-    name: "Petrochemical",
-    subtitle: "Hydrocarbon Processing & Refineries",
-    code: "PET-05",
-    image: slide5Img
-  },
-  {
-    id: "oil-gas",
-    name: "Oil & Gas",
-    subtitle: "Upstream, Midstream & Subsea Pipelines",
-    code: "O&G-06",
-    image: slide3Img
-  },
-  {
-    id: "precision-engineering",
-    name: "Precision Engineering",
-    subtitle: "Tight Tolerance Shafts & Turned Parts",
-    code: "PRC-07",
-    image: slide4Img
-  },
-  {
-    id: "industrial-piping",
-    name: "Industrial Piping",
-    subtitle: "Chemical Lines & High Pressure Distribution",
-    code: "PIP-08",
-    image: slide3Img
+    id: "aerospace-defense",
+    name: "Aerospace & Defense",
+    shortDesc: "Certified superalloys and titanium components for mission-critical propulsion and defense infrastructure.",
+    code: "SECTOR-01",
+    image: aerospaceImg,
+    tag: "AS9100 STANDARDS"
   },
   {
     id: "heavy-engineering",
     name: "Heavy Engineering",
-    subtitle: "Fabricated Columns, Pressure Vessels & Boilers",
-    code: "HVY-09",
-    image: slide1Img
+    shortDesc: "High-yield structural steels, boiler plates, and forged shafts for massive industrial machinery.",
+    code: "SECTOR-02",
+    image: heavyEngineeringImg,
+    tag: "HEAVY FORGINGS"
   },
   {
-    id: "defense-aerospace",
-    name: "Defense & Aerospace",
-    subtitle: "Mission-Critical Certified Superalloys",
-    code: "DEF-10",
-    image: slide4Img
+    id: "marine-offshore",
+    name: "Marine & Offshore",
+    shortDesc: "Duplex, super duplex, and copper-nickel piping built to resist seawater corrosion and subsea pressures.",
+    code: "SECTOR-03",
+    image: marineImg,
+    tag: "OFFSHORE GRADE"
+  },
+  {
+    id: "nuclear-thermal-power",
+    name: "Nuclear & Thermal Power",
+    shortDesc: "Ultra-pure reactor-grade alloys and high-pressure superheater tubes with 100% heat traceability.",
+    code: "SECTOR-04",
+    image: nuclearPowerImg,
+    tag: "CLASS-1 CODE"
+  },
+  {
+    id: "petrochemical-refineries",
+    name: "Petrochemical & Refineries",
+    shortDesc: "Corrosion-resistant nickel alloys and heavy-wall chrome-moly pipes for severe hydro-processing.",
+    code: "SECTOR-05",
+    image: petrochemicalImg,
+    tag: "NACE MR0175"
+  },
+  {
+    id: "precision-industrial-piping",
+    name: "Precision Industrial Piping",
+    shortDesc: "Tight-tolerance instrumentation tubing and double-ferrule connections for critical chemical lines.",
+    code: "SECTOR-06",
+    image: precisionPipingImg,
+    tag: "ZERO-DEFECT BORE"
   }
 ];
+
+// Backwards compatibility alias
+export const industriesData = sectorsData;
 
 // ==========================================
 // 5. VALUE ADDED SERVICES (7 Items)
@@ -379,91 +306,144 @@ export const valueAddedData = [
     tagline: "Seaworthy Protection",
     description: "Fumigated ISPM-15 wooden boxes, end-capping, anti-corrosion VCI wrapping, and reinforced container lashing.",
     highlight: "ISPM-15 Seaworthy Standards"
-  },
-  {
-    id: "logistics-support",
-    number: "07",
-    title: "Logistics Support",
-    tagline: "Global Multi-Modal Transit",
-    description: "End-to-end freight clearance, customs documentation, breakbulk shipping, and door-to-port delivery worldwide.",
-    highlight: "Air / Sea Freight Handling"
   }
 ];
 
 // ==========================================
-// 6. CLIENT NETWORK (Continuous Logo Marquee)
+// 6. CLIENT NETWORK (Official Corporate Partner Logos)
 // ==========================================
 export const clientsData = [
-  { name: "Indian Oil", sector: "Refinery & Hydrocarbons", tag: "Petroleum Giant" },
-  { name: "L&T", sector: "EPC & Heavy Engineering", tag: "Infrastructure Major" },
-  { name: "Tata Steel", sector: "Primary Metals & Steel", tag: "Industrial Pioneer" },
-  { name: "EIL", sector: "Consultancy & Petrochemical", tag: "Engineering Premier" },
-  { name: "Adani", sector: "Energy & Port Logistics", tag: "Conglomerate" },
-  { name: "Reliance", sector: "Refinery & Energy Mega-complex", tag: "Energy Leader" },
-  { name: "ONGC", sector: "Exploration & Production", tag: "Offshore Leader" },
-  { name: "BHEL", sector: "Power Equipment & Boilers", tag: "Power Premier" },
-  { name: "GAIL", sector: "Natural Gas Transmission", tag: "Gas Utility" },
-  { name: "Bharat Petroleum", sector: "Downstream Fuel Refining", tag: "Downstream Giant" }
+  { name: "Tata Steel", logo: tataSteelLogo },
+  { name: "Reliance Industries", logo: relianceLogo },
+  { name: "Adani Group", logo: adaniLogo },
+  { name: "Indian Oil", logo: ioclLogo },
+  { name: "JSW Steel", logo: jswLogo },
+  { name: "Jindal Steel & Power", logo: jindalLogo },
+  { name: "Aditya Birla Group", logo: adityaBirlaLogo },
+  { name: "Hindustan Petroleum", logo: hpclLogo },
+  { name: "Bhushan Power & Steel", logo: bhushanPowerLogo },
+  { name: "Godrej", logo: godrejLogo },
+  { name: "Haldia Petrochemicals", logo: haldiaLogo }
 ];
 
 // ==========================================
-// 7. COUNTRIES WE EXPORT TO (Global Footprint)
+// 7. COUNTRIES WE EXPORT TO (45+ Comprehensive Global Export System)
 // ==========================================
+export const exportCountryCategories = [
+  { id: "all", label: "All Countries" },
+  { id: "europe", label: "Europe" },
+  { id: "middle-east", label: "Middle East" },
+  { id: "asia-pacific", label: "Asia Pacific" },
+  { id: "americas", label: "Americas" },
+  { id: "africa", label: "Africa" },
+  { id: "oceania", label: "Australia / Oceania" }
+];
+
+export const exportCountriesList = [
+  // Americas
+  { code: "US", name: "United States", region: "americas", regionLabel: "Americas", flag: "🇺🇸", hub: "Houston / New York" },
+  { code: "CA", name: "Canada", region: "americas", regionLabel: "Americas", flag: "🇨🇦", hub: "Vancouver / Montreal" },
+  { code: "MX", name: "Mexico", region: "americas", regionLabel: "Americas", flag: "🇲🇽", hub: "Veracruz / Manzanillo" },
+  { code: "BR", name: "Brazil", region: "americas", regionLabel: "Americas", flag: "🇧🇷", hub: "Santos / Rio" },
+  { code: "CL", name: "Chile", region: "americas", regionLabel: "Americas", flag: "🇨🇱", hub: "Valparaíso" },
+  { code: "AR", name: "Argentina", region: "americas", regionLabel: "Americas", flag: "🇦🇷", hub: "Buenos Aires" },
+  { code: "CO", name: "Colombia", region: "americas", regionLabel: "Americas", flag: "🇨🇴", hub: "Cartagena" },
+  { code: "PE", name: "Peru", region: "americas", regionLabel: "Americas", flag: "🇵🇪", hub: "Callao" },
+
+  // Europe
+  { code: "DE", name: "Germany", region: "europe", regionLabel: "Europe", flag: "🇩🇪", hub: "Hamburg / Bremen" },
+  { code: "GB", name: "United Kingdom", region: "europe", regionLabel: "Europe", flag: "🇬🇧", hub: "London / Southampton" },
+  { code: "IT", name: "Italy", region: "europe", regionLabel: "Europe", flag: "🇮🇹", hub: "Genoa / Trieste" },
+  { code: "NL", name: "Netherlands", region: "europe", regionLabel: "Europe", flag: "🇳🇱", hub: "Rotterdam" },
+  { code: "FR", name: "France", region: "europe", regionLabel: "Europe", flag: "🇫🇷", hub: "Le Havre / Marseille" },
+  { code: "ES", name: "Spain", region: "europe", regionLabel: "Europe", flag: "🇪🇸", hub: "Valencia / Barcelona" },
+  { code: "BE", name: "Belgium", region: "europe", regionLabel: "Europe", flag: "🇧🇪", hub: "Antwerp" },
+  { code: "NO", name: "Norway", region: "europe", regionLabel: "Europe", flag: "🇳🇴", hub: "Stavanger / Oslo" },
+  { code: "SE", name: "Sweden", region: "europe", regionLabel: "Europe", flag: "🇸🇪", hub: "Gothenburg" },
+  { code: "PL", name: "Poland", region: "europe", regionLabel: "Europe", flag: "🇵🇱", hub: "Gdansk" },
+  { code: "TR", name: "Turkey", region: "europe", regionLabel: "Europe", flag: "🇹🇷", hub: "Istanbul / Mersin" },
+  { code: "FI", name: "Finland", region: "europe", regionLabel: "Europe", flag: "🇫🇮", hub: "Helsinki" },
+  { code: "DK", name: "Denmark", region: "europe", regionLabel: "Europe", flag: "🇩🇰", hub: "Copenhagen" },
+
+  // Middle East
+  { code: "AE", name: "United Arab Emirates", region: "middle-east", regionLabel: "Middle East", flag: "🇦🇪", hub: "Jebel Ali, Dubai" },
+  { code: "SA", name: "Saudi Arabia", region: "middle-east", regionLabel: "Middle East", flag: "🇸🇦", hub: "Dammam / Jeddah" },
+  { code: "QA", name: "Qatar", region: "middle-east", regionLabel: "Middle East", flag: "🇶🇦", hub: "Hamad Port, Doha" },
+  { code: "OM", name: "Oman", region: "middle-east", regionLabel: "Middle East", flag: "🇴🇲", hub: "Sohar / Salalah" },
+  { code: "KW", name: "Kuwait", region: "middle-east", regionLabel: "Middle East", flag: "🇰🇼", hub: "Shuwaikh Port" },
+  { code: "BH", name: "Bahrain", region: "middle-east", regionLabel: "Middle East", flag: "🇧🇭", hub: "Khalifa Bin Salman" },
+  { code: "IQ", name: "Iraq", region: "middle-east", regionLabel: "Middle East", flag: "🇮🇶", hub: "Umm Qasr" },
+
+  // Asia Pacific
+  { code: "IN", name: "India", region: "asia-pacific", regionLabel: "Asia Pacific", flag: "🇮🇳", hub: "Nhava Sheva / Mundra" },
+  { code: "SG", name: "Singapore", region: "asia-pacific", regionLabel: "Asia Pacific", flag: "🇸🇬", hub: "Port of Singapore" },
+  { code: "MY", name: "Malaysia", region: "asia-pacific", regionLabel: "Asia Pacific", flag: "🇲🇾", hub: "Port Klang" },
+  { code: "VN", name: "Vietnam", region: "asia-pacific", regionLabel: "Asia Pacific", flag: "🇻🇳", hub: "Ho Chi Minh City" },
+  { code: "JP", name: "Japan", region: "asia-pacific", regionLabel: "Asia Pacific", flag: "🇯🇵", hub: "Yokohama / Kobe" },
+  { code: "KR", name: "South Korea", region: "asia-pacific", regionLabel: "Asia Pacific", flag: "🇰🇷", hub: "Busan" },
+  { code: "ID", name: "Indonesia", region: "asia-pacific", regionLabel: "Asia Pacific", flag: "🇮🇩", hub: "Jakarta / Surabaya" },
+  { code: "TH", name: "Thailand", region: "asia-pacific", regionLabel: "Asia Pacific", flag: "🇹🇭", hub: "Laem Chabang" },
+  { code: "PH", name: "Philippines", region: "asia-pacific", regionLabel: "Asia Pacific", flag: "🇵🇭", hub: "Manila" },
+  { code: "TW", name: "Taiwan", region: "asia-pacific", regionLabel: "Asia Pacific", flag: "🇹🇼", hub: "Kaohsiung" },
+  { code: "KZ", name: "Kazakhstan", region: "asia-pacific", regionLabel: "Asia Pacific", flag: "🇰🇿", hub: "Aktau Port" },
+
+  // Africa
+  { code: "ZA", name: "South Africa", region: "africa", regionLabel: "Africa", flag: "🇿🇦", hub: "Durban / Cape Town" },
+  { code: "NG", name: "Nigeria", region: "africa", regionLabel: "Africa", flag: "🇳🇬", hub: "Lagos / Apapa" },
+  { code: "EG", name: "Egypt", region: "africa", regionLabel: "Africa", flag: "🇪🇬", hub: "Alexandria / Port Said" },
+  { code: "KE", name: "Kenya", region: "africa", regionLabel: "Africa", flag: "🇰🇪", hub: "Mombasa" },
+  { code: "GH", name: "Ghana", region: "africa", regionLabel: "Africa", flag: "🇬🇭", hub: "Tema" },
+  { code: "DZ", name: "Algeria", region: "africa", regionLabel: "Africa", flag: "🇩🇿", hub: "Algiers" },
+  { code: "MA", name: "Morocco", region: "africa", regionLabel: "Africa", flag: "🇲🇦", hub: "Tanger Med" },
+  { code: "AO", name: "Angola", region: "africa", regionLabel: "Africa", flag: "🇦🇴", hub: "Luanda" },
+
+  // Australia & Oceania
+  { code: "AU", name: "Australia", region: "oceania", regionLabel: "Australia / Oceania", flag: "🇦🇺", hub: "Sydney / Melbourne" },
+  { code: "NZ", name: "New Zealand", region: "oceania", regionLabel: "Australia / Oceania", flag: "🇳🇿", hub: "Auckland / Tauranga" }
+];
+
 export const exportRegions = [
   {
     region: "North America",
     destinations: ["United States", "Canada", "Mexico"],
-    hub: "Houston & New York",
-    lat: "35%",
-    lng: "22%"
+    hub: "Houston & New York"
   },
   {
     region: "Europe",
-    destinations: ["Germany", "United Kingdom", "Italy", "Netherlands"],
-    hub: "Rotterdam & Antwerp",
-    lat: "28%",
-    lng: "50%"
+    destinations: ["Germany", "United Kingdom", "Italy", "Netherlands", "France", "Spain", "Norway", "Belgium"],
+    hub: "Rotterdam & Antwerp"
   },
   {
     region: "Middle East",
-    destinations: ["UAE", "Saudi Arabia", "Qatar", "Oman", "Kuwait"],
-    hub: "Jebel Ali & Dammam",
-    lat: "42%",
-    lng: "60%"
+    destinations: ["UAE", "Saudi Arabia", "Qatar", "Oman", "Kuwait", "Bahrain"],
+    hub: "Jebel Ali & Dammam"
   },
   {
     region: "Asia & Southeast Asia",
-    destinations: ["Singapore", "Malaysia", "Vietnam", "Japan", "South Korea"],
-    hub: "Singapore & Yokohama",
-    lat: "48%",
-    lng: "78%"
+    destinations: ["Singapore", "Malaysia", "Vietnam", "Japan", "South Korea", "Indonesia", "Thailand"],
+    hub: "Singapore & Yokohama"
   },
   {
     region: "Africa",
-    destinations: ["South Africa", "Nigeria", "Egypt", "Kenya"],
-    hub: "Durban & Alexandria",
-    lat: "58%",
-    lng: "52%"
+    destinations: ["South Africa", "Nigeria", "Egypt", "Kenya", "Ghana", "Morocco"],
+    hub: "Durban & Alexandria"
   },
   {
     region: "South America",
-    destinations: ["Brazil", "Chile", "Argentina"],
-    hub: "Santos & Valparaíso",
-    lat: "70%",
-    lng: "32%"
+    destinations: ["Brazil", "Chile", "Argentina", "Colombia", "Peru"],
+    hub: "Santos & Valparaíso"
   },
   {
     region: "Australia / Oceania",
     destinations: ["Australia", "New Zealand"],
-    hub: "Sydney & Melbourne",
-    lat: "75%",
-    lng: "86%"
+    hub: "Sydney & Melbourne"
   }
 ];
 
 export const exportMetrics = [
-  { label: "Global Export Markets", value: "45+", suffix: "Countries" },
-  { label: "On-Spec Compliance", value: "100%", suffix: "Verified" },
-  { label: "Annual Supply Volume", value: "25,000+", suffix: "Metric Tons" },
-  { label: "Global Logistics Hubs", value: "12", suffix: "Strategic Ports" }
+  { label: "Global Export Markets", value: "48+", numValue: 48, suffix: "Countries" },
+  { label: "On-Spec Compliance", value: "100%", numValue: 100, suffix: "Verified" },
+  { label: "Annual Supply Volume", value: "25,000+", numValue: 25000, suffix: "Metric Tons" },
+  { label: "Global Logistics Hubs", value: "12", numValue: 12, suffix: "Strategic Ports" }
 ];
+

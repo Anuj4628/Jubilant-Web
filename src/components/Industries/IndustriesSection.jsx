@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { industriesData } from '../../data/homeSectionsData';
+import { sectorsData } from '../../data/homeSectionsData';
 import { ArrowUpRight } from 'lucide-react';
 import './IndustriesSection.css';
 
@@ -10,20 +10,19 @@ gsap.registerPlugin(ScrollTrigger);
 export default function IndustriesSection() {
   const sectionRef = useRef(null);
   const headerRef = useRef(null);
-  const gridRef = useRef(null);
 
   useEffect(() => {
-    if (!sectionRef.current || !gridRef.current) return;
+    if (!sectionRef.current || !headerRef.current) return;
 
     const ctx = gsap.context(() => {
       // Header entrance
       gsap.fromTo(
         headerRef.current.children,
-        { opacity: 0, y: 30 },
+        { opacity: 0, y: 35 },
         {
           opacity: 1,
           y: 0,
-          duration: 0.8,
+          duration: 0.85,
           stagger: 0.15,
           ease: 'power3.out',
           scrollTrigger: {
@@ -33,88 +32,79 @@ export default function IndustriesSection() {
           }
         }
       );
-
-      // Industry tiles reveal
-      const tiles = gridRef.current.querySelectorAll('.industry-tile');
-      gsap.fromTo(
-        tiles,
-        { opacity: 0, y: 35, scale: 0.97 },
-        {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          duration: 0.7,
-          stagger: 0.07,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: gridRef.current,
-            start: 'top 85%',
-            toggleActions: 'play none none none'
-          }
-        }
-      );
     }, sectionRef);
 
     return () => ctx.revert();
   }, []);
 
+  // Repeat 4 times for an unbroken seamless continuous loop across any resolution
+  const repeatedSectors = [...sectorsData, ...sectorsData, ...sectorsData, ...sectorsData];
+
   return (
-    <section id="industries" ref={sectionRef} className="industries-section" aria-label="Application Industries">
+    <section id="industries" ref={sectionRef} className="industries-section" aria-label="Serving Global Missions and Critical Sectors">
+      {/* Background Subtle Industrial Ambient Line */}
+      <div className="industries-bg-gradient" aria-hidden="true" />
+
       <div className="section-container">
         {/* Section Header */}
         <div ref={headerRef} className="industries-header">
           <div className="section-eyebrow">
             <span className="eyebrow-accent-bar" />
-            <span className="eyebrow-text">APPLICATION SECTORS</span>
+            <span className="eyebrow-text">APPLICATION SECTORS & GLOBAL MISSIONS</span>
           </div>
 
           <h2 className="section-display-heading">
-            SERVING GLOBAL <span className="text-highlight-red">MISSION-CRITICAL</span> SECTORS
+            SERVING GLOBAL MISSIONS <span className="text-highlight-red">AND CRITICAL SECTORS</span>
           </h2>
 
           <p className="section-description">
-            Engineered steel solutions supporting demanding applications across critical industries worldwide.
+            Precision-certified steel and specialized alloy components engineered for extreme environments, severe thermal cycles, and mission-critical specifications worldwide.
           </p>
         </div>
+      </div>
 
-        {/* Cinematic Industry Tiles Grid (10 Industries) */}
-        <div ref={gridRef} className="industries-grid">
-          {industriesData.map((ind) => (
+      {/* Premium Horizontal Moving Showcase (Infinite Continuous Marquee) */}
+      <div className="sectors-marquee-viewport" aria-label="Continuous showcase of mission-critical industry sectors">
+        <div className="sectors-marquee-track">
+          {repeatedSectors.map((sector, idx) => (
             <div
-              key={ind.id}
-              className="industry-tile"
+              key={`${sector.id}-${idx}`}
+              className="sector-showcase-card"
               tabIndex={0}
-              aria-label={`${ind.name} - ${ind.subtitle}`}
+              role="group"
+              aria-label={`${sector.name} - ${sector.tag}`}
             >
-              {/* Background Image Container */}
-              <div className="industry-image-wrap">
+              {/* Full Bleed Image Container */}
+              <div className="sector-card-media">
                 <img
-                  src={ind.image}
-                  alt={`${ind.name} industrial setting`}
-                  className="industry-bg-image"
+                  src={sector.image}
+                  alt={`${sector.name} industrial setting`}
+                  className="sector-image"
                   loading="lazy"
                 />
-                <div className="industry-dark-wash" aria-hidden="true" />
-                <div className="industry-accent-wash" aria-hidden="true" />
+                <div className="sector-media-overlay" aria-hidden="true" />
               </div>
 
-              {/* Top Code Badge */}
-              <div className="industry-code-tag">
-                <span className="code-dot" />
-                <span className="code-label">{ind.code}</span>
+              {/* Sector Code / Standards Tag */}
+              <div className="sector-top-badge">
+                <span className="sector-code">{sector.code}</span>
+                <span className="sector-divider-dot" />
+                <span className="sector-tag">{sector.tag}</span>
               </div>
 
-              {/* Bottom Content Info */}
-              <div className="industry-tile-body">
-                <span className="industry-subtitle">{ind.subtitle}</span>
-                <div className="industry-title-row">
-                  <h3 className="industry-name">{ind.name}</h3>
-                  <div className="industry-arrow-btn">
-                    <ArrowUpRight size={18} className="industry-arrow-icon" />
+              {/* Card Foreground Content */}
+              <div className="sector-card-content">
+                <div className="sector-title-row">
+                  <h3 className="sector-title">{sector.name}</h3>
+                  <div className="sector-action-circle" aria-hidden="true">
+                    <ArrowUpRight size={18} className="sector-action-icon" />
                   </div>
                 </div>
-                {/* Expanding Red Accent Bar */}
-                <span className="industry-accent-line" aria-hidden="true" />
+
+                <p className="sector-description">{sector.shortDesc}</p>
+
+                {/* Animated Accent Line */}
+                <div className="sector-accent-line" aria-hidden="true" />
               </div>
             </div>
           ))}
@@ -123,3 +113,4 @@ export default function IndustriesSection() {
     </section>
   );
 }
+

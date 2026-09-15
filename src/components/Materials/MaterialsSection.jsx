@@ -1,58 +1,63 @@
 import React, { useRef } from 'react';
 import { materialsRow1, materialsRow2 } from '../../data/homeSectionsData';
-import { Layers, Shield, Sparkles, Cpu, Atom, Flame, Anchor, Wind, Zap, Box } from 'lucide-react';
 import './MaterialsSection.css';
 
-// Icon map for materials
-const materialIcons = {
-  SS: Layers,
-  DX: Shield,
-  SD: Sparkles,
-  NA: Anchor,
-  INC: Flame,
-  HAST: Atom,
-  TI: Wind,
-  AS: Cpu,
-  CU: Zap,
-  CS: Box
-};
+// 4-Point Star Separator between cards
+const StarSeparator = () => (
+  <span className="marquee-star-separator" aria-hidden="true">
+    <svg viewBox="0 0 16 16" width="11" height="11" fill="currentColor">
+      <path d="M8 0L9.4 6.6L16 8L9.4 9.4L8 16L6.6 9.4L0 8L6.6 6.6Z" />
+    </svg>
+  </span>
+);
 
 export default function MaterialsSection() {
   const sectionRef = useRef(null);
 
-  // Duplicate items 4 times to guarantee a seamless continuous infinite marquee on all screen widths
-  const renderMarqueeRow = (items, directionClass) => {
+  // Duplicate items 4 times for seamless continuous infinite looping
+  const renderRow1 = (items) => {
     const repeated = [...items, ...items, ...items, ...items];
     return (
-      <div className={`marquee-track-wrapper ${directionClass}`}>
+      <div className="marquee-track-wrapper marquee-row-right-to-left">
         <div className="marquee-track">
-          {repeated.map((mat, index) => {
-            const Icon = materialIcons[mat.code] || Layers;
-            return (
+          {repeated.map((mat, index) => (
+            <React.Fragment key={`row1-${mat.id}-${index}`}>
               <div
-                key={`${mat.code}-${index}`}
-                className="material-panel-pill"
+                className="material-card-light"
                 tabIndex={0}
-                aria-label={`${mat.name} - ${mat.grades}`}
+                role="group"
+                aria-label={`${mat.name} ${mat.grade}`}
               >
-                <div className="pill-badge-code">
-                  <Icon size={16} className="pill-icon" />
-                  <span className="code-text">{mat.code}</span>
-                </div>
-
-                <div className="pill-content">
-                  <div className="pill-header">
-                    <h3 className="pill-name">{mat.name}</h3>
-                    <span className="pill-accent-dot" />
-                  </div>
-                  <p className="pill-grades">{mat.grades}</p>
-                  <span className="pill-property">{mat.property}</span>
-                </div>
-
-                <div className="pill-hover-glow" aria-hidden="true" />
+                <span className="card-light-name">{mat.name}</span>
+                <span className="card-light-grade">{mat.grade}</span>
               </div>
-            );
-          })}
+              <StarSeparator />
+            </React.Fragment>
+          ))}
+        </div>
+      </div>
+    );
+  };
+
+  const renderRow2 = (items) => {
+    const repeated = [...items, ...items, ...items, ...items];
+    return (
+      <div className="marquee-track-wrapper marquee-row-left-to-right">
+        <div className="marquee-track">
+          {repeated.map((mat, index) => (
+            <React.Fragment key={`row2-${mat.id}-${index}`}>
+              <div
+                className="material-card-dark"
+                tabIndex={0}
+                role="group"
+                aria-label={`${mat.name} ${mat.grade}`}
+              >
+                <span className="card-dark-name">{mat.name}</span>
+                <span className="card-dark-badge">{mat.grade}</span>
+              </div>
+              <StarSeparator />
+            </React.Fragment>
+          ))}
         </div>
       </div>
     );
@@ -60,6 +65,9 @@ export default function MaterialsSection() {
 
   return (
     <section id="materials" ref={sectionRef} className="materials-section" aria-label="Materials We Work With">
+      {/* Subtle Industrial Background Ambience */}
+      <div className="materials-bg-overlay" aria-hidden="true" />
+
       {/* Section Header */}
       <div className="section-container">
         <div className="materials-header">
@@ -68,31 +76,33 @@ export default function MaterialsSection() {
             <span className="eyebrow-text">METALLURGICAL GRADES & ALLOYS</span>
           </div>
 
-          <h2 className="section-display-heading">
+          <h2 className="materials-display-heading">
             MATERIAL <span className="text-highlight-red">WE WORK WITH</span>
           </h2>
 
-          <p className="section-description">
-            High-performance materials engineered for demanding industrial applications.
+          <p className="materials-supporting-line">
+            High-performance alloys and special steels engineered for demanding international industrial applications.
           </p>
         </div>
       </div>
 
-      {/* Dual Continuous Infinite Marquees */}
-      <div className="materials-marquees-container" aria-label="Continuous list of metallurgical grades">
-        {/* Row 1: Right to Left */}
+      {/* Dual Continuous Infinite Marquees matching reference color combination */}
+      <div className="materials-marquees-container" aria-label="Continuous stream of metallurgical materials">
+        {/* ROW 1: Light Cards (White background + Navy text + Red grade) moving Right → Left */}
         <div className="marquee-row-wrapper" aria-hidden="false">
-          {renderMarqueeRow(materialsRow1, 'marquee-reverse')}
+          {renderRow1(materialsRow1)}
         </div>
 
-        {/* Row 2: Left to Right */}
+        {/* ROW 2: Dark Cards (Navy background + White text + Red solid badge) moving Left → Right */}
         <div className="marquee-row-wrapper" aria-hidden="false">
-          {renderMarqueeRow(materialsRow2, 'marquee-forward')}
+          {renderRow2(materialsRow2)}
         </div>
       </div>
 
-      {/* Subtle Bottom Ambient Gradient Line */}
-      <div className="section-bottom-divider" aria-hidden="true" />
+      {/* Subtle Bottom Technical Divider */}
+      <div className="materials-bottom-divider" aria-hidden="true" />
     </section>
   );
 }
+
+

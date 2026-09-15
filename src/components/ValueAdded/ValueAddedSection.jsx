@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { valueAddedData } from '../../data/homeSectionsData';
-import { CheckCircle2, ChevronRight, FileCheck, Layers, PackageCheck, Ship, Sliders, ShieldAlert } from 'lucide-react';
+import { CheckCircle2, FileCheck, Layers, PackageCheck, Ship, Sliders, ShieldAlert, ArrowRight } from 'lucide-react';
 import './ValueAddedSection.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -17,28 +17,34 @@ const serviceIcons = {
   "logistics-support": Ship
 };
 
+const serviceSpecs = {
+  "material-sourcing": "PRIMARY MILL AUDITED",
+  "quality-inspection": "DNV • TUV • LLOYDS TPI",
+  "testing-documentation": "EN 10204 3.1 & 3.2 MTR",
+  "custom-requirements": "PRECISION PROFILING",
+  "project-supply": "TURNKEY EPC PACKAGES",
+  "export-packaging": "ISPM-15 FUMIGATED",
+  "logistics-support": "MULTI-MODAL FREIGHT"
+};
+
 export default function ValueAddedSection() {
-  const [activeServiceId, setActiveServiceId] = useState(valueAddedData[0].id);
   const sectionRef = useRef(null);
   const headerRef = useRef(null);
-  const showcaseRef = useRef(null);
-
-  const activeService = valueAddedData.find(s => s.id === activeServiceId) || valueAddedData[0];
-  const ActiveIcon = serviceIcons[activeService.id] || CheckCircle2;
+  const gridRef = useRef(null);
 
   useEffect(() => {
-    if (!sectionRef.current) return;
+    if (!sectionRef.current || !gridRef.current) return;
 
     const ctx = gsap.context(() => {
       // Header reveal
       gsap.fromTo(
         headerRef.current.children,
-        { opacity: 0, y: 28 },
+        { opacity: 0, y: 32 },
         {
           opacity: 1,
           y: 0,
-          duration: 0.8,
-          stagger: 0.15,
+          duration: 0.85,
+          stagger: 0.14,
           ease: 'power3.out',
           scrollTrigger: {
             trigger: headerRef.current,
@@ -48,17 +54,21 @@ export default function ValueAddedSection() {
         }
       );
 
-      // Showcase reveal
+      // Cards staggered reveal with subtle 3D depth
+      const cards = gridRef.current.querySelectorAll('.value-service-card');
       gsap.fromTo(
-        showcaseRef.current,
-        { opacity: 0, y: 40 },
+        cards,
+        { opacity: 0, y: 40, scale: 0.96, rotateX: 5 },
         {
           opacity: 1,
           y: 0,
-          duration: 0.9,
+          scale: 1,
+          rotateX: 0,
+          duration: 0.8,
+          stagger: 0.08,
           ease: 'power3.out',
           scrollTrigger: {
-            trigger: showcaseRef.current,
+            trigger: gridRef.current,
             start: 'top 84%',
             toggleActions: 'play none none none'
           }
@@ -72,7 +82,7 @@ export default function ValueAddedSection() {
   return (
     <section id="services" ref={sectionRef} className="value-added-section" aria-label="Value Added Services">
       <div className="section-container">
-        {/* Section Header */}
+        {/* Standardized Section Header */}
         <div ref={headerRef} className="value-added-header">
           <div className="section-eyebrow">
             <span className="eyebrow-accent-bar" />
@@ -84,90 +94,57 @@ export default function ValueAddedSection() {
           </h2>
 
           <p className="section-description">
-            End-to-end technical capabilities supporting complex procurement, project staging, and third-party inspection.
+            End-to-end metallurgical solutions supporting complex engineering procurement, mill-certified third-party inspection, and synchronized project dispatch.
           </p>
         </div>
 
-        {/* Asymmetric Technical Showcase Layout */}
-        <div ref={showcaseRef} className="services-showcase-container">
-          {/* Left Column: Interactive Service Navigation List */}
-          <div className="services-nav-list" role="tablist" aria-label="Value added service list">
-            {valueAddedData.map((service) => {
-              const isActive = service.id === activeServiceId;
-              return (
-                <button
-                  key={service.id}
-                  role="tab"
-                  type="button"
-                  aria-selected={isActive}
-                  className={`service-nav-item ${isActive ? 'is-active' : ''}`}
-                  onClick={() => setActiveServiceId(service.id)}
-                  onMouseEnter={() => setActiveServiceId(service.id)}
-                >
-                  <span className="service-nav-num">{service.number}</span>
-                  <div className="service-nav-label-wrap">
-                    <span className="service-nav-title">{service.title}</span>
-                    <span className="service-nav-tagline">{service.tagline}</span>
+        {/* Alternating Dark/Light Cards Grid */}
+        <div ref={gridRef} className="value-services-grid">
+          {valueAddedData.map((service, idx) => {
+            const Icon = serviceIcons[service.id] || CheckCircle2;
+            const specBadge = serviceSpecs[service.id] || "CERTIFIED METALLURGY";
+            // Alternating checkerboard theme
+            const isDark = idx % 2 === 0;
+
+            return (
+              <div
+                key={service.id}
+                className={`value-service-card ${isDark ? 'card-theme-dark' : 'card-theme-light'}`}
+                tabIndex={0}
+              >
+                {/* Top Row: Pill Badge on Left, Icon on Right */}
+                <div className="card-top-row">
+                  <div className="card-criterion-pill">
+                    <span className="criterion-dot" />
+                    <span className="criterion-text">SERVICE // {service.number}</span>
                   </div>
-                  <ChevronRight size={16} className="service-nav-chevron" />
-                  <span className="service-nav-indicator" />
-                </button>
-              );
-            })}
-          </div>
 
-          {/* Right Column: Dynamic Deep-Dive Feature Panel */}
-          <div className="services-feature-panel">
-            <div className="panel-accent-top" />
-            
-            <div className="panel-inner-content">
-              <div className="panel-header-badge">
-                <div className="panel-icon-wrap">
-                  <ActiveIcon size={28} className="panel-icon" />
+                  <div className="card-icon-frame">
+                    <Icon size={20} strokeWidth={1.8} />
+                  </div>
                 </div>
-                <div className="panel-meta-text">
-                  <span className="panel-step-tag">SERVICE {activeService.number} // CAPABILITY</span>
-                  <span className="panel-highlight-tag">{activeService.highlight}</span>
+
+                {/* Red Accent Line */}
+                <div className="card-red-accent-line" />
+
+                {/* Title & Description */}
+                <h3 className="card-main-title">{service.title}</h3>
+                <p className="card-main-desc">{service.description}</p>
+
+                {/* Bottom Row: Spec Pill on Left, Red Circle Arrow on Right */}
+                <div className="card-bottom-row">
+                  <div className="card-spec-pill">
+                    <span className="spec-dot" />
+                    <span className="spec-label">{specBadge}</span>
+                  </div>
+
+                  <a href="#quote" className="card-action-circle" aria-label={`Inquire about ${service.title}`}>
+                    <ArrowRight size={18} strokeWidth={2.4} />
+                  </a>
                 </div>
               </div>
-
-              <h3 className="panel-title">{activeService.title}</h3>
-              <p className="panel-desc">{activeService.description}</p>
-
-              {/* Technical Specifications Highlights Grid */}
-              <div className="panel-specs-grid">
-                <div className="panel-spec-card">
-                  <span className="spec-label">DOCUMENTATION</span>
-                  <span className="spec-val">EN 10204 3.1 & 3.2</span>
-                </div>
-                <div className="panel-spec-card">
-                  <span className="spec-label">INSPECTION AGENCIES</span>
-                  <span className="spec-val">DNV • TUV • LLOYDS</span>
-                </div>
-                <div className="panel-spec-card">
-                  <span className="spec-label">PACKAGING SPEC</span>
-                  <span className="spec-val">ISPM-15 SEAWORTHY</span>
-                </div>
-                <div className="panel-spec-card">
-                  <span className="spec-label">SUPPLY LEAD TIME</span>
-                  <span className="spec-val">RAPID STAGED DISPATCH</span>
-                </div>
-              </div>
-
-              {/* Bottom Quote Direct Action */}
-              <div className="panel-bottom-action">
-                <span className="panel-help-text">Have special testing or custom fabrication requirements?</span>
-                <a href="#quote" className="panel-action-btn">
-                  Consult With Our Engineers <ChevronRight size={16} />
-                </a>
-              </div>
-            </div>
-
-            {/* Subtle Industrial Watermark */}
-            <span className="panel-watermark" aria-hidden="true">
-              {activeService.number}
-            </span>
-          </div>
+            );
+          })}
         </div>
       </div>
     </section>

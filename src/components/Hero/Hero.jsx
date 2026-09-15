@@ -12,14 +12,11 @@ export default function Hero() {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const [direction, setDirection] = useState(1);
   const [progressPercent, setProgressPercent] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
   const totalSlides = heroSlides.length;
 
-  const timerRef = useRef(null);
   const progressRef = useRef(0);
-  const isHoveredRef = useRef(false);
 
-  // Transition to a specific slide
+  // Transition to a specific slide without interrupting continuous autoplay
   const goToSlide = useCallback((newIndex, newDirection = 1) => {
     setDirection(newDirection);
     setCurrentSlideIndex(newIndex);
@@ -35,13 +32,13 @@ export default function Hero() {
     goToSlide((currentSlideIndex - 1 + totalSlides) % totalSlides, -1);
   }, [currentSlideIndex, totalSlides, goToSlide]);
 
-  // Autoplay and progress loop
+  // Continuous uninterrupted autoplay loop
   useEffect(() => {
     const step = PROGRESS_INTERVAL_MS;
     const increment = (step / SLIDE_DURATION_MS) * 100;
 
     const interval = setInterval(() => {
-      if (isHoveredRef.current || document.hidden) return;
+      if (document.hidden) return;
 
       progressRef.current += increment;
       if (progressRef.current >= 100) {
@@ -56,17 +53,6 @@ export default function Hero() {
 
     return () => clearInterval(interval);
   }, [totalSlides]);
-
-  // Handle hover pause
-  const handleMouseEnter = () => {
-    isHoveredRef.current = true;
-    setIsPaused(true);
-  };
-
-  const handleMouseLeave = () => {
-    isHoveredRef.current = false;
-    setIsPaused(false);
-  };
 
   // Keyboard navigation
   useEffect(() => {
@@ -86,8 +72,6 @@ export default function Hero() {
     <section
       id="home"
       className="hero-section"
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
       aria-label="Jubilant Steels Hero Showcase"
     >
       {/* Slides Viewport */}
@@ -115,7 +99,6 @@ export default function Hero() {
           <HeroNavigation
             onPrev={handlePrev}
             onNext={handleNext}
-            isPaused={isPaused}
           />
         </div>
       </div>

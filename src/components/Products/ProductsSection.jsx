@@ -1,22 +1,17 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { productsData, productCategories } from '../../data/homeSectionsData';
+import { productsData } from '../../data/homeSectionsData';
 import ProductCard from './ProductCard';
-import Button from '../UI/Button';
 import './ProductsSection.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function ProductsSection() {
-  const [selectedCategory, setSelectedCategory] = useState('all');
   const sectionRef = useRef(null);
   const headerRef = useRef(null);
   const gridRef = useRef(null);
-
-  const filteredProducts = selectedCategory === 'all'
-    ? productsData
-    : productsData.filter(item => item.category === selectedCategory);
+  const ctaRef = useRef(null);
 
   // GSAP ScrollTrigger animation on section entrance
   useEffect(() => {
@@ -31,7 +26,7 @@ export default function ProductsSection() {
           opacity: 1,
           y: 0,
           duration: 0.8,
-          stagger: 0.15,
+          stagger: 0.14,
           ease: 'power3.out',
           scrollTrigger: {
             trigger: headerRef.current,
@@ -41,16 +36,18 @@ export default function ProductsSection() {
         }
       );
 
-      // Product cards stagger reveal
+      // Product cards stagger reveal with subtle 3D depth
       const cards = gridRef.current.querySelectorAll('.product-card');
       gsap.fromTo(
         cards,
-        { opacity: 0, y: 40 },
+        { opacity: 0, y: 38, scale: 0.96, rotateX: 4 },
         {
           opacity: 1,
           y: 0,
-          duration: 0.7,
-          stagger: 0.08,
+          scale: 1,
+          rotateX: 0,
+          duration: 0.75,
+          stagger: 0.07,
           ease: 'power3.out',
           scrollTrigger: {
             trigger: gridRef.current,
@@ -59,10 +56,29 @@ export default function ProductsSection() {
           }
         }
       );
+
+      // Bottom Button reveal
+      if (ctaRef.current) {
+        gsap.fromTo(
+          ctaRef.current,
+          { opacity: 0, y: 20 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: ctaRef.current,
+              start: 'top 90%',
+              toggleActions: 'play none none none'
+            }
+          }
+        );
+      }
     }, sectionRef);
 
     return () => ctx.revert();
-  }, [selectedCategory]);
+  }, []);
 
   return (
     <section id="products" ref={sectionRef} className="products-section" aria-label="Our Products">
@@ -81,41 +97,25 @@ export default function ProductsSection() {
           <p className="section-description">
             Precision-engineered steel products for demanding industrial and engineering applications.
           </p>
-
-          {/* Category Filter Tabs */}
-          <div className="product-category-tabs" role="tablist" aria-label="Product categories">
-            {productCategories.map(cat => (
-              <button
-                key={cat.id}
-                role="tab"
-                type="button"
-                aria-selected={selectedCategory === cat.id}
-                className={`category-tab-btn ${selectedCategory === cat.id ? 'is-active' : ''}`}
-                onClick={() => setSelectedCategory(cat.id)}
-              >
-                <span>{cat.label}</span>
-                {selectedCategory === cat.id && <span className="tab-indicator" />}
-              </button>
-            ))}
-          </div>
         </div>
 
-        {/* Product Cards Grid */}
+        {/* 8 Products Grid */}
         <div ref={gridRef} className="products-grid">
-          {filteredProducts.map(product => (
+          {productsData.map(product => (
             <ProductCard key={product.id} product={product} />
           ))}
         </div>
 
-        {/* Bottom CTA bar */}
-        <div className="products-bottom-cta">
-          <div className="cta-box-content">
-            <h4 className="cta-box-title">Need custom sizes, heavy walls or certified heat lots?</h4>
-            <p className="cta-box-desc">Our metallurgical engineering team can source and fabricate to ASTM, ASME, DIN and ISO standards.</p>
-          </div>
-          <Button href="#quote" variant="primary" size="md" icon="arrow">
-            Request Custom Quotation
-          </Button>
+        {/* Medium-sized Centered Button: ALL PRODUCTS → */}
+        <div ref={ctaRef} className="products-action-center">
+          <a
+            href="#products"
+            className="all-products-main-btn"
+            aria-label="View All Products"
+          >
+            <span>ALL PRODUCTS</span>
+            <span className="btn-arrow" aria-hidden="true">&rarr;</span>
+          </a>
         </div>
       </div>
     </section>

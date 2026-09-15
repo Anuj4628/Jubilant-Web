@@ -2,7 +2,7 @@ import React from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import './HeroControls.css';
 
-export default function HeroNavigation({ onPrev, onNext, isPaused }) {
+export default function HeroNavigation({ onPrev, onNext }) {
   return (
     <div className="hero-nav-controls" aria-label="Hero slider navigation">
       <div className="hero-nav-arrows">
@@ -26,13 +26,6 @@ export default function HeroNavigation({ onPrev, onNext, isPaused }) {
           <span className="arrow-btn-glow" />
         </button>
       </div>
-
-      {isPaused && (
-        <div className="hero-status-tag" aria-live="polite">
-          <span className="status-dot" />
-          <span>AUTOPLAY PAUSED</span>
-        </div>
-      )}
     </div>
   );
 }

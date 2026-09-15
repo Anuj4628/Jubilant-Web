@@ -2,7 +2,6 @@ import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { clientsData } from '../../data/homeSectionsData';
-import { ShieldCheck, Building2 } from 'lucide-react';
 import './ClientNetworkSection.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -12,17 +11,18 @@ export default function ClientNetworkSection() {
   const headerRef = useRef(null);
 
   useEffect(() => {
-    if (!sectionRef.current) return;
+    if (!sectionRef.current || !headerRef.current) return;
 
     const ctx = gsap.context(() => {
+      // Header GSAP entrance reveal
       gsap.fromTo(
         headerRef.current.children,
-        { opacity: 0, y: 25 },
+        { opacity: 0, y: 32 },
         {
           opacity: 1,
           y: 0,
-          duration: 0.8,
-          stagger: 0.15,
+          duration: 0.85,
+          stagger: 0.14,
           ease: 'power3.out',
           scrollTrigger: {
             trigger: headerRef.current,
@@ -36,68 +36,83 @@ export default function ClientNetworkSection() {
     return () => ctx.revert();
   }, []);
 
-  // Repeat 4 times for a seamless infinite loop
-  const repeatedClients = [...clientsData, ...clientsData, ...clientsData, ...clientsData];
+  // Split into 2 rows for opposing continuous infinite marquees
+  const row1Clients = clientsData.slice(0, 6);
+  const row2Clients = clientsData.slice(6);
+
+  // Replicate 4x for seamless jump-free infinite continuous scroll
+  const marqueeRow1 = [...row1Clients, ...row1Clients, ...row1Clients, ...row1Clients];
+  const marqueeRow2 = [...row2Clients, ...row2Clients, ...row2Clients, ...row2Clients];
 
   return (
     <section id="certificate" ref={sectionRef} className="client-network-section" aria-label="Client Network">
+      {/* Dark Technical Grid Overlay */}
+      <div className="client-network-bg-grid" aria-hidden="true" />
+      <div className="client-network-ambient-glow" aria-hidden="true" />
+
       <div className="section-container">
-        {/* Section Header */}
+        {/* Strong Section Heading */}
         <div ref={headerRef} className="client-network-header">
           <div className="section-eyebrow">
             <span className="eyebrow-accent-bar" />
-            <span className="eyebrow-text">ECOSYSTEM & INDUSTRIAL TRUST</span>
+            <span className="eyebrow-text">GLOBAL INDUSTRIAL ECOSYSTEM</span>
           </div>
 
           <h2 className="section-display-heading">
             CLIENT <span className="text-highlight-red">NETWORK</span>
           </h2>
-
-          <p className="section-description">
-            Trusted by leading organizations across engineering, infrastructure, energy and industrial sectors.
-          </p>
         </div>
       </div>
 
-      {/* Continuous Seamless Infinite Logo Marquee (Right -> Left) */}
-      <div className="client-marquee-container" aria-label="Partner and client organizations">
-        <div className="client-marquee-track">
-          {repeatedClients.map((client, idx) => (
-            <div
-              key={`${client.name}-${idx}`}
-              className="client-badge-card"
-              tabIndex={0}
-              aria-label={`${client.name} - ${client.sector}`}
-            >
-              <div className="badge-icon-box">
-                <Building2 size={20} className="badge-org-icon" />
-              </div>
-
-              <div className="badge-info">
-                <div className="badge-name-row">
-                  <span className="client-brand-name">{client.name}</span>
-                  <span className="client-dot-accent" />
+      {/* Dual Continuous Infinite Logo Marquees */}
+      <div className="client-marquees-wrapper" aria-label="Approved corporate client and partner logos">
+        {/* ROW 1: Right to Left */}
+        <div className="client-marquee-row marquee-reverse">
+          <div className="client-marquee-track">
+            {marqueeRow1.map((client, idx) => (
+              <div
+                key={`r1-${client.name}-${idx}`}
+                className="client-logo-card"
+                tabIndex={0}
+                role="group"
+                aria-label={client.name}
+              >
+                <div className="client-logo-surface">
+                  <img
+                    src={client.logo}
+                    alt={client.name}
+                    className="partner-logo-img"
+                    loading="lazy"
+                  />
                 </div>
-                <span className="client-sector-label">{client.sector}</span>
-                <span className="client-badge-tag">{client.tag}</span>
+                <span className="partner-company-name">{client.name}</span>
               </div>
-
-              <div className="badge-bottom-glow" aria-hidden="true" />
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Trust metric badges */}
-      <div className="section-container">
-        <div className="client-trust-strip">
-          <div className="trust-item">
-            <ShieldCheck size={20} className="trust-icon" />
-            <span className="trust-text">Approved Vendor for Major Public & Private Sector Enterprises</span>
+            ))}
           </div>
-          <div className="trust-item">
-            <ShieldCheck size={20} className="trust-icon" />
-            <span className="trust-text">ISO 9001:2015 & ASME Compliant Quality Management Systems</span>
+        </div>
+
+        {/* ROW 2: Left to Right */}
+        <div className="client-marquee-row marquee-forward">
+          <div className="client-marquee-track">
+            {marqueeRow2.map((client, idx) => (
+              <div
+                key={`r2-${client.name}-${idx}`}
+                className="client-logo-card"
+                tabIndex={0}
+                role="group"
+                aria-label={client.name}
+              >
+                <div className="client-logo-surface">
+                  <img
+                    src={client.logo}
+                    alt={client.name}
+                    className="partner-logo-img"
+                    loading="lazy"
+                  />
+                </div>
+                <span className="partner-company-name">{client.name}</span>
+              </div>
+            ))}
           </div>
         </div>
       </div>
