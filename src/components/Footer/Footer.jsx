@@ -4,9 +4,16 @@ import Button from '../UI/Button';
 import { MapPin, Phone, Mail, ArrowUp, ShieldCheck, Award } from 'lucide-react';
 import './Footer.css';
 
-export default function Footer() {
+export default function Footer({ currentPage = 'home', onNavigate }) {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleLinkClick = (e, page, sectionId = null) => {
+    if (onNavigate) {
+      e.preventDefault();
+      onNavigate(page, sectionId);
+    }
   };
 
   return (
@@ -19,7 +26,12 @@ export default function Footer() {
         <div className="footer-main-grid">
           {/* Brand Col */}
           <div className="footer-brand-col">
-            <a href="#home" className="footer-logo-link" aria-label="Jubilant Steels Home">
+            <a
+              href="/"
+              className="footer-logo-link"
+              aria-label="Jubilant Steels Home"
+              onClick={(e) => handleLinkClick(e, 'home')}
+            >
               <img
                 src={jubilantLogo}
                 alt="Jubilant Steels"
@@ -51,10 +63,10 @@ export default function Footer() {
               <span className="title-accent-dot" />
             </h4>
             <ul className="footer-links-list">
-              <li><a href="#home" className="footer-link">Home</a></li>
-              <li><a href="#about" className="footer-link">About Us</a></li>
-              <li><a href="#products" className="footer-link">Products</a></li>
-              <li><a href="#materials" className="footer-link">Materials</a></li>
+              <li><a href="/" className="footer-link" onClick={(e) => handleLinkClick(e, 'home')}>Home</a></li>
+              <li><a href="/about" className="footer-link" onClick={(e) => handleLinkClick(e, 'about')}>About Us</a></li>
+              <li><a href="/#products" className="footer-link" onClick={(e) => handleLinkClick(e, 'home', 'products')}>Products</a></li>
+              <li><a href="/#materials" className="footer-link" onClick={(e) => handleLinkClick(e, 'home', 'materials')}>Materials</a></li>
             </ul>
           </div>
 

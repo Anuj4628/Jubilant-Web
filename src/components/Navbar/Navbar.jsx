@@ -6,10 +6,10 @@ import TopContactBar from './TopContactBar';
 import { Menu, X } from 'lucide-react';
 import './Navbar.css';
 
-export default function Navbar() {
+export default function Navbar({ currentPage = 'home', onNavigate }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeLink, setActiveLink] = useState('home');
+  const activeLink = currentPage === 'about' ? 'about' : 'home';
   const navRef = useRef(null);
 
   useEffect(() => {
@@ -30,6 +30,34 @@ export default function Navbar() {
     };
   }, []);
 
+  const handleLinkClick = (e, link) => {
+    e.preventDefault();
+    if (onNavigate) {
+      if (link.id === 'about') {
+        onNavigate('about');
+      } else if (link.id === 'home') {
+        onNavigate('home');
+      } else {
+        // Other section links (products, materials, certificate, contact)
+        if (currentPage === 'about') {
+          onNavigate('home', link.id);
+        } else {
+          const target = document.getElementById(link.id);
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth' });
+          }
+        }
+      }
+    }
+  };
+
+  const handleLogoClick = (e) => {
+    e.preventDefault();
+    if (onNavigate) {
+      onNavigate('home');
+    }
+  };
+
   return (
     <>
       <header
@@ -43,7 +71,12 @@ export default function Navbar() {
         <div className="navbar-container">
 
           {/* Logo Area */}
-          <a href="#home" className="navbar-logo-link" aria-label="Jubilant Steels Home">
+          <a
+            href="/"
+            className="navbar-logo-link"
+            aria-label="Jubilant Steels Home"
+            onClick={handleLogoClick}
+          >
             <div className="navbar-logo-wrap">
               <img
                 src={brandDetails.logoUrl}
@@ -61,9 +94,9 @@ export default function Navbar() {
                 return (
                   <li key={link.id} className="navbar-item">
                     <a
-                      href={link.href}
+                      href={link.id === 'about' ? '/about' : link.href}
                       className={`navbar-link ${isActive ? 'active' : ''}`}
-                      onClick={() => setActiveLink(link.id)}
+                      onClick={(e) => handleLinkClick(e, link)}
                     >
                       <span className="navbar-link-text">{link.label}</span>
                       <span className="navbar-link-indicator" aria-hidden="true" />
@@ -81,6 +114,12 @@ export default function Navbar() {
               variant="nav-quote"
               size="sm"
               icon="arrow"
+              onClick={(e) => {
+                if (currentPage === 'about' && onNavigate) {
+                  e.preventDefault();
+                  onNavigate('home', 'contact');
+                }
+              }}
             >
               {brandDetails.quoteCta.label}
             </Button>
@@ -106,7 +145,8 @@ export default function Navbar() {
         isOpen={mobileMenuOpen}
         onClose={() => setMobileMenuOpen(false)}
         activeLink={activeLink}
-        setActiveLink={setActiveLink}
+        currentPage={currentPage}
+        onNavigate={onNavigate}
       />
     </>
   );

@@ -4,7 +4,7 @@ import { navLinks, brandDetails } from '../../data/navigationData';
 import Button from '../UI/Button';
 import './MobileMenu.css';
 
-export default function MobileMenu({ isOpen, onClose, activeLink, setActiveLink }) {
+export default function MobileMenu({ isOpen, onClose, activeLink, currentPage, onNavigate }) {
   const menuRef = useRef(null);
   const linksContainerRef = useRef(null);
   const footerRef = useRef(null);
@@ -82,9 +82,25 @@ export default function MobileMenu({ isOpen, onClose, activeLink, setActiveLink 
     };
   }, [isOpen]);
 
-  const handleLinkClick = (id) => {
-    setActiveLink(id);
+  const handleLinkClick = (e, id) => {
+    e.preventDefault();
     onClose();
+    if (onNavigate) {
+      if (id === 'about') {
+        onNavigate('about');
+      } else if (id === 'home') {
+        onNavigate('home');
+      } else {
+        if (currentPage === 'about') {
+          onNavigate('home', id);
+        } else {
+          const target = document.getElementById(id);
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth' });
+          }
+        }
+      }
+    }
   };
 
   return (
@@ -103,9 +119,9 @@ export default function MobileMenu({ isOpen, onClose, activeLink, setActiveLink 
             return (
               <li key={link.id} className="mobile-nav-item">
                 <a
-                  href={link.href}
+                  href={link.id === 'about' ? '/about' : link.href}
                   className={`mobile-nav-link ${isActive ? 'active' : ''}`}
-                  onClick={() => handleLinkClick(link.id)}
+                  onClick={(e) => handleLinkClick(e, link.id)}
                 >
                   <span className="mobile-link-number">0{index + 1}</span>
                   <span className="mobile-link-title">{link.label}</span>
