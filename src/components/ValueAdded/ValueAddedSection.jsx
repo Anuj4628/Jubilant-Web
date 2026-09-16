@@ -35,8 +35,10 @@ export default function ValueAddedSection() {
   useEffect(() => {
     if (!sectionRef.current || !gridRef.current) return;
 
-    const ctx = gsap.context(() => {
-      // Header reveal
+    const mm = gsap.matchMedia();
+
+    // Header reveal
+    if (headerRef.current) {
       gsap.fromTo(
         headerRef.current.children,
         { opacity: 0, y: 32 },
@@ -53,30 +55,130 @@ export default function ValueAddedSection() {
           }
         }
       );
+    }
 
-      // Cards staggered reveal with subtle 3D depth
-      const cards = gridRef.current.querySelectorAll('.value-service-card');
-      gsap.fromTo(
-        cards,
-        { opacity: 0, y: 40, scale: 0.96, rotateX: 5 },
-        {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          rotateX: 0,
-          duration: 0.8,
-          stagger: 0.08,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: gridRef.current,
-            start: 'top 84%',
-            toggleActions: 'play none none none'
-          }
+    const cards = gridRef.current.querySelectorAll('.value-service-card');
+
+    // Desktop: 3-column layout (> 1100px)
+    mm.add('(min-width: 1101px)', () => {
+      const desktopOffsets = [
+        { x: -60, y: 0 },  // Card 0 (Row 1 Left): enter from LEFT
+        { x: 0, y: -60 },  // Card 1 (Row 1 Center): enter from TOP
+        { x: 60, y: 0 },   // Card 2 (Row 1 Right): enter from RIGHT
+        { x: -60, y: 0 },  // Card 3 (Row 2 Left): enter from LEFT
+        { x: 0, y: 60 },   // Card 4 (Row 2 Center): enter from BOTTOM (natural directional variation)
+        { x: 60, y: 0 }    // Card 5 (Row 2 Right): enter from RIGHT
+      ];
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: gridRef.current,
+          start: 'top 82%',
+          toggleActions: 'play none none none'
         }
-      );
-    }, sectionRef);
+      });
 
-    return () => ctx.revert();
+      cards.forEach((card, idx) => {
+        const offset = desktopOffsets[idx] || { x: 0, y: 40 };
+        tl.fromTo(
+          card,
+          {
+            opacity: 0,
+            x: offset.x,
+            y: offset.y,
+            animation: 'none'
+          },
+          {
+            opacity: 1,
+            x: 0,
+            y: 0,
+            duration: 0.85,
+            ease: 'power3.out',
+            clearProps: 'transform,animation'
+          },
+          idx * 0.09
+        );
+      });
+    });
+
+    // Tablet: 2-column layout (769px - 1100px)
+    mm.add('(min-width: 769px) and (max-width: 1100px)', () => {
+      const tabletOffsets = [
+        { x: -50, y: 0 },  // Card 0 (Col 1): enter from LEFT
+        { x: 50, y: 0 },   // Card 1 (Col 2): enter from RIGHT
+        { x: -50, y: 0 },  // Card 2 (Col 1): enter from LEFT
+        { x: 50, y: 0 },   // Card 3 (Col 2): enter from RIGHT
+        { x: -50, y: 0 },  // Card 4 (Col 1): enter from LEFT
+        { x: 50, y: 0 }    // Card 5 (Col 2): enter from RIGHT
+      ];
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: gridRef.current,
+          start: 'top 82%',
+          toggleActions: 'play none none none'
+        }
+      });
+
+      cards.forEach((card, idx) => {
+        const offset = tabletOffsets[idx] || { x: 0, y: 40 };
+        tl.fromTo(
+          card,
+          {
+            opacity: 0,
+            x: offset.x,
+            y: offset.y,
+            animation: 'none'
+          },
+          {
+            opacity: 1,
+            x: 0,
+            y: 0,
+            duration: 0.85,
+            ease: 'power3.out',
+            clearProps: 'transform,animation'
+          },
+          idx * 0.09
+        );
+      });
+    });
+
+    // Mobile: 1-column layout (<= 768px) - Cards animate individually on scroll
+    mm.add('(max-width: 768px)', () => {
+      // Directional pattern: Card 1 -> RIGHT, Card 2 -> LEFT, Card 3 -> RIGHT, Card 4 -> LEFT, Card 5 -> RIGHT, Card 6 -> LEFT
+      cards.forEach((card, idx) => {
+        const isFromRight = idx % 2 === 0; // Card 1, 3, 5 from RIGHT; Card 2, 4, 6 from LEFT
+        const startX = isFromRight ? 36 : -36;
+
+        gsap.fromTo(
+          card,
+          {
+            opacity: 0,
+            x: startX,
+            y: 12,
+            animation: 'none'
+          },
+          {
+            opacity: 1,
+            x: 0,
+            y: 0,
+            duration: 0.75,
+            ease: 'power3.out',
+            clearProps: 'transform,animation',
+            scrollTrigger: {
+              trigger: card,
+              start: 'top 88%',
+              toggleActions: 'play none none none'
+            }
+          }
+        );
+      });
+    });
+
+
+    return () => {
+      mm.revert();
+    };
   }, []);
 
   return (

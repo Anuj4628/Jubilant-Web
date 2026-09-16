@@ -8,7 +8,7 @@
   left: 0;
   width: 100%;
   z-index: 20;
-  padding: 0 40px 32px;
+  padding: 0 40px 48px; /* elevated margin from bottom */
   background: linear-gradient(
     0deg,
     rgba(10, 14, 20, 0.5) 0%,
@@ -144,6 +144,7 @@
   display: flex;
   align-items: center;
   gap: 16px;
+  margin-right: 76px; /* Clean breathing room from floating action buttons on desktop */
 }
 
 .hero-nav-arrows {
@@ -212,16 +213,34 @@
 }
 
 /* ===================================================
-   RESPONSIVE CONTROLS
+   RESPONSIVE CONTROLS - PERFECT HARMONY WITH FLOATING ACTIONS
+   In tablet & mobile, group slider counter and arrows on the LEFT,
+   leaving the RIGHT side completely clear for floating WhatsApp & Call.
    =================================================== */
 
-@media (max-width: 960px) {
+@media (max-width: 1024px) {
   .hero-bottom-bar {
-    padding: 0 20px 20px;
+    padding: 0 24px 24px;
+  }
+
+  .hero-bottom-container {
+    justify-content: flex-start;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: nowrap;
+  }
+
+  .hero-nav-controls {
+    margin-right: 0;
   }
 
   .hero-progress-segments {
     display: none;
+  }
+
+  .hero-progress-wrapper {
+    padding: 8px 14px;
+    gap: 0;
   }
 
   .hero-arrow-btn {
@@ -232,7 +251,15 @@
 
 @media (max-width: 540px) {
   .hero-bottom-bar {
-    padding: 0 16px 16px;
+    padding: 0 16px 20px;
+  }
+
+  .hero-bottom-container {
+    gap: 10px;
+  }
+
+  .hero-progress-wrapper {
+    padding: 6px 12px;
   }
 
   .counter-current {
@@ -240,8 +267,8 @@
   }
 
   .hero-arrow-btn {
-    width: 36px;
-    height: 36px;
+    width: 38px;
+    height: 38px;
   }
 
   .hero-status-tag {

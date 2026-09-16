@@ -2,7 +2,6 @@ import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { navLinks, brandDetails } from '../../data/navigationData';
 import Button from '../UI/Button';
-import { Phone, Mail, MapPin } from 'lucide-react';
 import './MobileMenu.css';
 
 export default function MobileMenu({ isOpen, onClose, activeLink, setActiveLink }) {
@@ -135,6 +134,7 @@ export default function MobileMenu({ isOpen, onClose, activeLink, setActiveLink 
             <span className="mobile-brand-desc">{brandDetails.tagline}</span>
           </div>
         </div>
+
       </div>
     </div>
   );

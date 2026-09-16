@@ -128,3 +128,38 @@
   font-size: 0.78rem;
   color: var(--color-text-muted);
 }
+
+.mobile-menu-contacts {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px dashed rgba(226, 232, 240, 0.9);
+}
+
+.mobile-contact-line {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  line-height: 1.4;
+}
+
+.mobile-contact-line:hover {
+  color: var(--color-red);
+}
+
+.mobile-contact-icon {
+  color: var(--color-red);
+  flex-shrink: 0;
+}
+
+.mobile-address-line {
+  align-items: flex-start;
+  font-size: 0.74rem;
+  color: var(--color-text-muted);
+}
+

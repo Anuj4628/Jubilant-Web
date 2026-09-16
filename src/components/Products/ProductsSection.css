@@ -50,14 +50,17 @@
 /* Major Display Heading */
 .products-header .section-display-heading {
   font-family: var(--font-display, 'Syne', sans-serif);
-  font-size: clamp(2.3rem, 4.4vw, 3.6rem);
+  font-size: clamp(1.8rem, 4.4vw, 3.6rem);
   font-weight: 900;
   line-height: 1.15;
   letter-spacing: -0.02em;
   text-transform: uppercase;
   color: var(--color-text-primary, #0F172A);
   margin-bottom: 18px;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
+
 
 .products-header .text-highlight-red {
   color: var(--color-red, #D3122A);
@@ -403,8 +406,21 @@
 }
 
 @media (max-width: 640px) {
+  .products-section {
+    padding: 65px 0 55px;
+  }
+
+  .products-header .section-display-heading {
+    font-size: clamp(1.4rem, 6vw, 2.1rem);
+    line-height: 1.2;
+  }
+
+  .products-header {
+    margin-bottom: 26px;
+  }
+
   .section-container {
-    padding: 0 20px;
+    padding: 0 clamp(16px, 4vw, 20px);
   }
 
   .products-grid {
@@ -434,4 +450,5 @@
     font-size: 1.15rem;
   }
 }
+
 

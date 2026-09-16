@@ -200,6 +200,26 @@
   transition: color 0.2s ease;
 }
 
+.contact-phones-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.contact-sep {
+  color: rgba(255, 255, 255, 0.3);
+  user-select: none;
+}
+
+.contact-address {
+  font-style: normal;
+  font-size: 0.84rem;
+  line-height: 1.55;
+  color: rgba(226, 232, 240, 0.85);
+  word-break: break-word;
+}
+
 a.contact-val:hover {
   color: var(--color-red-bright);
 }
@@ -207,6 +227,7 @@ a.contact-val:hover {
 .footer-cta-wrap {
   margin-top: 10px;
 }
+
 
 /* Bottom Bar */
 .footer-bottom-bar {

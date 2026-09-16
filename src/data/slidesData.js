@@ -1,35 +1,37 @@
-import slide1Img from '../assets/images/slide-1.jpg';
-import slide2Img from '../assets/images/slide-2.jpg';
-import slide3Img from '../assets/Product BG/precision pipes and fitting.png';
-import slide4Img from '../assets/images/slide-4.jpg';
 import slide5Img from '../assets/images/slide-5.jpg';
+import slide2Img from '../assets/images/slide-2.jpg';
+import superiorRoundsImg from '../assets/Product BG/superior round and bars engineeres to be perfomed.png';
+import precisionPipesImg from '../assets/Product BG/precision pipes and fitting.png';
+import premiumSteelImg from '../assets/Product BG/premium steel solution build for industry.png';
 
 export const heroSlides = [
+  // Slide 01: Restored Warehouse & Logistics Slide (replaces slide-1.jpg with original slide-5 details)
   {
     id: 1,
     slideNumber: "01",
-    eyebrow: "JUBILANT STEELS",
-    headline: "Premium Steel Solutions, Built for Industry.",
-    description: "Quality steel products for demanding industrial applications.",
+    eyebrow: "GLOBAL STEEL PARTNER",
+    headline: "From Steel to Supply.\n[Built] Around Reliability.",
+    description: "Manufacturing, sourcing and supplying quality steel products with dependable service.",
     primaryCta: {
-      label: "Explore Products",
-      href: "#products",
+      label: "Get a Quote",
+      href: "#quote",
       variant: "primary"
     },
     secondaryCta: {
-      label: "Get a Quote",
-      href: "#quote",
+      label: "Explore Products",
+      href: "#products",
       variant: "secondary"
     },
-    image: slide1Img,
-    specTag: "HEAVY PLATES & FABRICATION // PRECISION TOLERANCE",
-    alt: "Industrial steel plates and fabrication facility"
+    image: slide5Img,
+    specTag: "INTERNATIONAL LOGISTICS // STRATEGIC WAREHOUSING",
+    alt: "Global steel logistics terminal and inventory center"
   },
+  // Slide 02: Existing Original Slide 2
   {
     id: 2,
     slideNumber: "02",
     eyebrow: "STEEL EXPORTERS",
-    headline: "Quality Sheets & Plates. Global Supply.",
+    headline: "Quality Sheets & Plates.\n[Global] Supply.",
     description: "Reliable steel sheets and plates supplied to industries across global markets.",
     primaryCta: {
       label: "Explore Sheets & Plates",
@@ -45,31 +47,12 @@ export const heroSlides = [
     specTag: "STAINLESS & COLD-ROLLED COILS // GLOBAL EXPORT",
     alt: "Cold-rolled stainless steel coils and sheets warehouse"
   },
+  // Slide 03: New Product BG Slide 1 — Superior Rounds and Bars
   {
     id: 3,
     slideNumber: "03",
-    eyebrow: "PIPES & FITTINGS",
-    headline: "Precision Pipes, Fittings & Flanges.",
-    description: "Engineered products for demanding industrial and process applications.",
-    primaryCta: {
-      label: "Explore Products",
-      href: "#products",
-      variant: "primary"
-    },
-    secondaryCta: {
-      label: "Get a Quote",
-      href: "#quote",
-      variant: "secondary"
-    },
-    image: slide3Img,
-    specTag: "HIGH-PRESSURE PIPING & FLANGES // ASME COMPLIANT",
-    alt: "Precision industrial pipes, weld-neck flanges and fittings"
-  },
-  {
-    id: 4,
-    slideNumber: "04",
     eyebrow: "MANUFACTURING",
-    headline: "Superior Rounds & Bars. Engineered to Perform.",
+    headline: "Superior Rounds & Bars.\n[Engineered] to Perform.",
     description: "Precision-manufactured rounds and bars for critical engineering applications.",
     primaryCta: {
       label: "Explore Rounds & Bars",
@@ -81,28 +64,50 @@ export const heroSlides = [
       href: "#quote",
       variant: "secondary"
     },
-    image: slide4Img,
+    image: superiorRoundsImg,
     specTag: "SOLID ROUND BARS & BRIGHT SHAFTS // ALLOY GRADES",
-    alt: "Precision steel round bars and bright bars"
+    alt: "Superior steel round bars and precision bright shafts"
   },
+  // Slide 04: New Product BG Slide 2 — Precision Pipes and Fittings
   {
-    id: 5,
-    slideNumber: "05",
-    eyebrow: "GLOBAL STEEL PARTNER",
-    headline: "From Steel to Supply. Built Around Reliability.",
-    description: "Manufacturing, sourcing and supplying quality steel products with dependable service.",
+    id: 4,
+    slideNumber: "04",
+    eyebrow: "PIPES & FITTINGS",
+    headline: "[Precision] Pipes,\nFittings & Flanges.",
+    description: "Engineered products for demanding industrial and process applications.",
     primaryCta: {
-      label: "Get a Quote",
-      href: "#quote",
+      label: "Explore Products",
+      href: "#products",
       variant: "primary"
     },
     secondaryCta: {
-      label: "Explore Products",
-      href: "#products",
+      label: "Get a Quote",
+      href: "#quote",
       variant: "secondary"
     },
-    image: slide5Img,
-    specTag: "INTERNATIONAL LOGISTICS // STRATEGIC WAREHOUSING",
-    alt: "Global steel logistics terminal and inventory center"
+    image: precisionPipesImg,
+    specTag: "HIGH-PRESSURE PIPING & FLANGES // ASME COMPLIANT",
+    alt: "Precision pipes, fittings and flanges"
+  },
+  // Slide 05: New Product BG Slide 3 — Premium Steel Solution Built for Industry
+  {
+    id: 5,
+    slideNumber: "05",
+    eyebrow: "JUBILANT STEELS",
+    headline: "Premium [Steel] Solutions,\nBuilt for Industry.",
+    description: "Quality steel products for demanding industrial applications.",
+    primaryCta: {
+      label: "Explore Products",
+      href: "#products",
+      variant: "primary"
+    },
+    secondaryCta: {
+      label: "Get a Quote",
+      href: "#quote",
+      variant: "secondary"
+    },
+    image: premiumSteelImg,
+    specTag: "HEAVY PLATES & FABRICATION // PRECISION TOLERANCE",
+    alt: "Premium steel solutions built for industry"
   }
 ];

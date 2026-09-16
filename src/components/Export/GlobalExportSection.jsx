@@ -216,7 +216,7 @@ export default function GlobalExportSection() {
           )}
         </div>
 
-        {/* Clean, Minimal Country Cards Grid — ONLY Flag + Country Name */}
+        {/* Clean, Minimal Country Cards Grid — Circular Flag + Country Name */}
         <div ref={gridRef} className="export-countries-grid">
           {filteredCountries.map(country => (
             <div
@@ -226,17 +226,22 @@ export default function GlobalExportSection() {
               role="group"
               aria-label={country.name}
             >
-              {/* Flag Container */}
+              {/* Circular Flag Container */}
               <div className="country-flag-box">
                 <img
-                  src={`https://flagcdn.com/w80/${country.code.toLowerCase()}.png`}
+                  src={`https://hatscripts.github.io/circle-flags/flags/${country.code.toLowerCase()}.svg`}
                   alt={`${country.name} flag`}
                   className="country-flag-img"
                   loading="lazy"
                   onError={(e) => {
-                    e.currentTarget.style.display = 'none';
-                    const fallback = e.currentTarget.parentElement.querySelector('.country-flag-fallback');
-                    if (fallback) fallback.style.display = 'inline-block';
+                    if (!e.currentTarget.dataset.fallback) {
+                      e.currentTarget.dataset.fallback = 'true';
+                      e.currentTarget.src = `https://flagcdn.com/w80/${country.code.toLowerCase()}.png`;
+                    } else {
+                      e.currentTarget.style.display = 'none';
+                      const fallback = e.currentTarget.parentElement.querySelector('.country-flag-fallback');
+                      if (fallback) fallback.style.display = 'inline-block';
+                    }
                   }}
                 />
                 <span className="country-flag-fallback" style={{ display: 'none' }}>
@@ -244,11 +249,8 @@ export default function GlobalExportSection() {
                 </span>
               </div>
 
-              {/* Country Name Only */}
+              {/* Country Name */}
               <h3 className="country-name-text">{country.name}</h3>
-
-              {/* Bottom Subtle Accent Bar on Hover */}
-              <div className="country-card-accent" />
             </div>
           ))}
 

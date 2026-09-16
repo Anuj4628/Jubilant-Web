@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { navLinks, brandDetails } from '../../data/navigationData';
 import Button from '../UI/Button';
 import MobileMenu from './MobileMenu';
+import TopContactBar from './TopContactBar';
 import { Menu, X } from 'lucide-react';
 import './Navbar.css';
 
@@ -36,7 +37,11 @@ export default function Navbar() {
         className={`navbar-wrapper ${isScrolled ? 'is-scrolled' : 'at-top'}`}
         id="main-navbar"
       >
+        {/* Top Quick Contact Strip */}
+        <TopContactBar />
+
         <div className="navbar-container">
+
           {/* Logo Area */}
           <a href="#home" className="navbar-logo-link" aria-label="Jubilant Steels Home">
             <div className="navbar-logo-wrap">

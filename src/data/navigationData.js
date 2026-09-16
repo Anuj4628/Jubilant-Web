@@ -16,5 +16,16 @@ export const brandDetails = {
   quoteCta: {
     label: "Get Quote",
     href: "#quote"
+  },
+  contact: {
+    email: "info@jubilantmetal.com",
+    phone1: "+91 9820171740",
+    phone1Raw: "+919820171740",
+    phone2: "+91 2266394511",
+    phone2Raw: "+912266394511",
+    address: "14 GROUND FLOOR, SIDDHESH APRATMENT, DR BABASAHEBSB JAYKAR MARG, 2ND KHATTAR LANE, THAKURDWAR ROAD, MUMBAI - 400002",
+    whatsApp: "+91 9820171740",
+    whatsAppUrl: "https://wa.me/919820171740"
   }
 };
+

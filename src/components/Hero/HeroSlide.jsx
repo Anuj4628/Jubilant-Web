@@ -3,6 +3,31 @@ import gsap from 'gsap';
 import Button from '../UI/Button';
 import './HeroSlide.css';
 
+// Helper function to render headline with strategic red accent on [bracketed] words and newline support
+function renderHeadline(headline) {
+  if (!headline) return null;
+  const lines = headline.split('\n');
+  return lines.map((line, lineIdx) => {
+    const parts = line.split(/(\[[^\]]+\])/g);
+    return (
+      <React.Fragment key={lineIdx}>
+        {parts.map((part, index) => {
+          if (part.startsWith('[') && part.endsWith(']')) {
+            const text = part.slice(1, -1);
+            return (
+              <span key={index} className="hero-headline-accent">
+                {text}
+              </span>
+            );
+          }
+          return part;
+        })}
+        {lineIdx < lines.length - 1 && <br className="hero-headline-br" />}
+      </React.Fragment>
+    );
+  });
+}
+
 export default function HeroSlide({ slide, isActive, direction = 1 }) {
   const slideRef = useRef(null);
   const bgImageRef = useRef(null);
@@ -167,8 +192,12 @@ export default function HeroSlide({ slide, isActive, direction = 1 }) {
 
             {/* Headline with Overflow Mask */}
             <div ref={headlineMaskRef} className="hero-headline-mask">
-              <h1 ref={headlineTextRef} className="hero-headline">
-                {slide.headline}
+              <h1
+                ref={headlineTextRef}
+                className="hero-headline"
+                aria-label={slide.headline ? slide.headline.replace(/\[|\]/g, '') : undefined}
+              >
+                {renderHeadline(slide.headline)}
               </h1>
             </div>
 

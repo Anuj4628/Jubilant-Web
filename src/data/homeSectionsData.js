@@ -340,30 +340,40 @@ export const exportCountryCategories = [
 ];
 
 export const exportCountriesList = [
-  // Americas
+  // Top 20 Countries matching layout screenshot
+  // Row 1
   { code: "US", name: "United States", region: "americas", regionLabel: "Americas", flag: "🇺🇸", hub: "Houston / New York" },
   { code: "CA", name: "Canada", region: "americas", regionLabel: "Americas", flag: "🇨🇦", hub: "Vancouver / Montreal" },
   { code: "MX", name: "Mexico", region: "americas", regionLabel: "Americas", flag: "🇲🇽", hub: "Veracruz / Manzanillo" },
   { code: "BR", name: "Brazil", region: "americas", regionLabel: "Americas", flag: "🇧🇷", hub: "Santos / Rio" },
-  { code: "CL", name: "Chile", region: "americas", regionLabel: "Americas", flag: "🇨🇱", hub: "Valparaíso" },
   { code: "AR", name: "Argentina", region: "americas", regionLabel: "Americas", flag: "🇦🇷", hub: "Buenos Aires" },
+
+  // Row 2
+  { code: "CL", name: "Chile", region: "americas", regionLabel: "Americas", flag: "🇨🇱", hub: "Valparaíso" },
+  { code: "GB", name: "United Kingdom", region: "europe", regionLabel: "Europe", flag: "🇬🇧", hub: "London / Southampton" },
+  { code: "DE", name: "Germany", region: "europe", regionLabel: "Europe", flag: "🇩🇪", hub: "Hamburg / Bremen" },
+  { code: "FR", name: "France", region: "europe", regionLabel: "Europe", flag: "🇫🇷", hub: "Le Havre / Marseille" },
+  { code: "IT", name: "Italy", region: "europe", regionLabel: "Europe", flag: "🇮🇹", hub: "Genoa / Trieste" },
+
+  // Row 3
+  { code: "ES", name: "Spain", region: "europe", regionLabel: "Europe", flag: "🇪🇸", hub: "Valencia / Barcelona" },
+  { code: "PT", name: "Portugal", region: "europe", regionLabel: "Europe", flag: "🇵🇹", hub: "Lisbon / Sines" },
+  { code: "NL", name: "Netherlands", region: "europe", regionLabel: "Europe", flag: "🇳🇱", hub: "Rotterdam" },
+  { code: "BE", name: "Belgium", region: "europe", regionLabel: "Europe", flag: "🇧🇪", hub: "Antwerp" },
+  { code: "CH", name: "Switzerland", region: "europe", regionLabel: "Europe", flag: "🇨🇭", hub: "Basel / Zurich" },
+
+  // Row 4
+  { code: "AT", name: "Austria", region: "europe", regionLabel: "Europe", flag: "🇦🇹", hub: "Vienna" },
+  { code: "SE", name: "Sweden", region: "europe", regionLabel: "Europe", flag: "🇸🇪", hub: "Gothenburg" },
+  { code: "NO", name: "Norway", region: "europe", regionLabel: "Europe", flag: "🇳🇴", hub: "Stavanger / Oslo" },
+  { code: "DK", name: "Denmark", region: "europe", regionLabel: "Europe", flag: "🇩🇰", hub: "Copenhagen" },
+  { code: "FI", name: "Finland", region: "europe", regionLabel: "Europe", flag: "🇫🇮", hub: "Helsinki" },
+
+  // Additional Americas & Europe
   { code: "CO", name: "Colombia", region: "americas", regionLabel: "Americas", flag: "🇨🇴", hub: "Cartagena" },
   { code: "PE", name: "Peru", region: "americas", regionLabel: "Americas", flag: "🇵🇪", hub: "Callao" },
-
-  // Europe
-  { code: "DE", name: "Germany", region: "europe", regionLabel: "Europe", flag: "🇩🇪", hub: "Hamburg / Bremen" },
-  { code: "GB", name: "United Kingdom", region: "europe", regionLabel: "Europe", flag: "🇬🇧", hub: "London / Southampton" },
-  { code: "IT", name: "Italy", region: "europe", regionLabel: "Europe", flag: "🇮🇹", hub: "Genoa / Trieste" },
-  { code: "NL", name: "Netherlands", region: "europe", regionLabel: "Europe", flag: "🇳🇱", hub: "Rotterdam" },
-  { code: "FR", name: "France", region: "europe", regionLabel: "Europe", flag: "🇫🇷", hub: "Le Havre / Marseille" },
-  { code: "ES", name: "Spain", region: "europe", regionLabel: "Europe", flag: "🇪🇸", hub: "Valencia / Barcelona" },
-  { code: "BE", name: "Belgium", region: "europe", regionLabel: "Europe", flag: "🇧🇪", hub: "Antwerp" },
-  { code: "NO", name: "Norway", region: "europe", regionLabel: "Europe", flag: "🇳🇴", hub: "Stavanger / Oslo" },
-  { code: "SE", name: "Sweden", region: "europe", regionLabel: "Europe", flag: "🇸🇪", hub: "Gothenburg" },
   { code: "PL", name: "Poland", region: "europe", regionLabel: "Europe", flag: "🇵🇱", hub: "Gdansk" },
   { code: "TR", name: "Turkey", region: "europe", regionLabel: "Europe", flag: "🇹🇷", hub: "Istanbul / Mersin" },
-  { code: "FI", name: "Finland", region: "europe", regionLabel: "Europe", flag: "🇫🇮", hub: "Helsinki" },
-  { code: "DK", name: "Denmark", region: "europe", regionLabel: "Europe", flag: "🇩🇰", hub: "Copenhagen" },
 
   // Middle East
   { code: "AE", name: "United Arab Emirates", region: "middle-east", regionLabel: "Middle East", flag: "🇦🇪", hub: "Jebel Ali, Dubai" },

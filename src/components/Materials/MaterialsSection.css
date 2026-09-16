@@ -388,8 +388,12 @@
   }
 
   .materials-display-heading {
-    font-size: 1.85rem;
+    font-size: clamp(1.4rem, 6vw, 1.85rem);
+    line-height: 1.2;
+    word-break: break-word;
+    overflow-wrap: break-word;
   }
+
 
   .materials-supporting-line {
     font-size: 0.9rem;

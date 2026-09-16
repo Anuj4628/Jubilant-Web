@@ -10,7 +10,9 @@ import ClientNetworkSection from './components/Clients/ClientNetworkSection';
 import GlobalExportSection from './components/Export/GlobalExportSection';
 import FinalCTASection from './components/CTA/FinalCTASection';
 import Footer from './components/Footer/Footer';
+import FloatingContactButtons from './components/UI/FloatingContactButtons';
 import './App.css';
+
 
 /**
  * Jubilant Steels - Application Root
@@ -53,6 +55,10 @@ export default function App() {
 
       {/* 11. Corporate Footer */}
       <Footer />
+
+      {/* 12. Floating Direct Contact Buttons (WhatsApp & Call) */}
+      <FloatingContactButtons />
     </div>
   );
 }
+

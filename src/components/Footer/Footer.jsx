@@ -95,27 +95,39 @@ export default function Footer() {
               <span className="title-accent-dot" />
             </h4>
             <div className="footer-contact-details">
+              {/* Phone Numbers */}
               <div className="contact-line">
                 <Phone size={16} className="contact-icon" />
                 <div>
-                  <span className="contact-lbl">Direct Export Desk</span>
-                  <a href="tel:+912223897788" className="contact-val">+91 (22) 2389-7788</a>
+                  <span className="contact-lbl">Export & Direct Desk</span>
+                  <div className="contact-phones-wrap">
+                    <a href="tel:+919820171740" className="contact-val">+91 9820171740</a>
+                    <span className="contact-sep">/</span>
+                    <a href="tel:+912266394511" className="contact-val">+91 2266394511</a>
+                  </div>
                 </div>
               </div>
 
+              {/* Email */}
               <div className="contact-line">
                 <Mail size={16} className="contact-icon" />
                 <div>
                   <span className="contact-lbl">Commercial Enquiries</span>
-                  <a href="mailto:sales@jubilantsteels.com" className="contact-val">sales@jubilantsteels.com</a>
+                  <a href="mailto:info@jubilantmetal.com" className="contact-val">info@jubilantmetal.com</a>
                 </div>
               </div>
 
+              {/* Address */}
               <div className="contact-line">
                 <MapPin size={16} className="contact-icon" />
                 <div>
-                  <span className="contact-lbl">Logistics & Works</span>
-                  <span className="contact-val">Mumbai Port Hub & Gujarat Industrial Corridor, India</span>
+                  <span className="contact-lbl">Registered Corporate Office</span>
+                  <address className="contact-val contact-address">
+                    14 GROUND FLOOR, SIDDHESH APRATMENT,<br />
+                    DR BABASAHEBSB JAYKAR MARG,<br />
+                    2ND KHATTAR LANE, THAKURDWAR ROAD,<br />
+                    MUMBAI - 400002
+                  </address>
                 </div>
               </div>
 
@@ -126,6 +138,7 @@ export default function Footer() {
               </div>
             </div>
           </div>
+
         </div>
 
         {/* Bottom Bar: Copyright & Legal */}

@@ -123,14 +123,18 @@
 
 .cta-main-heading {
   font-family: var(--font-display);
-  font-size: clamp(2.2rem, 4.2vw, 3.4rem);
+  font-size: clamp(1.8rem, 4.2vw, 3.4rem);
   font-weight: 800;
-  line-height: 1.15;
+  line-height: 1.18;
   letter-spacing: -0.02em;
   text-transform: uppercase;
   color: #FFFFFF;
   margin: 0 0 20px;
   text-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+  text-align: center;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  width: 100%;
 }
 
 .cta-heading-highlight {
@@ -140,12 +144,14 @@
 
 .cta-subheading {
   font-family: var(--font-primary);
-  font-size: clamp(1rem, 1.2vw, 1.15rem);
+  font-size: clamp(0.92rem, 1.2vw, 1.15rem);
   line-height: 1.65;
   color: rgba(241, 245, 249, 0.88);
   max-width: 660px;
-  margin: 0 0 40px;
+  margin: 0 0 36px;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  text-align: center;
+  box-sizing: border-box;
 }
 
 /* Button Group */
@@ -153,9 +159,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 20px;
+  gap: 18px;
   flex-wrap: wrap;
-  margin-bottom: 44px;
+  margin-bottom: 40px;
+  width: 100%;
 }
 
 /* Assurance Strip */
@@ -164,7 +171,7 @@
   align-items: center;
   justify-content: center;
   gap: 32px;
-  padding-top: 32px;
+  padding-top: 28px;
   border-top: 1px solid rgba(255, 255, 255, 0.15);
   width: 100%;
   flex-wrap: wrap;
@@ -188,17 +195,29 @@
 /* Responsive */
 @media (max-width: 768px) {
   .cta-banner-card {
-    padding: 50px 24px;
+    padding: 42px 20px;
+    border-radius: 14px;
   }
 
   .cta-main-heading {
-    font-size: 1.9rem;
+    font-size: clamp(1.45rem, 5.5vw, 2rem);
+    line-height: 1.22;
+  }
+
+  .cta-eyebrow {
+    padding: 5px 12px;
+    margin-bottom: 18px;
+  }
+
+  .cta-eyebrow-text {
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
   }
 
   .cta-buttons-group {
     flex-direction: column;
     width: 100%;
-    gap: 14px;
+    gap: 12px;
   }
 
   .cta-buttons-group .btn {
@@ -209,5 +228,23 @@
     flex-direction: column;
     align-items: center;
     gap: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .cta-banner-card {
+    padding: 34px 14px;
+  }
+
+  .cta-main-heading {
+    font-size: clamp(1.28rem, 6.2vw, 1.65rem);
+    line-height: 1.24;
+    margin-bottom: 14px;
+  }
+
+  .cta-subheading {
+    margin-bottom: 26px;
+    font-size: 0.88rem;
+    line-height: 1.55;
   }
 }

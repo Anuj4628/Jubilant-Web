@@ -44,13 +44,15 @@
 /* Major Display Heading */
 .value-added-header .section-display-heading {
   font-family: var(--font-display, 'Syne', sans-serif);
-  font-size: clamp(2.3rem, 4.4vw, 3.6rem);
+  font-size: clamp(1.8rem, 4.4vw, 3.6rem);
   font-weight: 900;
   line-height: 1.15;
   letter-spacing: -0.02em;
   text-transform: uppercase;
   color: var(--color-text-primary, #0F172A);
   margin-bottom: 18px;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .value-added-header .text-highlight-red {
@@ -75,7 +77,9 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 26px;
+  overflow: hidden;
 }
+
 
 /* ===================================================
    CARD BASE STRUCTURE
@@ -378,19 +382,36 @@
 
 @media (max-width: 768px) {
   .value-added-section {
-    padding: 85px 0 75px;
+    padding: 65px 0 55px;
   }
 
   .value-added-header {
-    margin-bottom: 44px;
+    margin-bottom: 32px;
+  }
+
+  .value-added-header .section-display-heading {
+    font-size: clamp(1.4rem, 6vw, 2.1rem);
+    line-height: 1.2;
   }
 
   .value-services-grid {
     grid-template-columns: 1fr;
-    gap: 18px;
+    gap: 16px;
   }
 
   .value-service-card {
-    padding: 24px 22px 22px;
+    padding: 22px 18px 20px;
   }
 }
+
+@media (max-width: 480px) {
+  .value-service-card-title {
+    font-size: 1.15rem;
+  }
+
+  .card-action-circle {
+    width: 34px;
+    height: 34px;
+  }
+}
+
