@@ -16,8 +16,10 @@ export default function AboutIntro() {
     const el = containerRef.current;
     if (!el) return;
 
-    const ctx = gsap.context(() => {
-      // Scrub timeline for the engineered assembling intro
+    const mm = gsap.matchMedia();
+
+    // Desktop (>= 992px): Exact existing engineered assembling scrub timeline
+    mm.add('(min-width: 992px)', () => {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: el,
@@ -74,9 +76,39 @@ export default function AboutIntro() {
         { y: 0, opacity: 1, stagger: 0.15, duration: 0.9, ease: 'power2.out' },
         0.5
       );
-    }, el);
+    });
 
-    return () => ctx.revert();
+    // Mobile & Tablet (< 992px): 100% visible, guaranteed no clipping, no disappearing during scroll
+    mm.add('(max-width: 991px)', () => {
+      const words = headlineRef.current?.querySelectorAll('.intro-word');
+      const textChildren = textContentRef.current?.children;
+      const badge = badgeRef.current;
+
+      // Ensure elements are immediately placed at neutral, visible transforms
+      gsap.set(words, { y: 0, opacity: 1, rotateX: 0, scale: 1 });
+      gsap.set(textChildren, { y: 0, opacity: 1 });
+      gsap.set(badge, { y: 0, opacity: 1 });
+
+      // Subtle, safe one-time entrance reveal that NEVER pushes content off-screen or scrubs it away
+      gsap.fromTo(
+        [badge, headlineRef.current, textContentRef.current],
+        { opacity: 0, y: 14 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          stagger: 0.08,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: el,
+            start: 'top 95%',
+            once: true
+          }
+        }
+      );
+    });
+
+    return () => mm.revert();
   }, []);
 
   return (

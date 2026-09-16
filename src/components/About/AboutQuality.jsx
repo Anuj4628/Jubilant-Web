@@ -184,6 +184,12 @@ export default function AboutQuality() {
                   <h4 className="principle-title">{principle.title}</h4>
                   <span className="principle-subtitle">{principle.subtitle}</span>
                   <p className="principle-desc">{principle.description}</p>
+
+                  {/* Elegant Click / Tap Hint in Lower Card Area */}
+                  <div className="card-tap-hint-pill" aria-hidden="true">
+                    <span className="hint-pulse-dot" />
+                    <span className="hint-text">CLICK TO EXPLORE</span>
+                  </div>
                 </div>
 
                 {/* Animated Colored Lower Panel (The Layered Expansion) */}
