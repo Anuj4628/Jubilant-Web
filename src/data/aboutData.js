@@ -38,37 +38,46 @@ export const aboutLegacyMilestones = [
     year: "1998",
     tag: "FOUNDATION",
     title: "The Industrial Inception",
-    description: "Established in Mumbai with a singular mission: supplying certified, high-integrity steel alloys to domestic manufacturing and infrastructure sectors.",
+    description: "Founded in Mumbai, establishing certified stockholding of high-integrity stainless alloys for domestic engineering.",
     image: legacyImg1,
     metric: "01 WAREHOUSE",
-    spec: "Grade 304 / 316 Stainless Standard"
+    spec: "Grade 304 / 316 Standard"
   },
   {
     year: "2008",
     tag: "GLOBAL EXPANSION",
-    title: "Venturing into International Waters",
-    description: "Expanded export logistics to the Middle East, Southeast Asia, and Europe, establishing direct supply lines for oil & gas refinery grade piping.",
+    title: "International Supply Lines",
+    description: "Ventured into global export logistics, supplying refinery-grade piping across Middle East and Southeast Asia.",
     image: legacyImg2,
     metric: "15+ COUNTRIES",
-    spec: "ASME / ASTM / DIN Certified"
+    spec: "ASME / ASTM / DIN Compliant"
   },
   {
     year: "2016",
     tag: "CAPABILITY ADVANCEMENT",
-    title: "Heavy Metallurgy & Precision Processing",
-    description: "Integrated high-capacity value-added services: precision cutting, custom profiling, ultrasonic testing, and exotic alloy stockholding.",
+    title: "Advanced Metallurgy & QA",
+    description: "Integrated ultrasonic testing, custom plate profiling, and heavy inventories of Duplex and nickel superalloys.",
     image: legacyImg3,
-    metric: "10,000+ MT INVENTORY",
-    spec: "Duplex, Super Duplex, Inconel"
+    metric: "10,000+ MT STOCK",
+    spec: "Duplex, Inconel & Titanium"
   },
   {
-    year: "2024",
-    tag: "GLOBAL RECOGNITION",
-    title: "Govt. Recognized Export Leader",
-    description: "Operating a unified global distribution network across 40+ countries with comprehensive ISO 9001 quality management and trusted partnerships.",
+    year: "2022",
+    tag: "GOVT. RECOGNITION",
+    title: "Export House Accreditation",
+    description: "Awarded Govt. Recognized Export House status, delivering to 500+ major industrial conglomerates worldwide.",
     image: legacyImg1,
-    metric: "500+ ENTERPRISE CLIENTS",
-    spec: "Mission-Critical Certification Ready"
+    metric: "40+ COUNTRIES",
+    spec: "ISO 9001:2015 Certified"
+  },
+  {
+    year: "2026",
+    tag: "FUTURE READY",
+    title: "Next-Gen Supply Intelligence",
+    description: "Pioneering end-to-end mill traceability, rapid shutdown airlifts, and zero-defect global supply pipelines.",
+    image: legacyImg2,
+    metric: "500+ GLOBAL PARTNERS",
+    spec: "EN 10204 3.2 Provenance Ready"
   }
 ];
 

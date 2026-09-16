@@ -35,11 +35,11 @@ export default function AboutPartners() {
     });
     tweenRef.current = tween;
 
-    // 2. Subtle center zoom/focus effect as logos pass through the main viewing area
+    // 2. Clear, prominent center zoom & elevation focus as logos pass through the main viewing area
     const cards = track.querySelectorAll('.partner-slider-card');
     const updateCenterFocus = () => {
       const windowCenter = window.innerWidth / 2;
-      const focusRadius = window.innerWidth * 0.38;
+      const focusRadius = Math.min(window.innerWidth * 0.35, 420);
 
       cards.forEach((card) => {
         const rect = card.getBoundingClientRect();
@@ -47,21 +47,35 @@ export default function AboutPartners() {
         const distanceFromCenter = Math.abs(cardCenter - windowCenter);
 
         if (distanceFromCenter < focusRadius) {
-          // Normalize 0 at center to 1 at edge of focus radius
-          const factor = 1 - distanceFromCenter / focusRadius;
-          // Scale from 0.94 up to 1.05 at center
-          const scale = 0.94 + factor * 0.11;
+          const factor = Math.max(0, 1 - distanceFromCenter / focusRadius);
+          const logoScale = 1.0 + factor * 0.12; // Scaled up to 1.12 at center
+          const translateY = factor * -6; // Smooth subtle elevation forward
+
           const imgEl = card.querySelector('.partner-slider-logo');
           if (imgEl) {
-            imgEl.style.transform = `scale(${scale})`;
+            imgEl.style.transform = `scale(${logoScale})`;
           }
-          card.style.borderColor = factor > 0.6 ? 'rgba(211, 18, 42, 0.4)' : 'rgba(226, 232, 240, 0.9)';
+
+          card.style.transform = `translateY(${translateY}px)`;
+
+          if (factor > 0.45) {
+            card.style.borderColor = 'rgba(211, 18, 42, 0.55)';
+            card.style.boxShadow = '0 14px 32px -6px rgba(15, 23, 42, 0.14), 0 0 0 1.5px rgba(211, 18, 42, 0.22)';
+            card.classList.add('is-focused');
+          } else {
+            card.style.borderColor = 'rgba(226, 232, 240, 0.9)';
+            card.style.boxShadow = '0 4px 14px rgba(15, 23, 42, 0.04)';
+            card.classList.remove('is-focused');
+          }
         } else {
           const imgEl = card.querySelector('.partner-slider-logo');
           if (imgEl) {
-            imgEl.style.transform = 'scale(0.94)';
+            imgEl.style.transform = 'scale(1.0)';
           }
+          card.style.transform = 'translateY(0px)';
           card.style.borderColor = 'rgba(226, 232, 240, 0.9)';
+          card.style.boxShadow = '0 4px 14px rgba(15, 23, 42, 0.04)';
+          card.classList.remove('is-focused');
         }
       });
 

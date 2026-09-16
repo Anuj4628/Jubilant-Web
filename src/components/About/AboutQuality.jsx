@@ -25,8 +25,6 @@ const principleIcons = {
 
 export default function AboutQuality() {
   const containerRef = useRef(null);
-  const dialRef = useRef(null);
-  const dialInnerRef = useRef(null);
   const principlesRef = useRef(null);
   const cardRefs = useRef([]);
   const [activeCardId, setActiveCardId] = useState(null);
@@ -46,26 +44,7 @@ export default function AboutQuality() {
         }
       });
 
-      // 1. Central Circular Caliper Dial rotates & locks into 0 deg
-      if (dialRef.current) {
-        tl.fromTo(
-          dialRef.current,
-          { rotate: -140, scale: 0.8, opacity: 0.3 },
-          { rotate: 0, scale: 1, opacity: 1, duration: 1.5, ease: 'power2.out' },
-          0
-        );
-      }
-
-      if (dialInnerRef.current) {
-        tl.fromTo(
-          dialInnerRef.current,
-          { rotate: 180, strokeDashoffset: 400 },
-          { rotate: 0, strokeDashoffset: 0, duration: 1.8, ease: 'power2.out' },
-          0.1
-        );
-      }
-
-      // 2. The 5 Principles physically assemble from alternating offset directions
+      // The 5 Principles physically assemble from alternating offset directions
       const cards = principlesRef.current?.querySelectorAll('.quality-principle-card');
       if (cards) {
         cards.forEach((card, index) => {
@@ -73,8 +52,8 @@ export default function AboutQuality() {
           tl.fromTo(
             card,
             {
-              x: isEven ? -30 : 30,
-              y: 35,
+              x: isEven ? -25 : 25,
+              y: 30,
               opacity: 0,
               scale: 0.96
             },
@@ -86,7 +65,7 @@ export default function AboutQuality() {
               duration: 0.85,
               ease: 'power3.out'
             },
-            0.2 + index * 0.12
+            index * 0.12
           );
         });
       }
@@ -155,49 +134,7 @@ export default function AboutQuality() {
           </p>
         </div>
 
-        {/* Central Precision Calibration Gauge Bar */}
-        <div className="quality-dial-header-zone" aria-hidden="true">
-          <div className="quality-dial-wrapper">
-            <div ref={dialRef} className="quality-dial-frame">
-              <svg className="dial-svg" viewBox="0 0 320 320" fill="none">
-                {/* Outer Calibrated Ring */}
-                <circle
-                  cx="160"
-                  cy="160"
-                  r="140"
-                  stroke="rgba(211, 18, 42, 0.2)"
-                  strokeWidth="2"
-                  strokeDasharray="4 8"
-                />
-                {/* Inner Rotating Gauge Track */}
-                <circle
-                  ref={dialInnerRef}
-                  cx="160"
-                  cy="160"
-                  r="110"
-                  stroke="var(--color-red, #D3122A)"
-                  strokeWidth="3"
-                  strokeDasharray="400"
-                  strokeLinecap="round"
-                />
-                {/* Technical Ticks */}
-                <circle cx="160" cy="160" r="80" stroke="rgba(15, 23, 42, 0.12)" strokeWidth="1" />
-                <line x1="160" y1="20" x2="160" y2="40" stroke="var(--color-red)" strokeWidth="2" />
-                <line x1="160" y1="280" x2="160" y2="300" stroke="var(--color-red)" strokeWidth="2" />
-                <line x1="20" y1="160" x2="40" y2="160" stroke="var(--color-red)" strokeWidth="2" />
-                <line x1="280" y1="160" x2="300" y2="160" stroke="var(--color-red)" strokeWidth="2" />
-              </svg>
-
-              <div className="dial-center-core">
-                <span className="dial-core-num">0.00</span>
-                <span className="dial-core-label">TOLERANCE // MM</span>
-                <span className="dial-core-status">CALIBRATED & VERIFIED</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* 5 Completely Redesigned Quality Promise Cards */}
+        {/* 5 Perfectly Aligned Quality Promise Cards */}
         <div ref={principlesRef} className="quality-principles-grid" role="region" aria-label="Quality Promise Cards">
           {aboutQualityPrinciples.map((principle, index) => {
             const IconComp = principleIcons[principle.id] || ShieldCheck;
