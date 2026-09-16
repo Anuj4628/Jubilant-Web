@@ -24,11 +24,11 @@
    =================================================== */
 .about-intro-phase {
   position: relative;
-  min-height: 85vh;
+  min-height: 92vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 120px 40px 100px;
+  padding: 150px 40px 130px;
   overflow: hidden;
   background: radial-gradient(circle at 50% 30%, rgba(211, 18, 42, 0.1) 0%, transparent 65%),
               linear-gradient(180deg, #090E17 0%, #0F172A 100%);
@@ -2674,8 +2674,8 @@
 @media (max-width: 991px) {
   /* Hero section on tablet / small laptop */
   .about-intro-phase {
-    min-height: auto;
-    padding: 70px 24px 45px;
+    min-height: 85vh;
+    padding: 130px 28px 100px;
   }
 
   .intro-word-wrap {
@@ -2686,11 +2686,11 @@
   .intro-headline {
     font-size: clamp(2rem, 5.8vw, 2.8rem);
     line-height: 1.15;
-    margin-bottom: 20px;
+    margin-bottom: 22px;
   }
 
   .intro-eyebrow-wrap {
-    margin-bottom: 20px;
+    margin-bottom: 22px;
   }
 
   /* Steel Legacy centered on tablet & mobile */
@@ -2789,10 +2789,10 @@
 }
 
 @media (max-width: 768px) {
-  /* Mobile Hero: Compact, centered, zero clipping */
+  /* Mobile Hero: Spacious, balanced, premium height and padding */
   .about-intro-phase {
-    min-height: auto;
-    padding: 50px 18px 36px;
+    min-height: 85vh;
+    padding: 110px 22px 85px;
   }
 
   .intro-blueprint-bg {
@@ -2809,8 +2809,8 @@
   }
 
   .intro-eyebrow-wrap {
-    margin-bottom: 16px;
-    padding: 5px 14px;
+    margin-bottom: 20px;
+    padding: 6px 14px;
     gap: 8px;
     max-width: 100%;
     flex-wrap: wrap;
@@ -2820,7 +2820,7 @@
   .intro-headline {
     font-size: clamp(1.65rem, 6.2vw, 2.2rem);
     line-height: 1.15;
-    margin-bottom: 14px;
+    margin-bottom: 16px;
     letter-spacing: -0.01em;
     width: 100%;
     box-sizing: border-box;
@@ -2839,7 +2839,7 @@
   .intro-lead-text {
     font-size: 0.98rem;
     line-height: 1.55;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
     max-width: 500px;
     margin-left: auto;
     margin-right: auto;
@@ -2849,7 +2849,7 @@
   .intro-sub-text {
     font-size: 0.86rem;
     line-height: 1.55;
-    margin-bottom: 20px;
+    margin-bottom: 24px;
     max-width: 460px;
     margin-left: auto;
     margin-right: auto;
@@ -2861,7 +2861,7 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 8px;
-    padding: 12px 14px;
+    padding: 14px 14px;
     width: 100%;
     max-width: 420px;
     margin: 0 auto;
@@ -2968,14 +2968,15 @@
 }
 
 @media (max-width: 480px) {
-  /* Hero Compact at 480px */
+  /* Hero at 480px: Generous height and comfortable padding */
   .about-intro-phase {
-    padding: 40px 14px 28px;
+    min-height: 85vh;
+    padding: 100px 18px 80px;
   }
 
   .intro-eyebrow-wrap {
-    margin-bottom: 12px;
-    padding: 4px 12px;
+    margin-bottom: 18px;
+    padding: 5px 12px;
     gap: 6px;
   }
 
@@ -2990,27 +2991,27 @@
   }
 
   .intro-headline {
-    font-size: clamp(1.35rem, 6.6vw, 1.7rem);
+    font-size: clamp(1.4rem, 6.8vw, 1.8rem);
     line-height: 1.2;
-    margin-bottom: 12px;
-  }
-
-  .intro-lead-text {
-    font-size: 0.92rem;
-    line-height: 1.5;
-    margin-bottom: 6px;
-  }
-
-  .intro-sub-text {
-    font-size: 0.82rem;
-    line-height: 1.5;
     margin-bottom: 16px;
   }
 
+  .intro-lead-text {
+    font-size: 0.94rem;
+    line-height: 1.55;
+    margin-bottom: 10px;
+  }
+
+  .intro-sub-text {
+    font-size: 0.84rem;
+    line-height: 1.55;
+    margin-bottom: 24px;
+  }
+
   .intro-metrics-row {
-    padding: 10px 8px;
-    gap: 4px;
-    max-width: 360px;
+    padding: 14px 12px;
+    gap: 6px;
+    max-width: 380px;
   }
 
   .mini-stat-num {
@@ -3107,11 +3108,13 @@
 @media (max-width: 360px) {
   /* Narrow Phones: 320px - 360px width */
   .about-intro-phase {
-    padding: 32px 10px 22px;
+    min-height: 80vh;
+    padding: 90px 14px 70px;
   }
 
   .intro-eyebrow-wrap {
-    padding: 3px 8px;
+    padding: 4px 10px;
+    margin-bottom: 16px;
   }
 
   .intro-code-tag {
@@ -3119,19 +3122,24 @@
   }
 
   .intro-headline {
-    font-size: clamp(1.2rem, 6.2vw, 1.35rem);
+    font-size: clamp(1.22rem, 6.2vw, 1.4rem);
     line-height: 1.2;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
   }
 
   .intro-lead-text {
     font-size: 0.86rem;
-    margin-bottom: 6px;
+    margin-bottom: 8px;
   }
 
   .intro-sub-text {
     font-size: 0.78rem;
-    margin-bottom: 14px;
+    margin-bottom: 20px;
+  }
+
+  .intro-metrics-row {
+    padding: 12px 8px;
+    gap: 6px;
   }
 
   .mini-stat-num {
