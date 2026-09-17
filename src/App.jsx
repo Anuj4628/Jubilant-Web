@@ -18,6 +18,8 @@ const ProductsLandingView = lazy(() => import('./components/Products/pages/Produ
 const DivisionView = lazy(() => import('./components/Products/pages/DivisionView'));
 const ProductFamilyView = lazy(() => import('./components/Products/pages/ProductFamilyView'));
 const ProductDetailView = lazy(() => import('./components/Products/pages/ProductDetailView'));
+const MaterialsLandingView = lazy(() => import('./components/Materials/pages/MaterialsLandingView'));
+const MaterialDetailView = lazy(() => import('./components/Materials/pages/MaterialDetailView'));
 
 // Preload route chunks on hover or idle
 export const preloadRoute = (target) => {
@@ -28,6 +30,9 @@ export const preloadRoute = (target) => {
     import('./components/Products/pages/DivisionView');
     import('./components/Products/pages/ProductFamilyView');
     import('./components/Products/pages/ProductDetailView');
+  } else if (target === 'materials' || target?.startsWith('/materials')) {
+    import('./components/Materials/pages/MaterialsLandingView');
+    import('./components/Materials/pages/MaterialDetailView');
   }
 };
 
@@ -41,6 +46,17 @@ function parseRoute(pathname = window.location.pathname) {
 
   if (clean.includes('about')) {
     return { page: 'about' };
+  }
+
+  if (clean.startsWith('/materials')) {
+    const raw = pathname.replace(/^\/materials\/?/i, '');
+    const parts = raw.split('/').filter(Boolean);
+
+    if (parts.length === 0) {
+      return { page: 'materials', view: 'landing' };
+    }
+
+    return { page: 'materials', view: 'material', materialSlug: parts[0].toLowerCase() };
   }
 
   if (clean.startsWith('/products')) {
@@ -108,6 +124,16 @@ export default function App() {
       return;
     }
 
+    if (target === 'materials') {
+      const dest = param ? (param.startsWith('/') ? param : `/materials/${param}`) : '/materials';
+      if (window.location.pathname !== dest) {
+        window.history.pushState({ page: 'materials' }, '', dest);
+      }
+      setRoute(parseRoute(dest));
+      window.scrollTo({ top: 0, behavior: 'instant' });
+      return;
+    }
+
     if (target === 'products') {
       const dest = param ? (param.startsWith('/') ? param : `/products/${param}`) : '/products';
       if (window.location.pathname !== dest) {
@@ -164,6 +190,7 @@ export default function App() {
     const idleId = idleCallback(() => {
       preloadRoute('about');
       preloadRoute('products');
+      preloadRoute('materials');
     });
     return () => {
       if (window.cancelIdleCallback && typeof idleId === 'number') {
@@ -183,6 +210,20 @@ export default function App() {
         <main id="main-content" className="about-page-main">
           <Suspense fallback={<div className="page-load-shell about-shell" aria-hidden="true" />}>
             <AboutSection onNavigate={navigateTo} />
+          </Suspense>
+        </main>
+      ) : route.page === 'materials' ? (
+        /* Dedicated Materials Catalog Pages */
+        <main id="main-content" className="materials-page-main">
+          <Suspense fallback={<div className="page-load-shell materials-shell" aria-hidden="true" />}>
+            {route.view === 'material' ? (
+              <MaterialDetailView
+                materialSlug={route.materialSlug}
+                onNavigate={navigateTo}
+              />
+            ) : (
+              <MaterialsLandingView onNavigate={navigateTo} />
+            )}
           </Suspense>
         </main>
       ) : route.page === 'products' ? (

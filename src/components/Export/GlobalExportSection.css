@@ -266,27 +266,27 @@
    =================================================== */
 .export-countries-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 20px;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 10px;
   max-width: 1240px;
   margin: 0 auto;
-  min-height: 180px;
+  min-height: 120px;
 }
 
-/* Individual Clean Country Card — Matching the Provided Screenshot */
+/* Individual Clean Country Card — Compact Tile */
 .export-country-card {
   position: relative;
   background: #FFFFFF;
   border: 1px solid rgba(226, 232, 240, 0.9);
-  border-radius: 20px;
-  padding: 28px 16px 24px;
+  border-radius: 12px;
+  padding: 14px 10px 12px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  gap: 14px;
-  box-shadow: 0 4px 16px -2px rgba(15, 23, 42, 0.04), 0 2px 6px -1px rgba(15, 23, 42, 0.02);
+  gap: 8px;
+  box-shadow: 0 2px 8px -1px rgba(15, 23, 42, 0.04), 0 1px 4px -1px rgba(15, 23, 42, 0.02);
   cursor: pointer;
   user-select: none;
   box-sizing: border-box;
@@ -297,20 +297,20 @@
 }
 
 .export-country-card:hover {
-  transform: translateY(-6px);
+  transform: translateY(-3px);
   border-color: rgba(211, 18, 42, 0.35);
   box-shadow: 
-    0 16px 32px -4px rgba(15, 23, 42, 0.08),
-    0 4px 12px rgba(211, 18, 42, 0.04);
+    0 8px 20px -4px rgba(15, 23, 42, 0.08),
+    0 3px 8px rgba(211, 18, 42, 0.04);
 }
 
 /* Circular Flag Container — Centered Circular Icon */
 .country-flag-box {
-  width: 52px;
-  height: 52px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.08);
   border: 1px solid rgba(0, 0, 0, 0.06);
   display: flex;
   align-items: center;
@@ -329,7 +329,7 @@
 }
 
 .country-flag-fallback {
-  font-size: 1.6rem;
+  font-size: 1.2rem;
   line-height: 1;
 }
 
@@ -340,13 +340,13 @@
 /* Country Name Text — Uppercase Bold Navy/Slate */
 .country-name-text {
   font-family: var(--font-display);
-  font-size: 0.88rem;
+  font-size: 0.74rem;
   font-weight: 700;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.03em;
   text-transform: uppercase;
   color: #0F172A;
   margin: 0;
-  line-height: 1.28;
+  line-height: 1.22;
   text-align: center;
   transition: color 0.25s ease;
   max-width: 100%;
@@ -394,8 +394,8 @@
    =================================================== */
 @media (max-width: 1200px) {
   .export-countries-grid {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 9px;
   }
 }
 
@@ -414,22 +414,22 @@
   }
 
   .export-countries-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 14px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
   }
 
   .export-country-card {
-    padding: 22px 12px 18px;
-    border-radius: 16px;
+    padding: 12px 8px 10px;
+    border-radius: 10px;
   }
 
   .country-flag-box {
-    width: 46px;
-    height: 46px;
+    width: 34px;
+    height: 34px;
   }
 
   .country-name-text {
-    font-size: 0.82rem;
+    font-size: 0.72rem;
   }
 }
 
@@ -460,13 +460,13 @@
 
 @media (max-width: 620px) {
   .export-countries-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
   }
 
   .export-country-card {
-    border-radius: 14px;
-    padding: 18px 10px 16px;
+    border-radius: 10px;
+    padding: 12px 8px 10px;
   }
 
   .export-region-tabs {
@@ -499,8 +499,8 @@
 
 @media (max-width: 380px) {
   .export-countries-grid {
-    grid-template-columns: 1fr;
-    gap: 10px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 7px;
   }
 }
 

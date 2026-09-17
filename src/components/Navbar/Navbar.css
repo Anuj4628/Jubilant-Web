@@ -56,7 +56,8 @@
   position: relative;
 }
 
-.navbar-item.products-item {
+.navbar-item.products-item,
+.navbar-item.materials-item {
   position: static;
 }
 

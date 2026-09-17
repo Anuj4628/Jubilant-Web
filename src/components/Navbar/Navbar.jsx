@@ -4,6 +4,7 @@ import Button from '../UI/Button';
 import MobileMenu from './MobileMenu';
 import TopContactBar from './TopContactBar';
 import ProductMegaMenu from '../Products/ProductMegaMenu';
+import MaterialsMegaMenu from './MaterialsMegaMenu';
 import { Menu, X } from 'lucide-react';
 import { preloadRoute } from '../../App';
 import './Navbar.css';
@@ -12,9 +13,15 @@ export default function Navbar({ currentPage = 'home', onNavigate }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [megaMenuOpen, setMegaMenuOpen] = useState(false);
+  const [materialsMenuOpen, setMaterialsMenuOpen] = useState(false);
   const megaMenuTimeoutRef = useRef(null);
+  const materialsMenuTimeoutRef = useRef(null);
 
-  const activeLink = currentPage === 'about' ? 'about' : (currentPage === 'products' ? 'products' : 'home');
+  const activeLink = currentPage === 'about' 
+    ? 'about' 
+    : (currentPage === 'products' 
+        ? 'products' 
+        : (currentPage === 'materials' ? 'materials' : 'home'));
   const navRef = useRef(null);
 
   useEffect(() => {
@@ -39,6 +46,7 @@ export default function Navbar({ currentPage = 'home', onNavigate }) {
     if (megaMenuTimeoutRef.current) {
       clearTimeout(megaMenuTimeoutRef.current);
     }
+    setMaterialsMenuOpen(false);
     setMegaMenuOpen(true);
     preloadRoute('products');
   }, []);
@@ -49,8 +57,28 @@ export default function Navbar({ currentPage = 'home', onNavigate }) {
     }, 180);
   }, []);
 
+  const handleMouseEnterMaterials = useCallback(() => {
+    if (materialsMenuTimeoutRef.current) {
+      clearTimeout(materialsMenuTimeoutRef.current);
+    }
+    setMegaMenuOpen(false);
+    setMaterialsMenuOpen(true);
+    preloadRoute('materials');
+  }, []);
+
+  const handleMouseLeaveMaterials = useCallback(() => {
+    materialsMenuTimeoutRef.current = setTimeout(() => {
+      setMaterialsMenuOpen(false);
+    }, 180);
+  }, []);
+
   const handleMegaMenuSelect = useCallback((url) => {
     setMegaMenuOpen(false);
+    if (onNavigate) onNavigate(url);
+  }, [onNavigate]);
+
+  const handleMaterialsMenuSelect = useCallback((url) => {
+    setMaterialsMenuOpen(false);
     if (onNavigate) onNavigate(url);
   }, [onNavigate]);
 
@@ -58,9 +86,14 @@ export default function Navbar({ currentPage = 'home', onNavigate }) {
     setMegaMenuOpen(false);
   }, []);
 
+  const handleMaterialsMenuClose = useCallback(() => {
+    setMaterialsMenuOpen(false);
+  }, []);
+
   const handleLinkClick = (e, link) => {
     e.preventDefault();
     setMegaMenuOpen(false);
+    setMaterialsMenuOpen(false);
     if (onNavigate) {
       if (link.id === 'about') {
         onNavigate('about');
@@ -68,8 +101,10 @@ export default function Navbar({ currentPage = 'home', onNavigate }) {
         onNavigate('home');
       } else if (link.id === 'products') {
         onNavigate('/products');
+      } else if (link.id === 'materials') {
+        onNavigate('/materials');
       } else {
-        // Other section links (materials, certificate, contact)
+        // Other section links (certificate, contact)
         if (currentPage !== 'home') {
           onNavigate('home', link.id);
         } else {
@@ -123,24 +158,39 @@ export default function Navbar({ currentPage = 'home', onNavigate }) {
               {navLinks.map((link) => {
                 const isActive = activeLink === link.id;
                 const isProducts = link.id === 'products';
+                const isMaterials = link.id === 'materials';
+
+                let mouseEnterHandler = undefined;
+                if (isProducts) mouseEnterHandler = handleMouseEnterProducts;
+                else if (isMaterials) mouseEnterHandler = handleMouseEnterMaterials;
+                else if (link.id === 'about') mouseEnterHandler = () => preloadRoute('about');
+
+                let mouseLeaveHandler = undefined;
+                if (isProducts) mouseLeaveHandler = handleMouseLeaveProducts;
+                else if (isMaterials) mouseLeaveHandler = handleMouseLeaveMaterials;
+
+                let linkHref = link.href;
+                if (link.id === 'about') linkHref = '/about';
+                else if (isProducts) linkHref = '/products';
+                else if (isMaterials) linkHref = '/materials';
 
                 return (
                   <li
                     key={link.id}
-                    className={`navbar-item ${isProducts ? 'products-item' : ''}`}
-                    onMouseEnter={isProducts ? handleMouseEnterProducts : (link.id === 'about' ? () => preloadRoute('about') : undefined)}
-                    onMouseLeave={isProducts ? handleMouseLeaveProducts : undefined}
+                    className={`navbar-item ${isProducts ? 'products-item' : ''} ${isMaterials ? 'materials-item' : ''}`}
+                    onMouseEnter={mouseEnterHandler}
+                    onMouseLeave={mouseLeaveHandler}
                   >
                     <a
-                      href={link.id === 'about' ? '/about' : (isProducts ? '/products' : link.href)}
+                      href={linkHref}
                       className={`navbar-link ${isActive ? 'active' : ''}`}
                       onClick={(e) => handleLinkClick(e, link)}
                     >
                       <span className="navbar-link-text">
                         {link.label}
-                        {isProducts && (
+                        {(isProducts || isMaterials) && (
                           <svg
-                            className={`nav-dropdown-chevron ${megaMenuOpen ? 'rotated' : ''}`}
+                            className={`nav-dropdown-chevron ${(isProducts ? megaMenuOpen : materialsMenuOpen) ? 'rotated' : ''}`}
                             width="12"
                             height="12"
                             viewBox="0 0 24 24"
@@ -152,7 +202,7 @@ export default function Navbar({ currentPage = 'home', onNavigate }) {
                               display: 'inline-block',
                               verticalAlign: 'middle',
                               transition: 'transform 0.2s ease',
-                              transform: megaMenuOpen ? 'rotate(180deg)' : 'rotate(0deg)'
+                              transform: (isProducts ? megaMenuOpen : materialsMenuOpen) ? 'rotate(180deg)' : 'rotate(0deg)'
                             }}
                           >
                             <polyline points="6 9 12 15 18 9"></polyline>
@@ -167,6 +217,14 @@ export default function Navbar({ currentPage = 'home', onNavigate }) {
                         isOpen={megaMenuOpen}
                         onSelect={handleMegaMenuSelect}
                         onClose={handleMegaMenuClose}
+                      />
+                    )}
+
+                    {isMaterials && (
+                      <MaterialsMegaMenu
+                        isOpen={materialsMenuOpen}
+                        onSelect={handleMaterialsMenuSelect}
+                        onClose={handleMaterialsMenuClose}
                       />
                     )}
                   </li>
