@@ -2,6 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { aboutIntroData } from '../../data/aboutData';
+import aboutHeroSteels from '../../assets/images/about-hero-steels.jpg';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -18,7 +19,7 @@ export default function AboutIntro() {
 
     const mm = gsap.matchMedia();
 
-    // Desktop (>= 992px): Exact existing engineered assembling scrub timeline
+    // Desktop (>= 992px): Engineered assembling scrub timeline
     mm.add('(min-width: 992px)', () => {
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -78,20 +79,18 @@ export default function AboutIntro() {
       );
     });
 
-    // Mobile & Tablet (< 992px): 100% visible, guaranteed no clipping, no disappearing during scroll
+    // Mobile & Tablet (< 992px): Safe one-time entrance reveal
     mm.add('(max-width: 991px)', () => {
       const words = headlineRef.current?.querySelectorAll('.intro-word');
       const textChildren = textContentRef.current?.children;
       const badge = badgeRef.current;
 
-      // Ensure elements are immediately placed at neutral, visible transforms
       gsap.set(words, { y: 0, opacity: 1, rotateX: 0, scale: 1 });
       gsap.set(textChildren, { y: 0, opacity: 1 });
       gsap.set(badge, { y: 0, opacity: 1 });
 
-      // Subtle, safe one-time entrance reveal that NEVER pushes content off-screen or scrubs it away
       gsap.fromTo(
-        [badge, headlineRef.current, textContentRef.current],
+        [badge, headlineRef.current, textContentRef.current].filter(Boolean),
         { opacity: 0, y: 14 },
         {
           opacity: 1,
@@ -112,7 +111,14 @@ export default function AboutIntro() {
   }, []);
 
   return (
-    <div ref={containerRef} className="about-intro-phase">
+    <div
+      ref={containerRef}
+      className="about-intro-phase"
+      style={{ backgroundImage: `url(${aboutHeroSteels})` }}
+    >
+      {/* High-Clarity Industrial Background Overlay */}
+      <div className="about-intro-bg-overlay" aria-hidden="true" />
+
       {/* Blueprint Grid & Measurement Lines */}
       <div ref={linesRef} className="intro-blueprint-bg" aria-hidden="true">
         <div className="blueprint-grid-overlay" />

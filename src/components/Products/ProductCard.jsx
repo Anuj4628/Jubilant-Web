@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ArrowUpRight } from 'lucide-react';
 
-export default function ProductCard({ product }) {
+function ProductCard({ product }) {
   const [imageLoaded, setImageLoaded] = useState(false);
 
   return (
@@ -13,6 +13,7 @@ export default function ProductCard({ product }) {
           alt={product.alt}
           className={`product-card-img ${imageLoaded ? 'is-loaded' : ''}`}
           loading="lazy"
+          decoding="async"
           onLoad={() => setImageLoaded(true)}
         />
         <div className="product-card-overlay" aria-hidden="true" />
@@ -51,4 +52,6 @@ export default function ProductCard({ product }) {
     </article>
   );
 }
+
+export default React.memo(ProductCard);
 

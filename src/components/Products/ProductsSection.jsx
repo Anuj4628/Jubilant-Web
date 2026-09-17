@@ -7,7 +7,7 @@ import './ProductsSection.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function ProductsSection() {
+export default function ProductsSection({ onNavigate }) {
   const sectionRef = useRef(null);
   const headerRef = useRef(null);
   const gridRef = useRef(null);
@@ -109,9 +109,15 @@ export default function ProductsSection() {
         {/* Medium-sized Centered Button: ALL PRODUCTS → */}
         <div ref={ctaRef} className="products-action-center">
           <a
-            href="#products"
+            href="/products"
             className="all-products-main-btn"
             aria-label="View All Products"
+            onClick={(e) => {
+              if (onNavigate) {
+                e.preventDefault();
+                onNavigate('/products');
+              }
+            }}
           >
             <span>ALL PRODUCTS</span>
             <span className="btn-arrow" aria-hidden="true">&rarr;</span>

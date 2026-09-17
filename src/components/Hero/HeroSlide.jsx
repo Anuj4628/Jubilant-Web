@@ -28,7 +28,7 @@ function renderHeadline(headline) {
   });
 }
 
-export default function HeroSlide({ slide, isActive, direction = 1 }) {
+function HeroSlide({ slide, isActive, direction = 1 }) {
   const slideRef = useRef(null);
   const bgImageRef = useRef(null);
   const glassCardRef = useRef(null);
@@ -168,75 +168,79 @@ export default function HeroSlide({ slide, isActive, direction = 1 }) {
     >
       {/* Background Image Layer - Bright, crisp, authentic industrial steel view */}
       <div className="hero-slide-bg">
-        <img
-          ref={bgImageRef}
-          src={slide.image}
-          alt={slide.alt}
-          className="hero-slide-image"
-          loading={slide.id === 1 ? 'eager' : 'lazy'}
-        />
-        {/* Very subtle ambient wash: no heavy dark vignette */}
-        <div className="hero-slide-overlay" aria-hidden="true" />
-      </div>
+          <img
+            ref={bgImageRef}
+            src={slide.image}
+            alt={slide.alt}
+            className="hero-slide-image"
+            loading={slide.id === 1 ? 'eager' : 'lazy'}
+            fetchPriority={slide.id === 1 ? 'high' : 'auto'}
+            decoding={slide.id === 1 ? 'sync' : 'async'}
+          />
+          {/* Very subtle ambient wash: no heavy dark vignette */}
+          <div className="hero-slide-overlay" aria-hidden="true" />
+        </div>
 
-      {/* Content Container */}
-      <div className="hero-slide-content-wrap">
-        <div className="hero-slide-container">
-          {/* Refined Translucent Glass Content Card */}
-          <div ref={glassCardRef} className="hero-glass-card">
-            {/* Engineering Eyebrow */}
-            <div ref={eyebrowRef} className="hero-eyebrow">
-              <span className="eyebrow-accent-bar" />
-              <span className="eyebrow-text">{slide.eyebrow}</span>
-            </div>
+        {/* Content Container */}
+        <div className="hero-slide-content-wrap">
+          <div className="hero-slide-container">
+            {/* Refined Translucent Glass Content Card */}
+            <div ref={glassCardRef} className="hero-glass-card">
+              {/* Engineering Eyebrow */}
+              <div ref={eyebrowRef} className="hero-eyebrow">
+                <span className="eyebrow-accent-bar" />
+                <span className="eyebrow-text">{slide.eyebrow}</span>
+              </div>
 
-            {/* Headline with Overflow Mask */}
-            <div ref={headlineMaskRef} className="hero-headline-mask">
-              <h1
-                ref={headlineTextRef}
-                className="hero-headline"
-                aria-label={slide.headline ? slide.headline.replace(/\[|\]/g, '') : undefined}
-              >
-                {renderHeadline(slide.headline)}
-              </h1>
-            </div>
-
-            {/* Concise Description */}
-            <p ref={descRef} className="hero-description">
-              {slide.description}
-            </p>
-
-            {/* Dual CTAs */}
-            <div ref={ctaGroupRef} className="hero-cta-group">
-              <Button
-                href={slide.primaryCta.href}
-                variant="primary"
-                size="lg"
-                icon="arrow"
-              >
-                {slide.primaryCta.label}
-              </Button>
-
-              {slide.secondaryCta && (
-                <Button
-                  href={slide.secondaryCta.href}
-                  variant="secondary"
-                  size="lg"
-                  icon="chevron"
+              {/* Headline with Overflow Mask */}
+              <div ref={headlineMaskRef} className="hero-headline-mask">
+                <h1
+                  ref={headlineTextRef}
+                  className="hero-headline"
+                  aria-label={slide.headline ? slide.headline.replace(/\[|\]/g, '') : undefined}
                 >
-                  {slide.secondaryCta.label}
-                </Button>
-              )}
-            </div>
+                  {renderHeadline(slide.headline)}
+                </h1>
+              </div>
 
-            {/* Technical Specification Badge */}
-            <div ref={specTagRef} className="hero-spec-tag">
-              <span className="spec-indicator" />
-              <span className="spec-text">{slide.specTag}</span>
+              {/* Concise Description */}
+              <p ref={descRef} className="hero-description">
+                {slide.description}
+              </p>
+
+              {/* Dual CTAs */}
+              <div ref={ctaGroupRef} className="hero-cta-group">
+                <Button
+                  href={slide.primaryCta.href}
+                  variant="primary"
+                  size="lg"
+                  icon="arrow"
+                >
+                  {slide.primaryCta.label}
+                </Button>
+
+                {slide.secondaryCta && (
+                  <Button
+                    href={slide.secondaryCta.href}
+                    variant="secondary"
+                    size="lg"
+                    icon="chevron"
+                  >
+                    {slide.secondaryCta.label}
+                  </Button>
+                )}
+              </div>
+
+              {/* Technical Specification Badge */}
+              <div ref={specTagRef} className="hero-spec-tag">
+                <span className="spec-indicator" />
+                <span className="spec-text">{slide.specTag}</span>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  );
+    );
 }
+
+export default React.memo(HeroSlide);

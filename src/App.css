@@ -32,3 +32,17 @@
   width: 100%;
   visibility: hidden;
 }
+
+/* Zero-Layout-Shift Fallback Shells */
+.page-load-shell {
+  width: 100%;
+  min-height: 70vh;
+}
+
+.about-shell {
+  background-color: #0B192C;
+}
+
+.products-shell {
+  background-color: #0B192C;
+}

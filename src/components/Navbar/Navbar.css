@@ -53,6 +53,11 @@
   justify-content: space-between;
   gap: 40px;
   transition: height 0.3s ease;
+  position: relative;
+}
+
+.navbar-item.products-item {
+  position: static;
 }
 
 .navbar-wrapper.is-scrolled .navbar-container {
@@ -156,6 +161,12 @@
 .navbar-link:hover .navbar-link-text {
   transform: translateY(-1px);
   color: var(--color-red);
+}
+
+.products-item:hover .nav-dropdown-chevron,
+.nav-dropdown-chevron.rotated {
+  transform: rotate(180deg) !important;
+  color: var(--color-red) !important;
 }
 
 .navbar-link:hover .navbar-link-indicator,

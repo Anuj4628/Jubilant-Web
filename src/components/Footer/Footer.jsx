@@ -12,7 +12,11 @@ export default function Footer({ currentPage = 'home', onNavigate }) {
   const handleLinkClick = (e, page, sectionId = null) => {
     if (onNavigate) {
       e.preventDefault();
-      onNavigate(page, sectionId);
+      if (typeof page === 'string' && page.startsWith('/')) {
+        onNavigate(page);
+      } else {
+        onNavigate(page, sectionId);
+      }
     }
   };
 
@@ -91,12 +95,12 @@ export default function Footer({ currentPage = 'home', onNavigate }) {
               <span className="title-accent-dot" />
             </h4>
             <ul className="footer-links-list">
-              <li><a href="#products" className="footer-link">Pipes & Tubes</a></li>
-              <li><a href="#products" className="footer-link">Fittings</a></li>
-              <li><a href="#products" className="footer-link">Flanges</a></li>
-              <li><a href="#products" className="footer-link">Bars</a></li>
-              <li><a href="#products" className="footer-link">Sheets & Plates</a></li>
-              <li><a href="#products" className="footer-link">Fasteners</a></li>
+              <li><a href="/products" className="footer-link" onClick={(e) => handleLinkClick(e, '/products')}>All Products Catalog</a></li>
+              <li><a href="/products/manufacturer" className="footer-link" onClick={(e) => handleLinkClick(e, '/products/manufacturer')}>Manufacturer Division</a></li>
+              <li><a href="/products/supplier" className="footer-link" onClick={(e) => handleLinkClick(e, '/products/supplier')}>Supplier Division</a></li>
+              <li><a href="/products/manufacturer/butt-weld-fittings" className="footer-link" onClick={(e) => handleLinkClick(e, '/products/manufacturer/butt-weld-fittings')}>Butt Weld Fittings</a></li>
+              <li><a href="/products/supplier/pipes-and-tubes" className="footer-link" onClick={(e) => handleLinkClick(e, '/products/supplier/pipes-and-tubes')}>Pipes & Tubes</a></li>
+              <li><a href="/products/manufacturer/flanges" className="footer-link" onClick={(e) => handleLinkClick(e, '/products/manufacturer/flanges')}>Flanges</a></li>
             </ul>
           </div>
 

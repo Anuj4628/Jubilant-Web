@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, Suspense, lazy } from 'react';
 import Navbar from './components/Navbar/Navbar';
 import Hero from './components/Hero/Hero';
-import AboutSection from './components/About/AboutSection';
 import MaterialsSection from './components/Materials/MaterialsSection';
 import ProductsSection from './components/Products/ProductsSection';
 import WhyChooseSection from './components/WhyChoose/WhyChooseSection';
@@ -12,74 +11,146 @@ import GlobalExportSection from './components/Export/GlobalExportSection';
 import FinalCTASection from './components/CTA/FinalCTASection';
 import Footer from './components/Footer/Footer';
 import FloatingContactButtons from './components/UI/FloatingContactButtons';
+
+// Lazy-loaded routes for ultra-fast initial bundle and snappy navigation
+const AboutSection = lazy(() => import('./components/About/AboutSection'));
+const ProductsLandingView = lazy(() => import('./components/Products/pages/ProductsLandingView'));
+const DivisionView = lazy(() => import('./components/Products/pages/DivisionView'));
+const ProductFamilyView = lazy(() => import('./components/Products/pages/ProductFamilyView'));
+const ProductDetailView = lazy(() => import('./components/Products/pages/ProductDetailView'));
+
+// Preload route chunks on hover or idle
+export const preloadRoute = (target) => {
+  if (target === 'about') {
+    import('./components/About/AboutSection');
+  } else if (target === 'products' || target?.startsWith('/products')) {
+    import('./components/Products/pages/ProductsLandingView');
+    import('./components/Products/pages/DivisionView');
+    import('./components/Products/pages/ProductFamilyView');
+    import('./components/Products/pages/ProductDetailView');
+  }
+};
+
 import './App.css';
 
 /**
+ * Route parser for native history-based client routing
+ */
+function parseRoute(pathname = window.location.pathname) {
+  const clean = (pathname || '').toLowerCase();
+
+  if (clean.includes('about')) {
+    return { page: 'about' };
+  }
+
+  if (clean.startsWith('/products')) {
+    const raw = pathname.replace(/^\/products\/?/i, '');
+    const parts = raw.split('/').filter(Boolean);
+
+    if (parts.length === 0) {
+      return { page: 'products', view: 'landing' };
+    }
+
+    if (parts.length === 1) {
+      const p0 = parts[0].toLowerCase();
+      if (p0 === 'manufacturer' || p0 === 'supplier') {
+        return { page: 'products', view: 'division', divisionSlug: p0 };
+      }
+      return { page: 'products', view: 'family', groupSlug: parts[0] };
+    }
+
+    if (parts.length === 2) {
+      const p0 = parts[0].toLowerCase();
+      if (p0 === 'manufacturer' || p0 === 'supplier') {
+        return { page: 'products', view: 'family', divisionSlug: p0, groupSlug: parts[1] };
+      }
+      return { page: 'products', view: 'detail', groupSlug: parts[0], productSlug: parts[1] };
+    }
+
+    if (parts.length >= 3) {
+      return {
+        page: 'products',
+        view: 'detail',
+        divisionSlug: parts[0].toLowerCase(),
+        groupSlug: parts[1],
+        productSlug: parts[2]
+      };
+    }
+  }
+
+  return { page: 'home' };
+}
+
+/**
  * Jubilant Steels - Application Root
- * Dedicated multi-route structure:
- * - Home (/) : Full commercial homepage (Hero, Materials, Products, Sectors, Services, Clients, Export, CTA)
- * - About (/about or /about.html) : Dedicated cinematic 9-phase company storytelling experience
  */
 export default function App() {
-  // Determine initial page from URL pathname or hash
-  const getInitialPage = () => {
-    const path = window.location.pathname.toLowerCase();
-    const hash = window.location.hash.toLowerCase();
-    if (path.includes('about') || hash === '#about') {
-      return 'about';
-    }
-    return 'home';
-  };
-
-  const [currentPage, setCurrentPage] = useState(getInitialPage);
+  const [route, setRoute] = useState(parseRoute);
 
   // Centralized page and section navigation handler
-  const navigateTo = useCallback((targetPage, sectionId = null) => {
-    if (targetPage === 'about') {
+  const navigateTo = useCallback((target, param = null) => {
+    // If target is a path string starting with '/'
+    if (typeof target === 'string' && target.startsWith('/')) {
+      if (window.location.pathname !== target) {
+        window.history.pushState({}, '', target);
+      }
+      setRoute(parseRoute(target));
+      window.scrollTo({ top: 0, behavior: 'instant' });
+      return;
+    }
+
+    if (target === 'about') {
       if (window.location.pathname !== '/about') {
         window.history.pushState({ page: 'about' }, '', '/about');
       }
-      setCurrentPage('about');
+      setRoute({ page: 'about' });
       window.scrollTo({ top: 0, behavior: 'instant' });
-    } else {
-      // Navigate to Home
-      const targetUrl = sectionId ? `/#${sectionId}` : '/';
-      if (window.location.pathname !== '/' || sectionId) {
-        window.history.pushState({ page: 'home', section: sectionId }, '', targetUrl);
-      }
-      setCurrentPage('home');
+      return;
+    }
 
-      if (sectionId) {
-        setTimeout(() => {
-          const el = document.getElementById(sectionId);
-          if (el) {
-            el.scrollIntoView({ behavior: 'smooth' });
-          }
-        }, 80);
-      } else {
-        window.scrollTo({ top: 0, behavior: 'instant' });
+    if (target === 'products') {
+      const dest = param ? (param.startsWith('/') ? param : `/products/${param}`) : '/products';
+      if (window.location.pathname !== dest) {
+        window.history.pushState({ page: 'products' }, '', dest);
       }
+      setRoute(parseRoute(dest));
+      window.scrollTo({ top: 0, behavior: 'instant' });
+      return;
+    }
+
+    // Navigate to Home with optional section scrolling
+    const targetUrl = param ? `/#${param}` : '/';
+    if (window.location.pathname !== '/' || param) {
+      window.history.pushState({ page: 'home', section: param }, '', targetUrl);
+    }
+    setRoute({ page: 'home' });
+
+    if (param) {
+      setTimeout(() => {
+        const el = document.getElementById(param);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 80);
+    } else {
+      window.scrollTo({ top: 0, behavior: 'instant' });
     }
   }, []);
 
   // Listen to browser Back and Forward navigation buttons
   useEffect(() => {
     const handlePopState = () => {
-      const path = window.location.pathname.toLowerCase();
-      const hash = window.location.hash.toLowerCase();
-      if (path.includes('about') || hash === '#about') {
-        setCurrentPage('about');
-        window.scrollTo({ top: 0, behavior: 'instant' });
+      const nextRoute = parseRoute(window.location.pathname);
+      setRoute(nextRoute);
+
+      const hash = window.location.hash;
+      if (hash && nextRoute.page === 'home') {
+        setTimeout(() => {
+          const el = document.getElementById(hash.replace('#', ''));
+          if (el) el.scrollIntoView({ behavior: 'smooth' });
+        }, 80);
       } else {
-        setCurrentPage('home');
-        if (hash) {
-          setTimeout(() => {
-            const el = document.getElementById(hash.replace('#', ''));
-            if (el) el.scrollIntoView({ behavior: 'smooth' });
-          }, 80);
-        } else {
-          window.scrollTo({ top: 0, behavior: 'instant' });
-        }
+        window.scrollTo({ top: 0, behavior: 'instant' });
       }
     };
 
@@ -87,23 +158,66 @@ export default function App() {
     return () => window.removeEventListener('popstate', handlePopState);
   }, []);
 
+  // Idle preloading of secondary route bundles once initial page load is quiet
+  useEffect(() => {
+    const idleCallback = window.requestIdleCallback || ((cb) => setTimeout(cb, 1200));
+    const idleId = idleCallback(() => {
+      preloadRoute('about');
+      preloadRoute('products');
+    });
+    return () => {
+      if (window.cancelIdleCallback && typeof idleId === 'number') {
+        window.cancelIdleCallback(idleId);
+      }
+    };
+  }, []);
+
   return (
     <div className="app-container">
       {/* 1. Global Navbar with integrated page navigation */}
-      <Navbar currentPage={currentPage} onNavigate={navigateTo} />
+      <Navbar currentPage={route.page} onNavigate={navigateTo} />
 
-      {/* 2. Page Switcher: Independent, cleanly isolated DOM & lifecycle */}
-      {currentPage === 'about' ? (
+      {/* 2. Page Switcher with Instant Suspense Fallback */}
+      {route.page === 'about' ? (
         /* Dedicated Independent About Page */
         <main id="main-content" className="about-page-main">
-          <AboutSection onNavigate={navigateTo} />
+          <Suspense fallback={<div className="page-load-shell about-shell" aria-hidden="true" />}>
+            <AboutSection onNavigate={navigateTo} />
+          </Suspense>
+        </main>
+      ) : route.page === 'products' ? (
+        /* Dedicated Bright Products Catalog Pages */
+        <main id="main-content" className="products-page-main">
+          <Suspense fallback={<div className="page-load-shell products-shell" aria-hidden="true" />}>
+            {route.view === 'division' ? (
+              <DivisionView
+                divisionSlug={route.divisionSlug}
+                onNavigate={navigateTo}
+              />
+            ) : route.view === 'family' ? (
+              <ProductFamilyView
+                divisionSlug={route.divisionSlug}
+                groupSlug={route.groupSlug}
+                onNavigate={navigateTo}
+              />
+            ) : route.view === 'detail' ? (
+              <ProductDetailView
+                divisionSlug={route.divisionSlug}
+                groupSlug={route.groupSlug}
+                productSlug={route.productSlug}
+                onNavigate={navigateTo}
+              />
+            ) : (
+              <ProductsLandingView onNavigate={navigateTo} />
+            )}
+          </Suspense>
         </main>
       ) : (
-        /* Full Commercial Home Page (About is NEVER loaded here) */
+        /* Full Commercial Home Page (About and Products catalog views are isolated) */
         <main id="main-content" className="home-page-main">
           <Hero />
           <MaterialsSection />
-          <ProductsSection />
+          <ProductsSection onNavigate={navigateTo} />
           <WhyChooseSection />
           <IndustriesSection />
           <ValueAddedSection />
@@ -114,11 +228,10 @@ export default function App() {
       )}
 
       {/* 3. Corporate Footer */}
-      <Footer currentPage={currentPage} onNavigate={navigateTo} />
+      <Footer currentPage={route.page} onNavigate={navigateTo} />
 
       {/* 4. Floating Direct Contact Buttons (WhatsApp & Direct Call) */}
       <FloatingContactButtons />
     </div>
   );
 }
-

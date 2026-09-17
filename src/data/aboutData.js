@@ -19,10 +19,12 @@ import nuclearImg from '../assets/Serving Global Mission-Critical Sectors/nuclea
 import petrochemicalImg from '../assets/Serving Global Mission-Critical Sectors/petrochemical.png';
 import pipingImg from '../assets/Serving Global Mission-Critical Sectors/precision industrial piping.png';
 
-// Steel Imagery for Timeline & Backgrounds
-import legacyImg1 from '../assets/images/slide-5.jpg';
-import legacyImg2 from '../assets/images/slide-2.jpg';
-import legacyImg3 from '../assets/images/slide-3.jpg';
+// Steel Imagery for Timeline & Backgrounds (All 100% Unique, Zero Repetition)
+import legacyImg1998 from '../assets/images/slide-5.jpg';
+import legacyImg2008 from '../assets/images/slide-2.jpg';
+import legacyImg2016 from '../assets/images/slide-3.jpg';
+import legacyImg2022 from '../assets/images/slide-4.jpg';
+import legacyImg2026 from '../assets/Product BG/precision pipes and fitting.png';
 import leadershipImg from '../assets/images/slide-1.jpg';
 
 export const aboutIntroData = {
@@ -39,7 +41,7 @@ export const aboutLegacyMilestones = [
     tag: "FOUNDATION",
     title: "The Industrial Inception",
     description: "Founded in Mumbai, establishing certified stockholding of high-integrity stainless alloys for domestic engineering.",
-    image: legacyImg1,
+    image: legacyImg1998,
     metric: "01 WAREHOUSE",
     spec: "Grade 304 / 316 Standard"
   },
@@ -48,7 +50,7 @@ export const aboutLegacyMilestones = [
     tag: "GLOBAL EXPANSION",
     title: "International Supply Lines",
     description: "Ventured into global export logistics, supplying refinery-grade piping across Middle East and Southeast Asia.",
-    image: legacyImg2,
+    image: legacyImg2008,
     metric: "15+ COUNTRIES",
     spec: "ASME / ASTM / DIN Compliant"
   },
@@ -57,7 +59,7 @@ export const aboutLegacyMilestones = [
     tag: "CAPABILITY ADVANCEMENT",
     title: "Advanced Metallurgy & QA",
     description: "Integrated ultrasonic testing, custom plate profiling, and heavy inventories of Duplex and nickel superalloys.",
-    image: legacyImg3,
+    image: legacyImg2016,
     metric: "10,000+ MT STOCK",
     spec: "Duplex, Inconel & Titanium"
   },
@@ -66,7 +68,7 @@ export const aboutLegacyMilestones = [
     tag: "GOVT. RECOGNITION",
     title: "Export House Accreditation",
     description: "Awarded Govt. Recognized Export House status, delivering to 500+ major industrial conglomerates worldwide.",
-    image: legacyImg1,
+    image: legacyImg2022,
     metric: "40+ COUNTRIES",
     spec: "ISO 9001:2015 Certified"
   },
@@ -75,7 +77,7 @@ export const aboutLegacyMilestones = [
     tag: "FUTURE READY",
     title: "Next-Gen Supply Intelligence",
     description: "Pioneering end-to-end mill traceability, rapid shutdown airlifts, and zero-defect global supply pipelines.",
-    image: legacyImg2,
+    image: legacyImg2026,
     metric: "500+ GLOBAL PARTNERS",
     spec: "EN 10204 3.2 Provenance Ready"
   }

@@ -1,15 +1,20 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { navLinks, brandDetails } from '../../data/navigationData';
 import Button from '../UI/Button';
 import MobileMenu from './MobileMenu';
 import TopContactBar from './TopContactBar';
+import ProductMegaMenu from '../Products/ProductMegaMenu';
 import { Menu, X } from 'lucide-react';
+import { preloadRoute } from '../../App';
 import './Navbar.css';
 
 export default function Navbar({ currentPage = 'home', onNavigate }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const activeLink = currentPage === 'about' ? 'about' : 'home';
+  const [megaMenuOpen, setMegaMenuOpen] = useState(false);
+  const megaMenuTimeoutRef = useRef(null);
+
+  const activeLink = currentPage === 'about' ? 'about' : (currentPage === 'products' ? 'products' : 'home');
   const navRef = useRef(null);
 
   useEffect(() => {
@@ -30,16 +35,42 @@ export default function Navbar({ currentPage = 'home', onNavigate }) {
     };
   }, []);
 
+  const handleMouseEnterProducts = useCallback(() => {
+    if (megaMenuTimeoutRef.current) {
+      clearTimeout(megaMenuTimeoutRef.current);
+    }
+    setMegaMenuOpen(true);
+    preloadRoute('products');
+  }, []);
+
+  const handleMouseLeaveProducts = useCallback(() => {
+    megaMenuTimeoutRef.current = setTimeout(() => {
+      setMegaMenuOpen(false);
+    }, 180);
+  }, []);
+
+  const handleMegaMenuSelect = useCallback((url) => {
+    setMegaMenuOpen(false);
+    if (onNavigate) onNavigate(url);
+  }, [onNavigate]);
+
+  const handleMegaMenuClose = useCallback(() => {
+    setMegaMenuOpen(false);
+  }, []);
+
   const handleLinkClick = (e, link) => {
     e.preventDefault();
+    setMegaMenuOpen(false);
     if (onNavigate) {
       if (link.id === 'about') {
         onNavigate('about');
       } else if (link.id === 'home') {
         onNavigate('home');
+      } else if (link.id === 'products') {
+        onNavigate('/products');
       } else {
-        // Other section links (products, materials, certificate, contact)
-        if (currentPage === 'about') {
+        // Other section links (materials, certificate, contact)
+        if (currentPage !== 'home') {
           onNavigate('home', link.id);
         } else {
           const target = document.getElementById(link.id);
@@ -91,16 +122,53 @@ export default function Navbar({ currentPage = 'home', onNavigate }) {
             <ul className="navbar-links-list">
               {navLinks.map((link) => {
                 const isActive = activeLink === link.id;
+                const isProducts = link.id === 'products';
+
                 return (
-                  <li key={link.id} className="navbar-item">
+                  <li
+                    key={link.id}
+                    className={`navbar-item ${isProducts ? 'products-item' : ''}`}
+                    onMouseEnter={isProducts ? handleMouseEnterProducts : (link.id === 'about' ? () => preloadRoute('about') : undefined)}
+                    onMouseLeave={isProducts ? handleMouseLeaveProducts : undefined}
+                  >
                     <a
-                      href={link.id === 'about' ? '/about' : link.href}
+                      href={link.id === 'about' ? '/about' : (isProducts ? '/products' : link.href)}
                       className={`navbar-link ${isActive ? 'active' : ''}`}
                       onClick={(e) => handleLinkClick(e, link)}
                     >
-                      <span className="navbar-link-text">{link.label}</span>
+                      <span className="navbar-link-text">
+                        {link.label}
+                        {isProducts && (
+                          <svg
+                            className={`nav-dropdown-chevron ${megaMenuOpen ? 'rotated' : ''}`}
+                            width="12"
+                            height="12"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2.5"
+                            style={{
+                              marginLeft: '4px',
+                              display: 'inline-block',
+                              verticalAlign: 'middle',
+                              transition: 'transform 0.2s ease',
+                              transform: megaMenuOpen ? 'rotate(180deg)' : 'rotate(0deg)'
+                            }}
+                          >
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                          </svg>
+                        )}
+                      </span>
                       <span className="navbar-link-indicator" aria-hidden="true" />
                     </a>
+
+                    {isProducts && (
+                      <ProductMegaMenu
+                        isOpen={megaMenuOpen}
+                        onSelect={handleMegaMenuSelect}
+                        onClose={handleMegaMenuClose}
+                      />
+                    )}
                   </li>
                 );
               })}

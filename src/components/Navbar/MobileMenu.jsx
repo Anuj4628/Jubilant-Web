@@ -90,6 +90,8 @@ export default function MobileMenu({ isOpen, onClose, activeLink, currentPage, o
         onNavigate('about');
       } else if (id === 'home') {
         onNavigate('home');
+      } else if (id === 'products') {
+        onNavigate('/products');
       } else {
         if (currentPage === 'about') {
           onNavigate('home', id);
