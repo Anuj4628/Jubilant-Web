@@ -59,11 +59,11 @@
 }
 
 .export-header .section-display-heading {
-  font-family: var(--font-display, 'Syne', sans-serif);
+  font-family: var(--font-display);
   font-size: clamp(1.8rem, 4.4vw, 3.6rem);
-  font-weight: 900;
-  line-height: 1.15;
-  letter-spacing: -0.02em;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: 0.01em;
   text-transform: uppercase;
   color: var(--color-text-primary, #0F172A);
   margin: 0 0 16px 0;
@@ -339,14 +339,14 @@
 
 /* Country Name Text — Uppercase Bold Navy/Slate */
 .country-name-text {
-  font-family: var(--font-display, 'Syne', sans-serif);
+  font-family: var(--font-display);
   font-size: 0.88rem;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   color: #0F172A;
   margin: 0;
-  line-height: 1.25;
+  line-height: 1.28;
   text-align: center;
   transition: color 0.25s ease;
   max-width: 100%;

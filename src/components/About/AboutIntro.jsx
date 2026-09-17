@@ -120,7 +120,7 @@ export default function AboutIntro() {
         <div className="intro-blueprint-line horizontal bottom-line" />
         <div className="intro-blueprint-line vertical left-line" />
         <div className="intro-blueprint-line vertical right-line" />
-        
+
         {/* Technical Coordinate Markers */}
         <span className="coordinate-cross top-left">+ 18° 57' 00" N</span>
         <span className="coordinate-cross top-right">+ 72° 49' 30" E</span>
@@ -160,7 +160,7 @@ export default function AboutIntro() {
         <div ref={textContentRef} className="intro-text-block">
           <p className="intro-lead-text">{aboutIntroData.lead}</p>
           <p className="intro-sub-text">{aboutIntroData.description}</p>
-          
+
           <div className="intro-metrics-row">
             <div className="intro-mini-stat">
               <span className="mini-stat-num">25+</span>

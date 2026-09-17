@@ -55,11 +55,11 @@
 
 /* Major Visual Headline */
 .industries-header .section-display-heading {
-  font-family: var(--font-display, 'Syne', sans-serif);
+  font-family: var(--font-display);
   font-size: clamp(1.8rem, 4.4vw, 3.7rem);
-  font-weight: 900;
-  line-height: 1.15;
-  letter-spacing: -0.02em;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: 0.01em;
   text-transform: uppercase;
   color: var(--color-text-primary, #0F172A);
   margin-bottom: 18px;
@@ -254,14 +254,14 @@
 }
 
 .sector-title {
-  font-family: var(--font-display, 'Syne', sans-serif);
+  font-family: var(--font-display);
   font-size: 1.35rem;
-  font-weight: 800;
-  letter-spacing: -0.01em;
+  font-weight: 700;
+  letter-spacing: 0.01em;
   text-transform: uppercase;
   color: #FFFFFF;
   margin: 0;
-  line-height: 1.2;
+  line-height: 1.28;
   transition: color 0.3s ease;
 }
 
