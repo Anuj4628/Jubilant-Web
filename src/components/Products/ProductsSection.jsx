@@ -99,10 +99,10 @@ export default function ProductsSection({ onNavigate }) {
           </p>
         </div>
 
-        {/* 8 Products Grid */}
+        {/* 9 Products Grid */}
         <div ref={gridRef} className="products-grid">
           {productsData.map(product => (
-            <ProductCard key={product.id} product={product} />
+            <ProductCard key={product.id} product={product} onNavigate={onNavigate} />
           ))}
         </div>
 

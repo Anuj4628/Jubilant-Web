@@ -495,15 +495,15 @@
 }
 
 .rfq-compact-card {
-  background: #FFFFFF;
-  border: 1px solid #E2E8F0;
+  background: #0B0F17;
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 12px;
   padding: 30px 36px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 32px;
-  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.03);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
 }
 
 @media (max-width: 900px) {
@@ -520,7 +520,7 @@
   font-weight: 800;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #D3122A;
+  color: #FF5500;
   display: block;
   margin-bottom: 4px;
 }
@@ -529,14 +529,14 @@
   font-family: var(--font-heading, 'Montserrat', sans-serif);
   font-size: 1.3rem;
   font-weight: 800;
-  color: #0B192C;
+  color: #FFFFFF;
   margin: 0 0 6px 0;
 }
 
 .rfq-compact-content p {
   font-family: var(--font-body, 'Inter', sans-serif);
   font-size: 0.88rem;
-  color: #64748B;
+  color: #94A3B8;
   line-height: 1.5;
   margin: 0;
   max-width: 640px;

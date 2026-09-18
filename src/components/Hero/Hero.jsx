@@ -8,7 +8,7 @@ import './Hero.css';
 const SLIDE_DURATION_MS = 3800;
 const PROGRESS_INTERVAL_MS = 40;
 
-export default function Hero() {
+export default function Hero({ onNavigate }) {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const [direction, setDirection] = useState(1);
   const [progressPercent, setProgressPercent] = useState(0);
@@ -82,6 +82,7 @@ export default function Hero() {
             slide={slide}
             isActive={index === currentSlideIndex}
             direction={direction}
+            onNavigate={onNavigate}
           />
         ))}
       </div>

@@ -69,7 +69,7 @@ export default function Footer({ currentPage = 'home', onNavigate }) {
             <ul className="footer-links-list">
               <li><a href="/" className="footer-link" onClick={(e) => handleLinkClick(e, 'home')}>Home</a></li>
               <li><a href="/about" className="footer-link" onClick={(e) => handleLinkClick(e, 'about')}>About Us</a></li>
-              <li><a href="/#products" className="footer-link" onClick={(e) => handleLinkClick(e, 'home', 'products')}>Products</a></li>
+              <li><a href="/products" className="footer-link" onClick={(e) => handleLinkClick(e, '/products')}>Products</a></li>
               <li><a href="/#materials" className="footer-link" onClick={(e) => handleLinkClick(e, 'home', 'materials')}>Materials</a></li>
             </ul>
           </div>
@@ -84,7 +84,7 @@ export default function Footer({ currentPage = 'home', onNavigate }) {
               <li><a href="#certificate" className="footer-link">Certifications</a></li>
               <li><a href="#industries" className="footer-link">Industries</a></li>
               <li><a href="#certificate" className="footer-link">Client Network</a></li>
-              <li><a href="#contact" className="footer-link">Contact</a></li>
+              <li><a href="/contact" className="footer-link" onClick={(e) => handleLinkClick(e, 'contact')}>Contact</a></li>
             </ul>
           </div>
 
@@ -99,7 +99,7 @@ export default function Footer({ currentPage = 'home', onNavigate }) {
               <li><a href="/products/manufacturer" className="footer-link" onClick={(e) => handleLinkClick(e, '/products/manufacturer')}>Manufacturer Division</a></li>
               <li><a href="/products/supplier" className="footer-link" onClick={(e) => handleLinkClick(e, '/products/supplier')}>Supplier Division</a></li>
               <li><a href="/products/manufacturer/butt-weld-fittings" className="footer-link" onClick={(e) => handleLinkClick(e, '/products/manufacturer/butt-weld-fittings')}>Butt Weld Fittings</a></li>
-              <li><a href="/products/supplier/pipes-and-tubes" className="footer-link" onClick={(e) => handleLinkClick(e, '/products/supplier/pipes-and-tubes')}>Pipes & Tubes</a></li>
+              <li><a href="/products/supplier/pipes-tubes" className="footer-link" onClick={(e) => handleLinkClick(e, '/products/supplier/pipes-tubes')}>Pipes & Tubes</a></li>
               <li><a href="/products/manufacturer/flanges" className="footer-link" onClick={(e) => handleLinkClick(e, '/products/manufacturer/flanges')}>Flanges</a></li>
             </ul>
           </div>
@@ -148,7 +148,13 @@ export default function Footer({ currentPage = 'home', onNavigate }) {
               </div>
 
               <div className="footer-cta-wrap">
-                <Button href="#quote" variant="primary" size="sm" icon="arrow">
+                <Button
+                  href="/contact"
+                  variant="primary"
+                  size="sm"
+                  icon="arrow"
+                  onClick={(e) => handleLinkClick(e, 'contact')}
+                >
                   Get a Quote
                 </Button>
               </div>

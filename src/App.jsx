@@ -20,11 +20,14 @@ const ProductFamilyView = lazy(() => import('./components/Products/pages/Product
 const ProductDetailView = lazy(() => import('./components/Products/pages/ProductDetailView'));
 const MaterialsLandingView = lazy(() => import('./components/Materials/pages/MaterialsLandingView'));
 const MaterialDetailView = lazy(() => import('./components/Materials/pages/MaterialDetailView'));
+const ContactPage = lazy(() => import('./components/Contact/ContactPage'));
 
 // Preload route chunks on hover or idle
 export const preloadRoute = (target) => {
   if (target === 'about') {
     import('./components/About/AboutSection');
+  } else if (target === 'contact' || target?.startsWith('/contact')) {
+    import('./components/Contact/ContactPage');
   } else if (target === 'products' || target?.startsWith('/products')) {
     import('./components/Products/pages/ProductsLandingView');
     import('./components/Products/pages/DivisionView');
@@ -46,6 +49,10 @@ function parseRoute(pathname = window.location.pathname) {
 
   if (clean.includes('about')) {
     return { page: 'about' };
+  }
+
+  if (clean.includes('contact')) {
+    return { page: 'contact' };
   }
 
   if (clean.startsWith('/materials')) {
@@ -124,6 +131,15 @@ export default function App() {
       return;
     }
 
+    if (target === 'contact') {
+      if (window.location.pathname !== '/contact') {
+        window.history.pushState({ page: 'contact' }, '', '/contact');
+      }
+      setRoute({ page: 'contact' });
+      window.scrollTo({ top: 0, behavior: 'instant' });
+      return;
+    }
+
     if (target === 'materials') {
       const dest = param ? (param.startsWith('/') ? param : `/materials/${param}`) : '/materials';
       if (window.location.pathname !== dest) {
@@ -189,6 +205,7 @@ export default function App() {
     const idleCallback = window.requestIdleCallback || ((cb) => setTimeout(cb, 1200));
     const idleId = idleCallback(() => {
       preloadRoute('about');
+      preloadRoute('contact');
       preloadRoute('products');
       preloadRoute('materials');
     });
@@ -210,6 +227,13 @@ export default function App() {
         <main id="main-content" className="about-page-main">
           <Suspense fallback={<div className="page-load-shell about-shell" aria-hidden="true" />}>
             <AboutSection onNavigate={navigateTo} />
+          </Suspense>
+        </main>
+      ) : route.page === 'contact' ? (
+        /* Dedicated Independent Contact Page */
+        <main id="main-content" className="contact-page-main">
+          <Suspense fallback={<div className="page-load-shell contact-shell" aria-hidden="true" />}>
+            <ContactPage onNavigate={navigateTo} />
           </Suspense>
         </main>
       ) : route.page === 'materials' ? (
@@ -256,7 +280,7 @@ export default function App() {
       ) : (
         /* Full Commercial Home Page (About and Products catalog views are isolated) */
         <main id="main-content" className="home-page-main">
-          <Hero />
+          <Hero onNavigate={navigateTo} />
           <MaterialsSection />
           <ProductsSection onNavigate={navigateTo} />
           <WhyChooseSection />
@@ -264,7 +288,7 @@ export default function App() {
           <ValueAddedSection />
           <ClientNetworkSection />
           <GlobalExportSection />
-          <FinalCTASection />
+          <FinalCTASection onNavigate={navigateTo} />
         </main>
       )}
 

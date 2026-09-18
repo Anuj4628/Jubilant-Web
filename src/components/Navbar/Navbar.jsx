@@ -19,9 +19,11 @@ export default function Navbar({ currentPage = 'home', onNavigate }) {
 
   const activeLink = currentPage === 'about' 
     ? 'about' 
-    : (currentPage === 'products' 
-        ? 'products' 
-        : (currentPage === 'materials' ? 'materials' : 'home'));
+    : (currentPage === 'contact'
+        ? 'contact'
+        : (currentPage === 'products' 
+            ? 'products' 
+            : (currentPage === 'materials' ? 'materials' : 'home')));
   const navRef = useRef(null);
 
   useEffect(() => {
@@ -97,6 +99,8 @@ export default function Navbar({ currentPage = 'home', onNavigate }) {
     if (onNavigate) {
       if (link.id === 'about') {
         onNavigate('about');
+      } else if (link.id === 'contact') {
+        onNavigate('contact');
       } else if (link.id === 'home') {
         onNavigate('home');
       } else if (link.id === 'products') {
@@ -164,6 +168,7 @@ export default function Navbar({ currentPage = 'home', onNavigate }) {
                 if (isProducts) mouseEnterHandler = handleMouseEnterProducts;
                 else if (isMaterials) mouseEnterHandler = handleMouseEnterMaterials;
                 else if (link.id === 'about') mouseEnterHandler = () => preloadRoute('about');
+                else if (link.id === 'contact') mouseEnterHandler = () => preloadRoute('contact');
 
                 let mouseLeaveHandler = undefined;
                 if (isProducts) mouseLeaveHandler = handleMouseLeaveProducts;
@@ -171,6 +176,7 @@ export default function Navbar({ currentPage = 'home', onNavigate }) {
 
                 let linkHref = link.href;
                 if (link.id === 'about') linkHref = '/about';
+                else if (link.id === 'contact') linkHref = '/contact';
                 else if (isProducts) linkHref = '/products';
                 else if (isMaterials) linkHref = '/materials';
 
@@ -236,14 +242,14 @@ export default function Navbar({ currentPage = 'home', onNavigate }) {
           {/* Desktop Right CTA */}
           <div className="navbar-actions-desktop">
             <Button
-              href={brandDetails.quoteCta.href}
+              href="/contact"
               variant="nav-quote"
               size="sm"
               icon="arrow"
               onClick={(e) => {
-                if (currentPage === 'about' && onNavigate) {
+                if (onNavigate) {
                   e.preventDefault();
-                  onNavigate('home', 'contact');
+                  onNavigate('contact');
                 }
               }}
             >

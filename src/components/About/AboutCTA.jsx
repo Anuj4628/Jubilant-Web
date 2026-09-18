@@ -81,7 +81,7 @@ export default function AboutCTA({ onNavigate }) {
   const handleQuoteClick = (e) => {
     if (onNavigate) {
       e.preventDefault();
-      onNavigate('home', 'contact');
+      onNavigate('contact');
     }
   };
 
@@ -119,7 +119,7 @@ export default function AboutCTA({ onNavigate }) {
         {/* Action Buttons */}
         <div ref={actionsRef} className="about-cta-buttons-row">
           <a
-            href="/#contact"
+            href="/contact"
             className="about-cta-primary-btn"
             aria-label="Request Technical Quote"
             onClick={handleQuoteClick}

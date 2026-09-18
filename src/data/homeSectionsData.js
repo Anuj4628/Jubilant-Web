@@ -12,7 +12,8 @@ import pipesImg from '../assets/Product Images/Pipes and Tubes/stainless steel.p
 import tubesImg from '../assets/Product Images/Pipes and Tubes/alloy steel.png';
 import seamlessPipesImg from '../assets/Product Images/Pipes and Tubes/high alloy.png';
 import nutsBoltsImg from '../assets/Product Images/Fasteners/high alloy.webp';
-import valvesImg from '../assets/Product Images/valves.jpg';
+import coilImg from '../assets/Product Section/Supplier division/Coil/stainless steel.jpg';
+import flatBarImg from '../assets/Product Section/Supplier division/flat/Stainless-Steel-Flat-Bar.jpg';
 
 // Authentic Sector Images from Serving Global Mission-Critical Sectors Folder
 import aerospaceImg from '../assets/Serving Global Mission-Critical Sectors/aerospace and defence.png';
@@ -71,52 +72,13 @@ export const productCategories = [
 
 export const productsData = [
   {
-    id: "butt-weld-fittings",
-    name: "Buttweld Fittings",
+    id: "butt-weld-fitting",
+    name: "Butt Weld Fitting",
     category: "fittings",
     specTag: "ASME B16.9 // ELBOWS, TEES, REDUCERS",
     image: buttWeldFittingImg,
+    route: "/products/manufacturer/butt-weld-fittings",
     alt: "Precision industrial buttweld pipe fittings in stainless and alloy steel"
-  },
-  {
-    id: "flanges",
-    name: "Flanges",
-    category: "fittings",
-    specTag: "ASME B16.5 // WELD NECK, SLIP-ON, BLIND",
-    image: flangesImg,
-    alt: "High-pressure industrial forged steel flanges"
-  },
-  {
-    id: "round-bars",
-    name: "Rounds and Bars",
-    category: "bars",
-    specTag: "ASTM A276 / A479 // BRIGHT & BLACK FINISH",
-    image: roundBarsImg,
-    alt: "Stainless steel and alloy solid rounds and bars"
-  },
-  {
-    id: "pipe-fittings",
-    name: "Pipe Fittings",
-    category: "fittings",
-    specTag: "MSS-SP // HIGH INTEGRITY PROCESS CONNECTIONS",
-    image: pipeFittingsImg,
-    alt: "Heavy duty alloy steel process pipe fittings"
-  },
-  {
-    id: "tube-fittings",
-    name: "Tube Fittings",
-    category: "fittings",
-    specTag: "DOUBLE FERRULE // INSTRUMENTATION GRADE",
-    image: tubeFittingsImg,
-    alt: "Precision instrumentation tube fittings"
-  },
-  {
-    id: "forged-fittings",
-    name: "Forged Fittings",
-    category: "fittings",
-    specTag: "ASME B16.11 // 3000# / 6000# / 9000#",
-    image: forgedFittingsImg,
-    alt: "High-pressure forged socket weld and threaded fittings"
   },
   {
     id: "fasteners",
@@ -124,23 +86,71 @@ export const productsData = [
     category: "bars",
     specTag: "ASTM A193 / A194 // STUDS, BOLTS & SPECIALS",
     image: fastenersImg,
+    route: "/products/manufacturer/fasteners",
     alt: "High tensile industrial alloy fasteners"
   },
   {
-    id: "sheets-plates",
-    name: "Sheets / Plates",
+    id: "flanges",
+    name: "Flanges",
+    category: "fittings",
+    specTag: "ASME B16.5 // WELD NECK, SLIP-ON, BLIND",
+    image: flangesImg,
+    route: "/products/manufacturer/flanges",
+    alt: "High-pressure industrial forged steel flanges"
+  },
+  {
+    id: "forge-fitting",
+    name: "Forge Fitting",
+    category: "fittings",
+    specTag: "ASME B16.11 // 3000# / 6000# / 9000#",
+    image: forgedFittingsImg,
+    route: "/products/manufacturer/forged-fittings",
+    alt: "High-pressure forged socket weld and threaded fittings"
+  },
+  {
+    id: "coil",
+    name: "Coil",
+    category: "plates",
+    specTag: "ASTM A240 // HOT & COLD ROLLED COILS",
+    image: coilImg,
+    route: "/products/supplier/coil",
+    alt: "High grade precision cold and hot rolled coils"
+  },
+  {
+    id: "flat-bar",
+    name: "Flat Bar",
+    category: "bars",
+    specTag: "ASTM A276 / A484 // COLD DRAWN & HRAP",
+    image: flatBarImg,
+    route: "/products/supplier/flat",
+    alt: "Engineered stainless steel and titanium flat bars"
+  },
+  {
+    id: "pipes-and-tubes",
+    name: "Pipes and Tubes",
+    category: "pipes",
+    specTag: "ASTM A312 / A269 // SEAMLESS & WELDED",
+    image: pipesImg,
+    route: "/products/supplier/pipes-tubes",
+    alt: "High performance seamless and welded industrial pipes and tubes"
+  },
+  {
+    id: "sheets-and-plates",
+    name: "Sheets and Plates",
     category: "plates",
     specTag: "ASTM A240 / ASME SA516 // COLD & HOT ROLLED",
     image: sheetsImg,
+    route: "/products/supplier/sheet-and-plates",
     alt: "Industrial stainless and carbon steel sheets and plates"
   },
   {
-    id: "valves",
-    name: "Valves",
-    category: "fittings",
-    specTag: "API 600 / ASME B16.34 // GATE, GLOBE, BALL & CHECK",
-    image: valvesImg,
-    alt: "Industrial high-pressure stainless and forged steel valves"
+    id: "rods-and-bars",
+    name: "Rods and Bars",
+    category: "bars",
+    specTag: "ASTM A276 / A479 // BRIGHT & BLACK FINISH",
+    image: roundBarsImg,
+    route: "/products/supplier/rods-and-bars",
+    alt: "Stainless steel and alloy solid rounds and bars"
   }
 ];
 

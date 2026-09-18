@@ -28,7 +28,7 @@ function renderHeadline(headline) {
   });
 }
 
-function HeroSlide({ slide, isActive, direction = 1 }) {
+function HeroSlide({ slide, isActive, direction = 1, onNavigate }) {
   const slideRef = useRef(null);
   const bgImageRef = useRef(null);
   const glassCardRef = useRef(null);
@@ -215,6 +215,12 @@ function HeroSlide({ slide, isActive, direction = 1 }) {
                   variant="primary"
                   size="lg"
                   icon="arrow"
+                  onClick={(e) => {
+                    if (onNavigate && slide.primaryCta.href) {
+                      e.preventDefault();
+                      onNavigate(slide.primaryCta.href);
+                    }
+                  }}
                 >
                   {slide.primaryCta.label}
                 </Button>
@@ -225,6 +231,12 @@ function HeroSlide({ slide, isActive, direction = 1 }) {
                     variant="secondary"
                     size="lg"
                     icon="chevron"
+                    onClick={(e) => {
+                      if (onNavigate && slide.secondaryCta.href) {
+                        e.preventDefault();
+                        onNavigate(slide.secondaryCta.href);
+                      }
+                    }}
                   >
                     {slide.secondaryCta.label}
                   </Button>

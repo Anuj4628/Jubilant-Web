@@ -14,12 +14,12 @@ export const heroSlides = [
     description: "Manufacturing, sourcing and supplying quality steel products with dependable service.",
     primaryCta: {
       label: "Get a Quote",
-      href: "#quote",
+      href: "/contact",
       variant: "primary"
     },
     secondaryCta: {
       label: "Explore Products",
-      href: "#products",
+      href: "/products",
       variant: "secondary"
     },
     image: slide5Img,
@@ -35,12 +35,12 @@ export const heroSlides = [
     description: "Reliable steel sheets and plates supplied to industries across global markets.",
     primaryCta: {
       label: "Explore Sheets & Plates",
-      href: "#products",
+      href: "/products/supplier/sheet-and-plates",
       variant: "primary"
     },
     secondaryCta: {
       label: "Get a Quote",
-      href: "#quote",
+      href: "/contact",
       variant: "secondary"
     },
     image: slide2Img,
@@ -56,12 +56,12 @@ export const heroSlides = [
     description: "Precision-manufactured rounds and bars for critical engineering applications.",
     primaryCta: {
       label: "Explore Rounds & Bars",
-      href: "#products",
+      href: "/products/supplier/rods-and-bars",
       variant: "primary"
     },
     secondaryCta: {
       label: "Get a Quote",
-      href: "#quote",
+      href: "/contact",
       variant: "secondary"
     },
     image: superiorRoundsImg,
@@ -77,12 +77,12 @@ export const heroSlides = [
     description: "Engineered products for demanding industrial and process applications.",
     primaryCta: {
       label: "Explore Products",
-      href: "#products",
+      href: "/products",
       variant: "primary"
     },
     secondaryCta: {
       label: "Get a Quote",
-      href: "#quote",
+      href: "/contact",
       variant: "secondary"
     },
     image: precisionPipesImg,
@@ -98,12 +98,12 @@ export const heroSlides = [
     description: "Quality steel products for demanding industrial applications.",
     primaryCta: {
       label: "Explore Products",
-      href: "#products",
+      href: "/products",
       variant: "primary"
     },
     secondaryCta: {
       label: "Get a Quote",
-      href: "#quote",
+      href: "/contact",
       variant: "secondary"
     },
     image: premiumSteelImg,

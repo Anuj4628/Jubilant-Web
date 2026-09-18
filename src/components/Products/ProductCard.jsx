@@ -1,11 +1,29 @@
 import React, { useState } from 'react';
 import { ArrowUpRight } from 'lucide-react';
 
-function ProductCard({ product }) {
+function ProductCard({ product, onNavigate }) {
   const [imageLoaded, setImageLoaded] = useState(false);
 
+  const handleClick = (e) => {
+    if (product?.route && onNavigate) {
+      e.preventDefault();
+      onNavigate(product.route);
+    }
+  };
+
   return (
-    <article className="product-card" tabIndex={0} aria-label={product.name}>
+    <article
+      className="product-card"
+      tabIndex={0}
+      aria-label={product.name}
+      onClick={handleClick}
+      style={{ cursor: 'pointer' }}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          handleClick(e);
+        }
+      }}
+    >
       {/* Product Image Container with Large Visual Area & Subtle Zoom */}
       <div className="product-card-image-wrap">
         <img
@@ -30,11 +48,21 @@ function ProductCard({ product }) {
       {/* Product Content Details (NO category label - Product name is visually dominant) */}
       <div className="product-card-body">
         <div className="product-title-row">
-          <h3 className="product-name">{product.name}</h3>
+          <h3 className="product-name">
+            <a
+              href={product.route || '/products'}
+              className="product-name-link"
+              onClick={handleClick}
+              style={{ color: 'inherit', textDecoration: 'none' }}
+            >
+              {product.name}
+            </a>
+          </h3>
           <a
-            href="#quote"
+            href={product.route || '/products'}
             className="product-explore-btn"
-            aria-label={`Enquire about ${product.name}`}
+            aria-label={`View ${product.name} specification`}
+            onClick={handleClick}
           >
             <ArrowUpRight size={18} className="explore-icon" />
           </a>

@@ -97,12 +97,14 @@ export default function MobileMenu({ isOpen, onClose, activeLink, currentPage, o
     if (onNavigate) {
       if (id === 'about') {
         onNavigate('about');
+      } else if (id === 'contact') {
+        onNavigate('contact');
       } else if (id === 'home') {
         onNavigate('home');
       } else if (id === 'products') {
         onNavigate('/products');
       } else {
-        if (currentPage === 'about' || currentPage === 'materials' || currentPage === 'products') {
+        if (currentPage === 'about' || currentPage === 'materials' || currentPage === 'products' || currentPage === 'contact') {
           onNavigate('home', id);
         } else {
           const target = document.getElementById(id);
@@ -144,6 +146,7 @@ export default function MobileMenu({ isOpen, onClose, activeLink, currentPage, o
 
             let targetHref = link.href;
             if (link.id === 'about') targetHref = '/about';
+            else if (link.id === 'contact') targetHref = '/contact';
             else if (link.id === 'products') targetHref = '/products';
             else if (link.id === 'materials') targetHref = '/materials';
 
@@ -208,11 +211,15 @@ export default function MobileMenu({ isOpen, onClose, activeLink, currentPage, o
         {/* Footer info & CTA */}
         <div ref={footerRef} className="mobile-menu-footer">
           <Button
-            href={brandDetails.quoteCta.href}
+            href="/contact"
             variant="primary"
             size="md"
             icon="arrow"
-            onClick={onClose}
+            onClick={(e) => {
+              e.preventDefault();
+              onClose();
+              if (onNavigate) onNavigate('contact');
+            }}
             className="mobile-quote-btn"
           >
             {brandDetails.quoteCta.label}

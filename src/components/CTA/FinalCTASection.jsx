@@ -8,7 +8,7 @@ import './FinalCTASection.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function FinalCTASection() {
+export default function FinalCTASection({ onNavigate }) {
   const sectionRef = useRef(null);
   const cardRef = useRef(null);
 
@@ -73,11 +73,33 @@ export default function FinalCTASection() {
 
             {/* CTA Buttons Group (with bottom-to-top Jubilant Red fill) */}
             <div className="cta-buttons-group">
-              <Button href="#contact" variant="primary" size="lg" icon="arrow">
+              <Button
+                href="/contact"
+                variant="primary"
+                size="lg"
+                icon="arrow"
+                onClick={(e) => {
+                  if (onNavigate) {
+                    e.preventDefault();
+                    onNavigate('contact');
+                  }
+                }}
+              >
                 Get a Quote
               </Button>
 
-              <Button href="#products" variant="secondary" size="lg" icon="chevron">
+              <Button
+                href="/products"
+                variant="secondary"
+                size="lg"
+                icon="chevron"
+                onClick={(e) => {
+                  if (onNavigate) {
+                    e.preventDefault();
+                    onNavigate('/products');
+                  }
+                }}
+              >
                 Explore Products
               </Button>
             </div>
